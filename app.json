@@ -1,0 +1,9 @@
+{
+    "name": "AngularGMP2018",
+    "description": "Angular Global Mentoring Program 2018",
+    "repository": "https://github.com/MaksimKavalenkaBY/AngularGMP2018.git",
+    "logo": "https://angular-gmp-2018.herokuapp.com/angular.png",
+    "keywords": [
+        "angular"
+    ]
+}
