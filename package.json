@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "npm run build && npm run launch",
     "build": "ng build",
+    "launch": "node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
