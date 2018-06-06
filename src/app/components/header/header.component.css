@@ -1,0 +1,30 @@
+* {
+    font-family: cursive;
+    font-size: 30px;
+}
+
+button {
+    font-size: 20px;
+    padding: 5px 20px;
+}
+
+div {
+    align-items: center;
+    display: flex;
+    height: 100%;
+}
+
+img {
+    height: 100%;
+}
+
+.block > * {
+    margin: 15px;
+}
+
+.header {
+    border: 2px solid black;
+    height: 50px;
+    justify-content: space-between;
+    padding: 15px;
+}
