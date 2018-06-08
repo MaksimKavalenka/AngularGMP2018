@@ -4,7 +4,10 @@ html {
 }
 
 body {
-    border: 2px solid black;
     height: 100%;
     margin: 0 auto;
+}
+
+* {
+    font-family: cursive;
 }

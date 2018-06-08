@@ -1,0 +1,29 @@
+:host {
+    border-bottom: 2px solid #aeaeae;
+    height: 50px;
+    display: block;
+    width: 100%;
+}
+
+button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    height: 100%;
+    width: 150px;
+}
+
+button:hover {
+    background: #ff2d34;
+    color: #FFF;
+}
+
+button:active {
+    background: #d42b2f;
+    color: #fff;
+}
+
+button:focus {
+    outline: 0 !important;
+}

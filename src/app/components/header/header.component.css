@@ -1,6 +1,8 @@
-* {
-    font-family: cursive;
-    font-size: 30px;
+:host {
+    border-bottom: 2px solid #000;
+    height: 50px;
+    padding: 15px;
+    width: auto;
 }
 
 button {
@@ -11,6 +13,7 @@ button {
 div {
     align-items: center;
     display: flex;
+    font-size: 30px;
     height: 100%;
 }
 
@@ -23,8 +26,5 @@ img {
 }
 
 .header {
-    border: 2px solid black;
-    height: 50px;
     justify-content: space-between;
-    padding: 15px;
 }
