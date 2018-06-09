@@ -6,7 +6,7 @@
 }
 
 button {
-    background: transparent;
+    background: #fff;
     border: none;
     cursor: pointer;
     font-size: 24px;
@@ -16,14 +16,10 @@ button {
 
 button:hover {
     background: #ff2d34;
-    color: #FFF;
+    color: #fff;
 }
 
 button:active {
     background: #d42b2f;
     color: #fff;
-}
-
-button:focus {
-    outline: 0 !important;
 }

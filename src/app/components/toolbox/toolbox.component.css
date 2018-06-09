@@ -1,6 +1,7 @@
 :host {
     border-bottom: 2px solid #000;
-    height: 50px;
+    display: block;
+    height: 30px;
     padding: 15px;
     width: auto;
 }
@@ -9,20 +10,23 @@ button {
     background: #fff;
     border: 1px solid #000;
     cursor: pointer;
-    font-size: 20px;
-    padding: 5px 20px;
+    font-size: 16px;
+    height: 100%;
+    width: 80px;
 }
 
 button:hover {
-    background: #aeaeae;
+    background: #00abea;
     color: #fff;
 }
 
 button:active {
-    background: #8e8e8e;
+    background: #007acc;
     color: #fff;
 }
 
-img {
-    height: 100%;
+input {
+    height: 25px;
+    padding: 0 8px;
+    width: 500px;
 }
