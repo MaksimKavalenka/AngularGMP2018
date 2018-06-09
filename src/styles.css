@@ -14,6 +14,7 @@ body {
 
 .action {
     border: 1px solid #000;
+    cursor: pointer;
     font-size: 12px;
     padding: 5px;
 }
@@ -23,6 +24,16 @@ body {
     height: 100%;
     margin: 0 5px;
     vertical-align: middle;
+}
+
+.action.add:hover {
+    background: #649f39;
+    color: #fff;
+}
+
+.action.add:active {
+    background: #33691e;
+    color: #fff;
 }
 
 .block > * {
