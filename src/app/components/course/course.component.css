@@ -1,0 +1,43 @@
+:host {
+    display: block;
+    padding: 0 15px 15px;
+    width: auto;
+}
+
+.block {
+    border: 1px solid #000;
+    margin: 15px;
+}
+
+.block:first-child {
+    margin: 0 15px 15px;
+}
+
+.course .body {
+    width: 88%;
+}
+
+.course .body > * {
+    margin: 5px 0;
+}
+
+.course .body .header {
+    font-size: 23px;
+}
+
+.course .body .header .metadata > * {
+    padding: 0 10px;
+}
+
+.course .body .description {
+    height: 50px;
+    overflow: hidden;
+}
+
+.course .actions {
+    float: right;
+}
+
+.course .actions > * {
+    margin: 10px;
+}
