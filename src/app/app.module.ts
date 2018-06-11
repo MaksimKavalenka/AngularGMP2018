@@ -15,12 +15,12 @@ import { ToolboxComponent } from './components/toolbox/toolbox.component';
     CourseComponent,
     FooterComponent,
     HeaderComponent,
-    ToolboxComponent
+    ToolboxComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
