@@ -4,6 +4,8 @@ export interface ICourse {
   duration: number;
   creationDate: Date;
   description: string;
+
+  getDuration(): string;
 }
 
 export class Course implements ICourse {
