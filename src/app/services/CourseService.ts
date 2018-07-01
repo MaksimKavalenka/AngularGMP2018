@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { ICourse, Course } from '../entities/course';
 
-@Injectable()
 export class CourseService {
 
   private cources: ICourse[] = [

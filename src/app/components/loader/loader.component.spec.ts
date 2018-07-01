@@ -3,14 +3,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoaderComponent } from './loader.component';
 
 describe('LoaderComponent', () => {
+
   let component: LoaderComponent;
   let fixture: ComponentFixture<LoaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoaderComponent ]
+      declarations: [LoaderComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +23,5 @@ describe('LoaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
