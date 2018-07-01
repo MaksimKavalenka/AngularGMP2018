@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesPageComponent } from './courses-page.component';
 
 describe('CoursesPageComponent', () => {
-
   let component: CoursesPageComponent;
   let fixture: ComponentFixture<CoursesPageComponent>;
 
@@ -23,5 +22,4 @@ describe('CoursesPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });
