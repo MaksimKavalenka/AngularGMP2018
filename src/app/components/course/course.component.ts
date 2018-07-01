@@ -10,7 +10,7 @@ import { ICourse } from '../../entities/course';
 export class CourseComponent implements OnInit {
 
   @Input()
-  private courses: ICourse[];
+  private course: ICourse;
 
   @Output()
   private deleteCourseEvent: EventEmitter<string> = new EventEmitter();
