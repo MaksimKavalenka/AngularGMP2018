@@ -10,10 +10,10 @@ import { ICourse } from '../../entities/course';
 export class CourseComponent implements OnInit {
 
   @Input()
-  private course: ICourse;
+  public course: ICourse;
 
   @Output()
-  private deleteCourseEvent: EventEmitter<string> = new EventEmitter();
+  public deleteCourseEvent: EventEmitter<string> = new EventEmitter();
 
   public constructor() { }
 

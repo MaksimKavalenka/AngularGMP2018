@@ -10,10 +10,10 @@ import { CourseService } from '../../services/CourseService';
 })
 export class CoursesPageComponent implements OnInit {
 
-  private static readonly SEARCH_QUERY_FIELDS: string[] = ['title', 'description', 'creationDate'];
+  public static readonly SEARCH_QUERY_FIELDS: string[] = ['title', 'description', 'creationDate'];
 
-  private courses: ICourse[];
-  private searchQuery: string;
+  public courses: ICourse[];
+  public searchQuery: string;
 
   public constructor(
     public courseService: CourseService,

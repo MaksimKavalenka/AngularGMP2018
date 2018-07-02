@@ -8,7 +8,7 @@ import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 export class LoaderComponent implements OnInit {
 
   @Output()
-  private loadMoreEvent: EventEmitter<void> = new EventEmitter();
+  public loadMoreEvent: EventEmitter<void> = new EventEmitter();
 
   public constructor() { }
 

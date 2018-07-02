@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -7,33 +6,21 @@ import { ICourse, Course } from '../../entities/course';
 
 const testCourse: ICourse = new Course('0', 'Video Course 0', 30, new Date('08.08.2018'), 'Test');
 
-@Component({
-  template:
-    `<app-course [course]="course" (deleteCourseEvent)="deleteCourse($event)"></app-course>`,
-})
-class TestHostComponent {
-  public course: ICourse = testCourse;
-  public id: string;
-
-  public deleteCourse(id: string) {
-    this.id = id;
-  }
-}
-
-describe('CourseComponent TestHost', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+describe('CourseComponent StandAlone', () => {
+  let component: CourseComponent;
+  let fixture: ComponentFixture<CourseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponent, TestHostComponent],
+      declarations: [CourseComponent],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
+    fixture = TestBed.createComponent(CourseComponent);
     component = fixture.componentInstance;
+    component.course = testCourse;
     fixture.detectChanges();
   });
 
@@ -42,8 +29,12 @@ describe('CourseComponent TestHost', () => {
   });
 
   it('should delete a course', () => {
+    let deteleId: string;
+    component.deleteCourseEvent.subscribe((id: string) => deteleId = id);
+
     const deleteButton = fixture.debugElement.query(By.css('.delete'));
     deleteButton.triggerEventHandler('click', null);
-    expect(component.id).toEqual(testCourse.id);
+
+    expect(deteleId).toEqual(component.course.id);
   });
 });

@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -7,33 +6,20 @@ import { ToolboxComponent } from './toolbox.component';
 
 const testSearchQuery = 'Test search query';
 
-@Component({
-  template:
-    `<app-toolbox (searchEvent)="search($event)"></app-toolbox>`,
-})
-class TestHostComponent {
-  public searchQuery: string = testSearchQuery;
-  public parentSearchQuery: string;
-
-  public search() {
-    this.parentSearchQuery = this.searchQuery;
-  }
-}
-
-describe('ToolboxComponent TestHost', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+describe('ToolboxComponent StandAlone', () => {
+  let component: ToolboxComponent;
+  let fixture: ComponentFixture<ToolboxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ToolboxComponent, TestHostComponent],
+      declarations: [ToolboxComponent],
       imports: [FormsModule],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
+    fixture = TestBed.createComponent(ToolboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -43,16 +29,24 @@ describe('ToolboxComponent TestHost', () => {
   });
 
   it('should apply a search query', () => {
+    let search: string;
+    component.searchEvent.subscribe((searchQuery: string) => search = searchQuery);
+
     const searchButton = fixture.debugElement.query(By.css('.search'));
     searchButton.triggerEventHandler('click', null);
-    expect(component.searchQuery).toEqual(testSearchQuery);
-    expect(component.parentSearchQuery).toEqual(testSearchQuery);
+
+    expect(search).toEqual(component.searchQuery);
   });
 
   it('should apply a search query after a value editing', () => {
     component.searchQuery = 'New value';
+
+    let search: string;
+    component.searchEvent.subscribe((searchQuery: string) => search = searchQuery);
+
     const searchButton = fixture.debugElement.query(By.css('.search'));
     searchButton.triggerEventHandler('click', null);
-    expect(component.parentSearchQuery).toEqual(component.searchQuery);
+
+    expect(search).toEqual(component.searchQuery);
   });
 });
