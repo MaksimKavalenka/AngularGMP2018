@@ -30,11 +30,12 @@ describe('CourseComponent StandAlone', () => {
 
   it('should delete a course', () => {
     let deteleId: string;
+
     component.deleteCourseEvent.subscribe((id: string) => deteleId = id);
 
     const deleteButton = fixture.debugElement.query(By.css('.delete'));
     deleteButton.triggerEventHandler('click', null);
 
-    expect(deteleId).toEqual(component.course.id);
+    expect(deteleId).toBe(component.course.id);
   });
 });

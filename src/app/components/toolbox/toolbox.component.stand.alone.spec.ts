@@ -21,6 +21,7 @@ describe('ToolboxComponent StandAlone', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ToolboxComponent);
     component = fixture.componentInstance;
+    component.searchQuery = testSearchQuery;
     fixture.detectChanges();
   });
 
@@ -30,23 +31,24 @@ describe('ToolboxComponent StandAlone', () => {
 
   it('should apply a search query', () => {
     let search: string;
+
     component.searchEvent.subscribe((searchQuery: string) => search = searchQuery);
 
     const searchButton = fixture.debugElement.query(By.css('.search'));
     searchButton.triggerEventHandler('click', null);
 
-    expect(search).toEqual(component.searchQuery);
+    expect(search).toBe(component.searchQuery);
   });
 
   it('should apply a search query after a value editing', () => {
-    component.searchQuery = 'New value';
-
     let search: string;
+
+    component.searchQuery = 'New value';
     component.searchEvent.subscribe((searchQuery: string) => search = searchQuery);
 
     const searchButton = fixture.debugElement.query(By.css('.search'));
     searchButton.triggerEventHandler('click', null);
 
-    expect(search).toEqual(component.searchQuery);
+    expect(search).toBe(component.searchQuery);
   });
 });

@@ -44,6 +44,7 @@ describe('CourseComponent TestHost', () => {
   it('should delete a course', () => {
     const deleteButton = fixture.debugElement.query(By.css('.delete'));
     deleteButton.triggerEventHandler('click', null);
-    expect(component.id).toEqual(testCourse.id);
+
+    expect(component.id).toBe(testCourse.id);
   });
 });

@@ -28,10 +28,10 @@ describe('CourseComponent', () => {
   });
 
   it('should have appropriate course information', () => {
-    expect(component.course.creationDate).toEqual(testCourse.creationDate);
-    expect(component.course.description).toEqual(testCourse.description);
-    expect(component.course.duration).toEqual(testCourse.duration);
-    expect(component.course.id).toEqual(testCourse.id);
-    expect(component.course.title).toEqual(testCourse.title);
+    expect(component.course.creationDate).toBe(testCourse.creationDate);
+    expect(component.course.description).toBe(testCourse.description);
+    expect(component.course.duration).toBe(testCourse.duration);
+    expect(component.course.id).toBe(testCourse.id);
+    expect(component.course.title).toBe(testCourse.title);
   });
 });

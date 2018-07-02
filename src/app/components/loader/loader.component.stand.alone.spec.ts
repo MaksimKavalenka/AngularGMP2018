@@ -1,30 +1,21 @@
-import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { LoaderComponent } from './loader.component';
 
-@Component({
-  template:
-    `<app-loader (loadMoreEvent)="loadMore()"></app-loader>`,
-})
-class TestHostComponent {
-  public loadMore() { }
-}
-
-describe('LoaderComponent HostTest', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+describe('LoaderComponent StandAlone', () => {
+  let component: LoaderComponent;
+  let fixture: ComponentFixture<LoaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoaderComponent, TestHostComponent],
+      declarations: [LoaderComponent],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
+    fixture = TestBed.createComponent(LoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -34,6 +25,8 @@ describe('LoaderComponent HostTest', () => {
   });
 
   it('should load more courses', () => {
+    component.loadMoreEvent.subscribe(() => { });
+
     const loadMoreButton = fixture.debugElement.query(By.css('.load-more'));
     loadMoreButton.triggerEventHandler('click', null);
   });

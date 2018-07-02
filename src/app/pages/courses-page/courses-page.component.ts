@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ICourse, Course } from '../../entities/course';
-import { CourseService } from '../../services/CourseService';
+import { ICourse } from '../../entities/course';
+import { MemoryCourseService } from '../../services/course-service/MemoryCourseService';
 
 @Component({
   selector: 'app-courses-page',
@@ -10,13 +10,11 @@ import { CourseService } from '../../services/CourseService';
 })
 export class CoursesPageComponent implements OnInit {
 
-  public static readonly SEARCH_QUERY_FIELDS: string[] = ['title', 'description', 'creationDate'];
-
   public courses: ICourse[];
   public searchQuery: string;
 
   public constructor(
-    public courseService: CourseService,
+    public courseService: MemoryCourseService,
   ) {
     this.courses = [];
   }
@@ -35,7 +33,7 @@ export class CoursesPageComponent implements OnInit {
 
   public search(searchQuery: string) {
     this.searchQuery = searchQuery;
-    this.courses = this.courseService.search(searchQuery, CoursesPageComponent.SEARCH_QUERY_FIELDS);
+    this.courses = this.courseService.search(searchQuery);
     console.log(`Search by ${searchQuery}`);
   }
 

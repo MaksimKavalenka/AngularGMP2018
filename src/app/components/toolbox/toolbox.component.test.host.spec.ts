@@ -45,14 +45,17 @@ describe('ToolboxComponent TestHost', () => {
   it('should apply a search query', () => {
     const searchButton = fixture.debugElement.query(By.css('.search'));
     searchButton.triggerEventHandler('click', null);
-    expect(component.searchQuery).toEqual(testSearchQuery);
-    expect(component.parentSearchQuery).toEqual(testSearchQuery);
+
+    expect(component.searchQuery).toBe(testSearchQuery);
+    expect(component.parentSearchQuery).toBe(testSearchQuery);
   });
 
   it('should apply a search query after a value editing', () => {
     component.searchQuery = 'New value';
+
     const searchButton = fixture.debugElement.query(By.css('.search'));
     searchButton.triggerEventHandler('click', null);
-    expect(component.parentSearchQuery).toEqual(component.searchQuery);
+
+    expect(component.parentSearchQuery).toBe(component.searchQuery);
   });
 });

@@ -4,7 +4,7 @@
   width: auto;
 }
 
-div {
+.load-more {
   border: 1px solid #000;
   cursor: pointer;
   font-size: 23px;
@@ -14,12 +14,12 @@ div {
   text-transform: uppercase;
 }
 
-div:hover {
+.load-more:hover {
   background: #4e4e4e;
   color: #fff;
 }
 
-div:active {
+.load-more:active {
   background: #2b2b2b;
   color: #fff;
 }

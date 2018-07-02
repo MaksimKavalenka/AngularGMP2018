@@ -10,7 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ToolboxComponent } from './components/toolbox/toolbox.component';
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
-import { CourseService } from './services/CourseService';
+import { MemoryCourseService } from './services/course-service/MemoryCourseService';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { CourseService } from './services/CourseService';
     FormsModule,
   ],
   providers: [
-    CourseService,
+    MemoryCourseService,
   ],
   bootstrap: [AppComponent],
 })

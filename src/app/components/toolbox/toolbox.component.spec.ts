@@ -29,6 +29,6 @@ describe('ToolboxComponent', () => {
   });
 
   it('should have appropriate search query information', () => {
-    expect(component.searchQuery).toEqual(testSearchQuery);
+    expect(component.searchQuery).toBe(testSearchQuery);
   });
 });
