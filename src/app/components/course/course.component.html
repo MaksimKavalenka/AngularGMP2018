@@ -1,4 +1,4 @@
-<div class="course block" *ngFor="let course of courses">
+<div class="course block">
   <div class="body">
     <div class="header justify">
       <div>{{course.title}}</div>
@@ -14,9 +14,9 @@
       <img src="assets/images/edit.png" alt="Edit">
       <div>Edit</div>
     </div>
-    <div class="action delete">
-        <img src="assets/images/delete.png" alt="Delete">
-        <div>Delete</div>
-      </div>
+    <div class="action delete" (click)="deleteCourse(course.id)">
+      <img src="assets/images/delete.png" alt="Delete">
+      <div>Delete</div>
+    </div>
   </div>
 </div>

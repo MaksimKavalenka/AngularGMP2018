@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  padding: 0 15px;
+  width: auto;
+}
+
+div {
+  border: 1px solid #000;
+  cursor: pointer;
+  font-size: 23px;
+  margin: 15px 15px 80px;
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+div:hover {
+  background: #4e4e4e;
+  color: #fff;
+}
+
+div:active {
+  background: #2b2b2b;
+  color: #fff;
+}

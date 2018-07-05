@@ -1,6 +1,6 @@
 :host {
     display: block;
-    padding: 0 15px 15px;
+    padding: 0 15px;
     width: auto;
 }
 
@@ -11,6 +11,10 @@
 
 .block:first-child {
     margin: 0 15px 15px;
+}
+
+.block:last-child {
+    margin: 15px 15px 0;
 }
 
 .course .body {
