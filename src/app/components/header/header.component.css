@@ -1,0 +1,30 @@
+:host {
+    border-bottom: 2px solid #000;
+    display: block;
+    font-size: 30px;
+    height: 50px;
+    padding: 15px;
+    width: auto;
+}
+
+button {
+    background: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px 20px;
+}
+
+button:hover {
+    background: #aeaeae;
+    color: #fff;
+}
+
+button:active {
+    background: #8e8e8e;
+    color: #fff;
+}
+
+img {
+    height: 100%;
+}

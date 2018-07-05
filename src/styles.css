@@ -1,1 +1,84 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0 auto;
+}
+
+* {
+    font-family: cursive;
+}
+
+.action {
+    border: 1px solid #000;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px;
+    position: relative;
+    width: 100px;
+}
+
+.action > img {
+    height: 15px;
+    position: absolute;
+}
+
+.action > div {
+    text-align: center;
+    width: 100%;
+}
+
+.action.add {
+    width: 125px;
+}
+
+.action.add:hover {
+    background: #649f39;
+    color: #fff;
+}
+
+.action.add:active {
+    background: #33691e;
+    color: #fff;
+}
+
+.action.edit:hover {
+    background: #f4974e;
+    color: #fff;
+}
+
+.action.edit:active {
+    background: #e38e33;
+    color: #fff;
+}
+
+.action.delete:hover {
+    background: #ff0000;
+    color: #fff;
+}
+
+.action.delete:active {
+    background: #d30303;
+    color: #fff;
+}
+
+.block > * {
+    display: inline-block;
+    margin: 0 15px;
+    vertical-align: middle;
+}
+
+.justify {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.justify > div {
+    display: flex;
+    height: 100%;
+}
