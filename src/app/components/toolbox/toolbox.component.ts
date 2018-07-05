@@ -7,10 +7,10 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 })
 export class ToolboxComponent implements OnInit {
 
-  private searchQuery: string;
+  public searchQuery: string;
 
   @Output()
-  private searchEvent: EventEmitter<string> = new EventEmitter();
+  public searchEvent: EventEmitter<string> = new EventEmitter();
 
   public constructor() { }
 
