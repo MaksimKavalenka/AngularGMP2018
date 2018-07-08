@@ -3,8 +3,6 @@ import { ICourse, Course } from '../../entities/course';
 
 export class MemoryCourseService implements ICourseService {
 
-  private static readonly SEARCH_QUERY_FIELDS: string[] = ['title', 'description', 'creationDate'];
-
   private cources: ICourse[] = [
     new Course(
       '1', 'Video Course 1', 88, new Date('05.23.2018'),
@@ -62,18 +60,6 @@ export class MemoryCourseService implements ICourseService {
   public deleteCourse(id: string): ICourse[] {
     this.cources = this.cources.filter(course => course.id !== id);
     return this.cources;
-  }
-
-  public search(searchQuery: string): ICourse[] {
-    return searchQuery
-      ? this.cources.filter(course => MemoryCourseService.SEARCH_QUERY_FIELDS.some((field: string) => {
-        const value: any = course[field];
-        if (value instanceof Date) {
-          return new Date(searchQuery).getTime() === value.getTime();
-        }
-        return new RegExp(searchQuery).test(value);
-      }))
-      : this.cources;
   }
 
 }

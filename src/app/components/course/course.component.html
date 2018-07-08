@@ -6,7 +6,7 @@
         <img [hidden]="!course.topRated" src="assets/images/star.png" alt="Star">
       </div>
       <div class="metadata">
-        <div>{{course.getDuration()}}</div>
+        <div>{{course.duration | duration}}</div>
         <div>{{course.creationDate | date: "MM.dd.y"}}</div>
       </div>
     </div>

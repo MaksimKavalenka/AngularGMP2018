@@ -12,6 +12,7 @@ export class CoursesPageComponent implements OnInit {
 
   public courses: ICourse[];
   public searchQuery: string;
+  public isEmplyList: boolean;
 
   public constructor(
     private courseService: MemoryCourseService,
@@ -33,7 +34,6 @@ export class CoursesPageComponent implements OnInit {
 
   public search(searchQuery: string) {
     this.searchQuery = searchQuery;
-    this.courses = this.courseService.search(searchQuery);
     console.log(`Search by ${searchQuery}`);
   }
 

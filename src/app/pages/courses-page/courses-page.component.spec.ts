@@ -14,7 +14,6 @@ const testCourses: ICourse[] = [
 const testCourseCategory: Object = {
   get: testCourses[0],
   delete: testCourses[1],
-  search: testCourses[2],
 };
 
 const testSearchQuery = 'Test search query';
@@ -29,7 +28,6 @@ describe('CoursesPageComponent', () => {
       deleteCourse: jasmine.createSpy('deleteCourse').and.returnValue([testCourseCategory['delete']]),
       getCourse: jasmine.createSpy('getCourse').and.returnValue(testCourseCategory['get']),
       getCourses: jasmine.createSpy('getCourses').and.returnValue(testCourses),
-      search: jasmine.createSpy('search').and.returnValue([testCourseCategory['search']]),
     };
 
     TestBed.configureTestingModule({
@@ -68,16 +66,12 @@ describe('CoursesPageComponent', () => {
     component.deleteCourse(deleteCourse.id);
 
     expect(courseService.deleteCourse).toHaveBeenCalledWith(deleteCourse.id);
-    expect(courseService.search).toHaveBeenCalledWith(testSearchQuery);
     expect(component.courses).toEqual([searchCourse]);
   });
 
   it('should apply a search query', () => {
     const course: ICourse = testCourseCategory['search'];
-
     component.search(testSearchQuery);
-
-    expect(courseService.search).toHaveBeenCalledWith(testSearchQuery);
     expect(component.courses).toEqual([course]);
   });
 

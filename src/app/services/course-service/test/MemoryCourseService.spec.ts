@@ -25,15 +25,6 @@ describe('MemoryCourseService', () => {
     expect(courseService.getCourse(course.id)).toEqual(course);
   });
 
-  it('should apply a search query', () => {
-    const course: ICourse = testCourses[0];
-    expect(courseService.search(course.title)).toContain(course);
-  });
-
-  it('should apply a search query', () => {
-    expect(courseService.search(null)).toEqual(testCourses);
-  });
-
   it('should delete a course', () => {
     const course: ICourse = testCourses[0];
     expect(courseService.deleteCourse(course.id).length).toBe(testCourses.length - 1);
