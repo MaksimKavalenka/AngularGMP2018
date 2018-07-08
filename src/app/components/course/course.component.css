@@ -4,8 +4,12 @@
     width: auto;
 }
 
+.top-rated {
+    background: #fff999;
+}
+
 .block {
-    border: 1px solid #000;
+    border: 2px solid #000;
     margin: 15px;
 }
 
@@ -27,6 +31,12 @@
 
 .course .body .header {
     font-size: 23px;
+    height: 35px;
+}
+
+.course .body .header img {
+    height: 50%;
+    margin: 0 10px;
 }
 
 .course .body .header .metadata > * {

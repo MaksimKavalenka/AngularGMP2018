@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-loader',
@@ -6,6 +6,9 @@ import { Component, Output, OnInit, EventEmitter } from '@angular/core';
   styleUrls: ['./loader.component.css'],
 })
 export class LoaderComponent implements OnInit {
+
+  @Input()
+  public isEmptyList: boolean;
 
   @Output()
   public loadMoreEvent: EventEmitter<void> = new EventEmitter();

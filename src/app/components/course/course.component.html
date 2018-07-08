@@ -1,7 +1,10 @@
-<div class="course block">
+<div [appReleaseBorder]="course.creationDate" [ngClass]="{'top-rated': course.topRated}" class="course block">
   <div class="body">
     <div class="header justify">
-      <div>{{course.title}}</div>
+      <div>
+        <div>{{course.title | uppercase}}</div>
+        <img [hidden]="!course.topRated" src="assets/images/star.png" alt="Star">
+      </div>
       <div class="metadata">
         <div>{{course.getDuration()}}</div>
         <div>{{course.creationDate | date: "MM.dd.y"}}</div>

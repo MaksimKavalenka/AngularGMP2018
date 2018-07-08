@@ -14,7 +14,7 @@ export class CoursesPageComponent implements OnInit {
   public searchQuery: string;
 
   public constructor(
-    public courseService: MemoryCourseService,
+    private courseService: MemoryCourseService,
   ) {
     this.courses = [];
   }

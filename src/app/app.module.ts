@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ToolboxComponent } from './components/toolbox/toolbox.component';
+import { ReleaseBorderDirective } from './directives/release-border/release-border.directive';
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
 import { MemoryCourseService } from './services/course-service/MemoryCourseService';
 
@@ -19,9 +20,10 @@ import { MemoryCourseService } from './services/course-service/MemoryCourseServi
     CourseComponent,
     FooterComponent,
     HeaderComponent,
-    ToolboxComponent,
-    CoursesPageComponent,
     LoaderComponent,
+    ToolboxComponent,
+    ReleaseBorderDirective,
+    CoursesPageComponent,
   ],
   imports: [
     BrowserModule,
