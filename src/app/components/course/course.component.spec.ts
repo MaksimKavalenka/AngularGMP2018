@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseComponent } from './course.component';
+import { ReleaseBorderDirective } from '../../directives/release-border/release-border.directive';
 import { ICourse, Course } from '../../entities/course';
+import { DurationPipe } from '../../pipes/duration/duration.pipe';
 
 const testCourse: ICourse = new Course('0', 'Video Course 0', 30, new Date('08.08.2018'), 'Test');
 
@@ -11,7 +13,7 @@ describe('CourseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponent],
+      declarations: [CourseComponent, ReleaseBorderDirective, DurationPipe],
     })
       .compileComponents();
   }));
@@ -33,5 +35,6 @@ describe('CourseComponent', () => {
     expect(component.course.duration).toBe(testCourse.duration);
     expect(component.course.id).toBe(testCourse.id);
     expect(component.course.title).toBe(testCourse.title);
+    expect(component.course.topRated).toBe(testCourse.topRated);
   });
 });

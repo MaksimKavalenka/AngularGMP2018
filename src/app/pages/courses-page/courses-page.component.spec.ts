@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
 import { ICourse, Course } from '../../entities/course';
+import { OrderByPipe } from '../../pipes/order-by/order-by.pipe';
+import { SearchPipe } from '../../pipes/search/search.pipe';
 import { MemoryCourseService } from '../../services/course-service/MemoryCourseService';
 
 const testCourses: ICourse[] = [
@@ -16,7 +18,7 @@ const testCourseCategory: Object = {
   delete: testCourses[1],
 };
 
-const testSearchQuery = 'Test search query';
+const testSearchQuery = 'Course 1';
 
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
@@ -31,7 +33,7 @@ describe('CoursesPageComponent', () => {
     };
 
     TestBed.configureTestingModule({
-      declarations: [CoursesPageComponent],
+      declarations: [CoursesPageComponent, OrderByPipe, SearchPipe],
       providers: [{ provide: MemoryCourseService, useValue: courseService }],
       schemas: [NO_ERRORS_SCHEMA],
     })
@@ -51,28 +53,15 @@ describe('CoursesPageComponent', () => {
 
   it('should delete a course', () => {
     const course: ICourse = testCourseCategory['delete'];
-
     component.deleteCourse(course.id);
 
     expect(courseService.deleteCourse).toHaveBeenCalledWith(course.id);
     expect(component.courses).toEqual([course]);
   });
 
-  it('should delete a course when searching', () => {
-    const deleteCourse: ICourse = testCourseCategory['delete'];
-    const searchCourse: ICourse = testCourseCategory['search'];
-
-    component.searchQuery = testSearchQuery;
-    component.deleteCourse(deleteCourse.id);
-
-    expect(courseService.deleteCourse).toHaveBeenCalledWith(deleteCourse.id);
-    expect(component.courses).toEqual([searchCourse]);
-  });
-
   it('should apply a search query', () => {
-    const course: ICourse = testCourseCategory['search'];
     component.search(testSearchQuery);
-    expect(component.courses).toEqual([course]);
+    expect(component.searchQuery).toBe(testSearchQuery);
   });
 
   it('should load more courses', () => {
