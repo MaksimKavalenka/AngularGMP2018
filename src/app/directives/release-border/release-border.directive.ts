@@ -14,11 +14,15 @@ export class ReleaseBorderDirective implements OnInit {
   ) { }
 
   public ngOnInit() {
-    if (this.creationDate.getTime() > Date.now()) {
-      this.renderer.setStyle(this.element.nativeElement, 'border-color', 'blue');
-    } else if (this.creationDate.getTime() > (Date.now() - 14 * 24 * 60 * 60 * 1000)) {
-      this.renderer.setStyle(this.element.nativeElement, 'border-color', 'green');
+    if (this.creationDate) {
+      if (this.creationDate.getTime() > Date.now()) {
+        return this.renderer.setStyle(this.element.nativeElement, 'border-color', 'blue');
+      }
+      if (this.creationDate.getTime() > (Date.now() - 14 * 24 * 60 * 60 * 1000)) {
+        return this.renderer.setStyle(this.element.nativeElement, 'border-color', 'green');
+      }
     }
+    return this.renderer.setStyle(this.element.nativeElement, 'border-color', 'black');
   }
 
 }

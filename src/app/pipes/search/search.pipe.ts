@@ -7,7 +7,7 @@ import { ICourse } from '../../entities/course';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(courses: ICourse[], field: string, searchQuery: string): any {
+  transform(courses: ICourse[], field: string, searchQuery: string): ICourse[] {
     return searchQuery
       ? courses.filter((course) => {
         const value: any = course[field];

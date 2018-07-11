@@ -7,7 +7,7 @@ import { ICourse } from '../../entities/course';
 })
 export class OrderByPipe implements PipeTransform {
 
-  public transform(courses: ICourse[], field: string, order: number): any {
+  public transform(courses: ICourse[], field: string, order: number): ICourse[] {
     return courses.sort((course1, course2) => {
       if (course1[field] > course2[field]) {
         return order;
