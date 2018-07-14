@@ -5,7 +5,7 @@ import { CoursesPageComponent } from './courses-page.component';
 import { ICourse, Course } from '../../entities/course';
 import { OrderByPipe } from '../../pipes/order-by/order-by.pipe';
 import { SearchPipe } from '../../pipes/search/search.pipe';
-import { MemoryCourseService } from '../../services/course-service/MemoryCourseService';
+import { MemoryCourseService } from '../../services/course/memory-course.service';
 
 const testCourses: ICourse[] = [
   new Course('1', 'Video Course 1', 31, new Date('01.08.2018'), 'Test1'),

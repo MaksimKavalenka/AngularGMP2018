@@ -1,6 +1,6 @@
 import { ICourse, Course } from '../../../entities/course';
-import { ICourseService } from '../ICourseService';
-import { MemoryCourseService } from '../MemoryCourseService';
+import { ICourseService } from '../course.service';
+import { MemoryCourseService } from '../memory-course.service';
 
 describe('MemoryCourseService', () => {
   const courseService: ICourseService = new MemoryCourseService();

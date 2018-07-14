@@ -17,7 +17,7 @@ import { CoursesPageComponent } from './pages/courses-page/courses-page.componen
 import { DurationPipe } from './pipes/duration/duration.pipe';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
-import { MemoryCourseService } from './services/course-service/MemoryCourseService';
+import { MemoryCourseService } from './services/course/memory-course.service';
 
 @NgModule({
   declarations: [

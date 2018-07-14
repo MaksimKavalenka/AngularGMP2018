@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ICourse } from '../../entities/course';
-import { MemoryCourseService } from '../../services/course-service/MemoryCourseService';
+import { MemoryCourseService } from '../../services/course/memory-course.service';
 
 @Component({
   selector: 'app-courses-page',

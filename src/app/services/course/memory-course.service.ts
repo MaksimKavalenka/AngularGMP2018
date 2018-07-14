@@ -1,4 +1,4 @@
-import { ICourseService } from './ICourseService';
+import { ICourseService } from './course.service';
 import { ICourse, Course } from '../../entities/course';
 
 export class MemoryCourseService implements ICourseService {
