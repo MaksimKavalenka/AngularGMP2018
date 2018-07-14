@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
+import { DialogComponent } from '../dialog/dialog.component';
 import { ICourse } from '../../entities/course';
 
 @Component({
@@ -15,10 +17,22 @@ export class CourseComponent {
   @Output()
   public deleteCourseEvent: EventEmitter<string> = new EventEmitter();
 
-  public constructor() { }
+  public constructor(
+    private dialog: MatDialog,
+  ) { }
 
   public deleteCourse(id: string) {
-    this.deleteCourseEvent.emit(id);
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { course: this.course },
+      height: '200px',
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteCourseEvent.emit(this.course.id);
+      }
+    });
   }
 
 }
