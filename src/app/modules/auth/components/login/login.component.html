@@ -1,3 +1,21 @@
-<p>
-  login works!
-</p>
+<form class="form-submit form-validation" (ngSubmit)="login()">
+  <fieldset>
+    <div class="header">
+      <div>Login</div>
+      <hr>
+    </div>
+    <div class="body">
+      <div class="field">
+        <label class="required" for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="Please enter email" [(ngModel)]="email" required/>
+      </div>
+      <div class="field">
+        <label class="required" for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Please enter password" [(ngModel)]="password" required/>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary" [disabled]="!email || !password">Login</button>
+      </div>
+    </div>
+  </fieldset>
+</form>

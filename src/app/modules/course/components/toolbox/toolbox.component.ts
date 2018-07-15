@@ -12,8 +12,6 @@ export class ToolboxComponent {
   @Output()
   public searchEvent: EventEmitter<string> = new EventEmitter();
 
-  public constructor() { }
-
   public search() {
     this.searchEvent.emit(this.searchQuery);
   }

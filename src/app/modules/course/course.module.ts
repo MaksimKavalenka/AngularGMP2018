@@ -30,7 +30,7 @@ import { MaterialModule } from '../../modules/material/material.module';
     MaterialModule,
   ],
   providers: [
-    MemoryCourseService,
+    { provide: 'memoryCourseService', useClass: MemoryCourseService },
   ],
 })
 export class CourseModule { }

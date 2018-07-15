@@ -13,8 +13,6 @@ export class LoaderComponent {
   @Output()
   public loadMoreEvent: EventEmitter<void> = new EventEmitter();
 
-  public constructor() { }
-
   public loadMore() {
     this.loadMoreEvent.emit();
   }

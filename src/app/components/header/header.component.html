@@ -3,8 +3,8 @@
     <img src="assets/images/logo.png">
     <div>Logo</div>
   </div>
-  <div class="block">
-    <button [routerLink]="['/login']">Log in</button>
-    <button>Log out</button>
+  <div class="block" *ngIf="!isLoginPage()">
+    <button *ngIf="!isAuthenticated()" [routerLink]="['/login']">Log in</button>
+    <button *ngIf="isAuthenticated()" (click)="logout()">Log out</button>
   </div>
 </div>

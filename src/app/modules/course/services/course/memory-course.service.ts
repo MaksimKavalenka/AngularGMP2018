@@ -46,10 +46,12 @@ export class MemoryCourseService implements ICourseService {
     ),
   ];
 
-  public constructor() { }
+  public addCourse(course: Course): void {
+    this.cources.push(course);
+  }
 
   public addCourses(courses: Course[]): void {
-    this.cources = courses;
+    this.cources = this.cources.concat(courses);
   }
 
   public getCourses(): Course[] {
@@ -58,6 +60,11 @@ export class MemoryCourseService implements ICourseService {
 
   public getCourse(id: string): Course {
     return this.cources.find(course => course.id === id);
+  }
+
+  public updateCourse(id: string, course: Course): void {
+    this.deleteCourse(id);
+    this.addCourse(course);
   }
 
   public deleteCourse(id: string): Course[] {

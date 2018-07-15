@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
 import { Course } from '../../entities/course';
 import { MemoryCourseService } from '../../services/course/memory-course.service';
@@ -15,7 +15,7 @@ export class CoursesPageComponent implements OnInit {
   public isEmplyList: boolean;
 
   public constructor(
-    private courseService: MemoryCourseService,
+    @Inject('memoryCourseService') private courseService: MemoryCourseService,
   ) {
     this.courses = [];
   }
