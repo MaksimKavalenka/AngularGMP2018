@@ -1,30 +1,21 @@
 import { NgModule } from '@angular/core';
 
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatDialogModule,
-  MatIconModule,
-  MatMenuModule,
-  MatToolbarModule,
-} from '@angular/material';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
-  imports: [
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
+  declarations: [
+    DialogComponent,
+  ],
+  entryComponents: [
+    DialogComponent,
   ],
   exports: [
-    MatButtonModule,
-    MatCardModule,
     MatDialogModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
+  ],
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule { }
