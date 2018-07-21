@@ -1,42 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
-import { CourseComponent } from './components/course/course.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { ToolboxComponent } from './components/toolbox/toolbox.component';
-import { ReleaseBorderDirective } from './directives/release-border/release-border.directive';
-import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
-import { DurationPipe } from './pipes/duration/duration.pipe';
-import { OrderByPipe } from './pipes/order-by/order-by.pipe';
-import { SearchPipe } from './pipes/search/search.pipe';
-import { MemoryCourseService } from './services/course-service/MemoryCourseService';
+import { AuthModule } from './modules/auth/auth.module';
+import { CourseModule } from './modules/course/course.module';
+import { CustomRouterModule } from './modules/router/router.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     BreadcrumbsComponent,
-    CourseComponent,
     FooterComponent,
     HeaderComponent,
-    LoaderComponent,
-    ToolboxComponent,
-    ReleaseBorderDirective,
-    CoursesPageComponent,
-    DurationPipe,
-    OrderByPipe,
-    SearchPipe,
   ],
   imports: [
+    AuthModule,
+    BrowserAnimationsModule,
     BrowserModule,
-    FormsModule,
-  ],
-  providers: [
-    MemoryCourseService,
+    CourseModule,
+    CustomRouterModule,
   ],
   bootstrap: [AppComponent],
 })

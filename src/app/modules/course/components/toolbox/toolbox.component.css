@@ -1,0 +1,29 @@
+:host {
+    display: block;
+    height: 30px;
+    padding: 15px;
+    width: auto;
+}
+
+button.search {
+    background: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.search:hover {
+    background: #00abea;
+    color: #fff;
+}
+
+button.search:active {
+    background: #007acc;
+    color: #fff;
+}
+
+input {
+    height: 30px;
+    padding: 0 8px;
+    width: 500px;
+}
