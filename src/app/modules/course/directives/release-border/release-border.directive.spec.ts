@@ -25,11 +25,13 @@ class TestComponent {
 describe('ReleaseBorderDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let dirElements: DebugElement[];
-  let emptyElement: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ReleaseBorderDirective, TestComponent],
+      declarations: [
+        ReleaseBorderDirective,
+        TestComponent,
+      ],
     })
       .compileComponents();
   }));
@@ -37,7 +39,6 @@ describe('ReleaseBorderDirective', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);
     dirElements = fixture.debugElement.queryAll(By.directive(ReleaseBorderDirective));
-    emptyElement = fixture.debugElement.query(By.css('div:not([appReleaseBorder])'));
     fixture.detectChanges();
   });
 

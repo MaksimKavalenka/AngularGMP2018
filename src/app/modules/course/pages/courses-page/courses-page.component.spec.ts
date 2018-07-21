@@ -5,7 +5,7 @@ import { CoursesPageComponent } from './courses-page.component';
 import { Course } from '../../entities/course';
 import { OrderByPipe } from '../../pipes/order-by/order-by.pipe';
 import { SearchPipe } from '../../pipes/search/search.pipe';
-import { MemoryCourseService } from '../../services/course/memory-course.service';
+import { ICourseService } from '../../services/course/course.service';
 
 const testCourses: Course[] = [
   new Course('1', 'Video Course 1', 31, new Date('01.08.2018'), 'Test1'),
@@ -23,18 +23,23 @@ const testSearchQuery = 'Course 1';
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
   let fixture: ComponentFixture<CoursesPageComponent>;
-  let courseService: Partial<MemoryCourseService>;
+
+  let spyCourseService: Partial<ICourseService>;
 
   beforeEach(async(() => {
-    courseService = {
+    spyCourseService = {
       deleteCourse: jasmine.createSpy('deleteCourse').and.returnValue([testCourseCategory['delete']]),
       getCourse: jasmine.createSpy('getCourse').and.returnValue(testCourseCategory['get']),
       getCourses: jasmine.createSpy('getCourses').and.returnValue(testCourses),
     };
 
     TestBed.configureTestingModule({
-      declarations: [CoursesPageComponent, OrderByPipe, SearchPipe],
-      providers: [{ provide: MemoryCourseService, useValue: courseService }],
+      declarations: [
+        CoursesPageComponent,
+        OrderByPipe,
+        SearchPipe,
+      ],
+      providers: [{ provide: 'memoryCourseService', useValue: spyCourseService }],
       schemas: [NO_ERRORS_SCHEMA],
     })
       .compileComponents();
@@ -55,7 +60,7 @@ describe('CoursesPageComponent', () => {
     const course: Course = testCourseCategory['delete'];
     component.deleteCourse(course.id);
 
-    expect(courseService.deleteCourse).toHaveBeenCalledWith(course.id);
+    expect(spyCourseService.deleteCourse).toHaveBeenCalledWith(course.id);
     expect(component.courses).toEqual([course]);
   });
 

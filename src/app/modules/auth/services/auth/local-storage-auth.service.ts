@@ -8,7 +8,7 @@ import { User } from '../../entities/user';
 @Injectable()
 export class LocalStorageAuthService extends GuidAuthService {
 
-  private static readonly USER_ID_KEY: string = 'userId';
+  public static readonly USER_ID_KEY: string = 'userId';
 
   public constructor(
     private cookieService: CookieService,
@@ -24,7 +24,7 @@ export class LocalStorageAuthService extends GuidAuthService {
       user = this.getUser();
       console.log(`You are already logged in: ${user.email}`);
     } else {
-      user = new User(this.guid(), '', '', email);
+      user = new User(this.guid(), '', '', email, password);
       this.storage.set(user.id, user);
       this.cookieService.set(LocalStorageAuthService.USER_ID_KEY, user.id);
       console.log(`You've been logged in: ${user.email}`);

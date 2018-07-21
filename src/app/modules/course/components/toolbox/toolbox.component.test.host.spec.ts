@@ -26,7 +26,10 @@ describe('ToolboxComponent TestHost', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ToolboxComponent, TestHostComponent],
+      declarations: [
+        ToolboxComponent,
+        TestHostComponent,
+      ],
       imports: [FormsModule],
     })
       .compileComponents();

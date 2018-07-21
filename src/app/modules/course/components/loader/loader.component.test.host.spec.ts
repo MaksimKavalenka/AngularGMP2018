@@ -18,7 +18,10 @@ describe('LoaderComponent HostTest', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoaderComponent, TestHostComponent],
+      declarations: [
+        LoaderComponent,
+        TestHostComponent,
+      ],
     })
       .compileComponents();
   }));

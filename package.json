@@ -7,7 +7,8 @@
     "start": "npm run build && npm run launch",
     "build": "ng build",
     "launch": "node server.js",
-    "test": "ng test",
+    "serve": "ng serve --open",
+    "test": "ng test --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot -prod"

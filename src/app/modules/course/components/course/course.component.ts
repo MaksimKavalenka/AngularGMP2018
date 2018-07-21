@@ -21,7 +21,7 @@ export class CourseComponent {
     private dialog: MatDialog,
   ) { }
 
-  public deleteCourse(id: string) {
+  public deleteCourse() {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         title: 'Do you really want to delete this course?',

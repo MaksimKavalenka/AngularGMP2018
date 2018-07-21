@@ -54,12 +54,12 @@ export class MemoryCourseService implements ICourseService {
     this.cources = this.cources.concat(courses);
   }
 
-  public getCourses(): Course[] {
-    return this.cources;
-  }
-
   public getCourse(id: string): Course {
     return this.cources.find(course => course.id === id);
+  }
+
+  public getCourses(): Course[] {
+    return this.cources;
   }
 
   public updateCourse(id: string, course: Course): void {
@@ -70,6 +70,10 @@ export class MemoryCourseService implements ICourseService {
   public deleteCourse(id: string): Course[] {
     this.cources = this.cources.filter(course => course.id !== id);
     return this.cources;
+  }
+
+  public deleteCourses(): void {
+    this.cources = [];
   }
 
 }

@@ -9,5 +9,6 @@ describe('AuthModule', () => {
 
   it('should create an instance', () => {
     expect(authModule).toBeTruthy();
+    expect(AuthModule.forRoot()).toBeTruthy();
   });
 });

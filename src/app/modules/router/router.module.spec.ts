@@ -1,10 +1,10 @@
-import { RouterModule } from './router.module';
+import { CustomRouterModule } from './router.module';
 
 describe('RouterModule', () => {
-  let routerModule: RouterModule;
+  let routerModule: CustomRouterModule;
 
   beforeEach(() => {
-    routerModule = new RouterModule();
+    routerModule = new CustomRouterModule();
   });
 
   it('should create an instance', () => {
