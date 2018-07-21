@@ -12,9 +12,10 @@ export class CoursesPageComponent implements OnInit {
 
   public courses: ICourse[];
   public searchQuery: string;
+  public isEmplyList: boolean;
 
   public constructor(
-    public courseService: MemoryCourseService,
+    private courseService: MemoryCourseService,
   ) {
     this.courses = [];
   }
@@ -26,14 +27,10 @@ export class CoursesPageComponent implements OnInit {
   public deleteCourse(id: string) {
     this.courses = this.courseService.deleteCourse(id);
     console.log(`Course ${id} has been deleted`);
-    if (this.searchQuery) {
-      this.search(this.searchQuery);
-    }
   }
 
   public search(searchQuery: string) {
     this.searchQuery = searchQuery;
-    this.courses = this.courseService.search(searchQuery);
     console.log(`Search by ${searchQuery}`);
   }
 

@@ -5,5 +5,4 @@ export interface ICourseService {
   getCourses(): ICourse[];
   getCourse(id: string): ICourse;
   deleteCourse(id: string): ICourse[];
-  search(searchQuery: string): ICourse[];
 }

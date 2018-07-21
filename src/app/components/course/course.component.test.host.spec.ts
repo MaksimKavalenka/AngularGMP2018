@@ -3,7 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { CourseComponent } from './course.component';
+import { ReleaseBorderDirective } from '../../directives/release-border/release-border.directive';
 import { ICourse, Course } from '../../entities/course';
+import { DurationPipe } from '../../pipes/duration/duration.pipe';
 
 const testCourse: ICourse = new Course('0', 'Video Course 0', 30, new Date('08.08.2018'), 'Test');
 
@@ -26,7 +28,7 @@ describe('CourseComponent TestHost', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponent, TestHostComponent],
+      declarations: [CourseComponent, ReleaseBorderDirective, DurationPipe, TestHostComponent],
     })
       .compileComponents();
   }));

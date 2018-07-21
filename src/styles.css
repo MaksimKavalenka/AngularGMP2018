@@ -8,15 +8,19 @@ body {
     margin: 0 auto;
 }
 
+img {
+    height: 100%;
+}
+
 * {
     font-family: cursive;
 }
 
 .action {
+    background: #fff;
     border: 1px solid #000;
     cursor: pointer;
     font-size: 12px;
-    padding: 5px;
     position: relative;
     width: 100px;
 }
@@ -28,7 +32,10 @@ body {
 
 .action > div {
     text-align: center;
-    width: 100%;
+}
+
+.action > * {
+    padding: 5px;
 }
 
 .action.add {
@@ -68,7 +75,6 @@ body {
 .block > * {
     display: inline-block;
     margin: 0 15px;
-    vertical-align: middle;
 }
 
 .justify {
@@ -79,6 +85,7 @@ body {
 }
 
 .justify > div {
+    align-items: center;
     display: flex;
     height: 100%;
 }

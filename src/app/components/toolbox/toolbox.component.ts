@@ -1,11 +1,11 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-toolbox',
   templateUrl: './toolbox.component.html',
   styleUrls: ['./toolbox.component.css'],
 })
-export class ToolboxComponent implements OnInit {
+export class ToolboxComponent {
 
   public searchQuery: string;
 
@@ -13,8 +13,6 @@ export class ToolboxComponent implements OnInit {
   public searchEvent: EventEmitter<string> = new EventEmitter();
 
   public constructor() { }
-
-  public ngOnInit() { }
 
   public search() {
     this.searchEvent.emit(this.searchQuery);
