@@ -13,15 +13,27 @@ button:active {
 }
 
 button.confirm:hover {
-	background: #337ab7;
+	background: #449d44;
 }
 
 button.confirm:active {
-	background: #286090;
+	background: #398439;
 }
 
 button.confirm:disabled {
 	background: #fff;
 	color: #000;
 	cursor: not-allowed;
+}
+
+button.cancel:hover {
+	background: #d9534f;
+}
+
+button.cancel:active {
+	background: #c9302c;
+}
+
+button:not(:first-child) {
+  margin: 0 20px;
 }

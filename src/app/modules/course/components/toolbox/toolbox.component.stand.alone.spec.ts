@@ -1,10 +1,18 @@
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ToolboxComponent } from './toolbox.component';
+import { Path } from '../../../../modules/router/constants/path';
 
 const testSearchQuery = 'Test search query';
+
+@Component({
+  template: '',
+})
+class MockComponent { }
 
 describe('ToolboxComponent StandAlone', () => {
   let component: ToolboxComponent;
@@ -12,8 +20,16 @@ describe('ToolboxComponent StandAlone', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ToolboxComponent],
-      imports: [FormsModule],
+      declarations: [
+        MockComponent,
+        ToolboxComponent,
+      ],
+      imports: [
+        FormsModule,
+        RouterTestingModule.withRoutes([
+          { path: Path.ADD_COURSE, component: MockComponent },
+        ]),
+      ],
     })
       .compileComponents();
   }));

@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { ICourseService } from './course.service';
 import { Course } from '../../entities/course';
+import { GuidUtils } from '../../../../utils/guid-utils';
 
 @Injectable()
 export class MemoryCourseService implements ICourseService {
 
-  private cources: Course[] = [
+  private courses: Course[] = [
     new Course(
       '1', 'Video Course 1', 88, new Date('05.23.2018'),
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -46,34 +47,36 @@ export class MemoryCourseService implements ICourseService {
     ),
   ];
 
-  public addCourse(course: Course): void {
-    this.cources.push(course);
+  public addCourse(title: string, duration: number, creationDate: Date, description: string, topRated: boolean = false): Course {
+    const course: Course = new Course(GuidUtils.guid(), title, duration, creationDate, description, topRated);
+    this.courses.push(course);
+    return course;
   }
 
   public addCourses(courses: Course[]): void {
-    this.cources = this.cources.concat(courses);
+    this.courses = this.courses.concat(courses);
   }
 
   public getCourse(id: string): Course {
-    return this.cources.find(course => course.id === id);
+    return this.courses.find(course => course.id === id);
   }
 
   public getCourses(): Course[] {
-    return this.cources;
+    return this.courses;
   }
 
   public updateCourse(id: string, course: Course): void {
     this.deleteCourse(id);
-    this.addCourse(course);
+    this.courses.push(course);
   }
 
   public deleteCourse(id: string): Course[] {
-    this.cources = this.cources.filter(course => course.id !== id);
-    return this.cources;
+    this.courses = this.courses.filter(course => course.id !== id);
+    return this.courses;
   }
 
   public deleteCourses(): void {
-    this.cources = [];
+    this.courses = [];
   }
 
 }
