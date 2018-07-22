@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AuthorsComponent } from './authors.component';
 
-describe('AuthorsComponent', () => {
+describe('AuthorsComponent StandAlone', () => {
   let component: AuthorsComponent;
   let fixture: ComponentFixture<AuthorsComponent>;
 
@@ -23,5 +23,14 @@ describe('AuthorsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set authors', () => {
+    const spyAuthorsChange = spyOn(component.authorsChange, 'emit');
+    const newAuthor = 'New Author';
+    component.authors = newAuthor;
+
+    expect(component.authors).toBe(newAuthor);
+    expect(spyAuthorsChange).toHaveBeenCalledWith(newAuthor);
   });
 });

@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { DateComponent } from './date.component';
 
-describe('DateComponent', () => {
+describe('DateComponent StandAlone', () => {
   let component: DateComponent;
   let fixture: ComponentFixture<DateComponent>;
 
@@ -23,5 +23,14 @@ describe('DateComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set a date', () => {
+    const spyDateChange = spyOn(component.dateChange, 'emit');
+    const newDate = '1000';
+    component.date = newDate;
+
+    expect(component.date).toBe(newDate);
+    expect(spyDateChange).toHaveBeenCalledWith(newDate);
   });
 });

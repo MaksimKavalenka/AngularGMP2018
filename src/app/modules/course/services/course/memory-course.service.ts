@@ -47,7 +47,7 @@ export class MemoryCourseService implements ICourseService {
     ),
   ];
 
-  public addCourse(title: string, duration: number, creationDate: Date, description: string, topRated: boolean = false): Course {
+  public addCourse(title: string, duration: number, creationDate: Date, description: string, topRated?: boolean): Course {
     const course: Course = new Course(GuidUtils.guid(), title, duration, creationDate, description, topRated);
     this.courses.push(course);
     return course;
