@@ -66,6 +66,7 @@ export class MemoryCourseService implements ICourseService {
   }
 
   public updateCourse(id: string, course: Course): void {
+    course.id = id;
     this.deleteCourse(id);
     this.courses.push(course);
   }

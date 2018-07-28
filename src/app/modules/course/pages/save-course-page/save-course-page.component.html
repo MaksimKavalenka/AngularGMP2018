@@ -11,7 +11,7 @@
   <app-duration [(duration)]="duration"></app-duration>
   <app-authors [(authors)]="authors"></app-authors>
   <div>
-    <button class="submit" [disabled]="!isFormValid()" (click)="addCourse()">Save</button>
+    <button class="submit" [disabled]="!isFormValid()" (click)="saveCourse()">Save</button>
     <button class="cancel" [routerLink]="['/courses']">Cancel</button>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { NoContentComponent } from './components/no-content/no-content.component';
 import { ROUTES } from './constants/routes';
 
 @NgModule({
@@ -9,8 +10,7 @@ import { ROUTES } from './constants/routes';
     CommonModule,
     RouterModule.forRoot(ROUTES),
   ],
-  exports: [
-    RouterModule,
-  ],
+  exports: [RouterModule],
+  declarations: [NoContentComponent],
 })
 export class CustomRouterModule { }

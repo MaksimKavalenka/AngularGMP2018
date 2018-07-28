@@ -18,6 +18,7 @@ export class HeaderComponent {
 
   public logout(): void {
     this.authService.logout();
+    this.router.navigate([`/${Path.LOGIN}`]);
   }
 
   public isLoginPage(): boolean {

@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AddCourseComponent } from './add-course.component';
+import { SaveCoursePageComponent } from './save-course-page.component';
 import { Course } from '../../entities/course';
 import { ICourseService } from '../../services/course/course.service';
 import { Path } from '../../../../modules/router/constants/path';
@@ -17,20 +17,20 @@ const testCourse: Course = new Course('1', 'Video Course 1', 31, new Date('01.08
 })
 class MockComponent { }
 
-describe('AddCourseComponent', () => {
-  let component: AddCourseComponent;
-  let fixture: ComponentFixture<AddCourseComponent>;
+describe('SaveCoursePageComponent', () => {
+  let component: SaveCoursePageComponent;
+  let fixture: ComponentFixture<SaveCoursePageComponent>;
 
   let spyCourseService: Partial<ICourseService>;
 
   beforeEach(async(() => {
     spyCourseService = {
-      addCourse: jasmine.createSpy('addCourse').and.returnValue(testCourse),
+      addCourse: jasmine.createSpy('saveCourse').and.returnValue(testCourse),
     };
 
     TestBed.configureTestingModule({
       declarations: [
-        AddCourseComponent,
+        SaveCoursePageComponent,
         MockComponent,
       ],
       imports: [
@@ -47,7 +47,7 @@ describe('AddCourseComponent', () => {
   }));
 
   beforeEach(fakeAsync(() => {
-    fixture = TestBed.createComponent(AddCourseComponent);
+    fixture = TestBed.createComponent(SaveCoursePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
