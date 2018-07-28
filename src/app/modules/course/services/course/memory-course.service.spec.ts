@@ -18,10 +18,8 @@ describe('MemoryCourseService', () => {
   });
 
   it('should add a course', () => {
-    const testCourseToAdd: Course = new Course('5', 'Video Course 5', 35, new Date('5.08.2018'), 'Test5');
-
-    courseService.addCourse(testCourseToAdd);
-    expect(courseService.getCourse(testCourseToAdd.id)).toEqual(testCourseToAdd);
+    const course: Course = courseService.addCourse('Video Course 5', 35, new Date('5.08.2018'), 'Test5', true);
+    expect(courseService.getCourse(course.id)).toEqual(course);
     expect(courseService.getCourses().length).toBe(testCourses.length + 1);
   });
 

@@ -1,7 +1,7 @@
 import { Course } from '../../entities/course';
 
 export interface ICourseService {
-  addCourse(courses: Course): void;
+  addCourse(title: string, duration: number, creationDate: Date, description: string, topRated?: boolean): Course;
   addCourses(courses: Course[]): void;
   getCourse(id: string): Course;
   getCourses(): Course[];

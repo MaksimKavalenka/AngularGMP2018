@@ -10,7 +10,7 @@ export class DialogComponent {
 
   public constructor(
     private dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
 }

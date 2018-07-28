@@ -2,20 +2,19 @@ import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { CookieService } from 'ngx-cookie-service';
 
-import { GuidAuthService } from './auth.service';
+import { IAuthService } from './auth.service';
 import { User } from '../../entities/user';
+import { GuidUtils } from '../../../../utils/guid-utils';
 
 @Injectable()
-export class LocalStorageAuthService extends GuidAuthService {
+export class LocalStorageAuthService implements IAuthService {
 
   public static readonly USER_ID_KEY: string = 'userId';
 
   public constructor(
     private cookieService: CookieService,
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
-  ) {
-    super();
-  }
+  ) { }
 
   public login(email: string, password: string): User {
     let user: User;
@@ -24,7 +23,7 @@ export class LocalStorageAuthService extends GuidAuthService {
       user = this.getUser();
       console.log(`You are already logged in: ${user.email}`);
     } else {
-      user = new User(this.guid(), '', '', email, password);
+      user = new User(GuidUtils.guid(), '', '', email, password);
       this.storage.set(user.id, user);
       this.cookieService.set(LocalStorageAuthService.USER_ID_KEY, user.id);
       console.log(`You've been logged in: ${user.email}`);

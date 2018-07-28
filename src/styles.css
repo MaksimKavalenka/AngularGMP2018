@@ -86,6 +86,91 @@ img {
     margin: 0 15px;
 }
 
+.form-submit {
+	margin: auto;
+    text-align: center;
+    width: 700px;
+}
+
+.form-submit * {
+	text-align: left;
+}
+
+.form-submit fieldset {
+	display: inline-block;
+    font-family: sans-serif;
+    width: 100%;
+}
+
+.form-submit .header {
+	font-size: 20px;
+	margin: 15px 0;
+}
+
+.form-submit .body {
+	margin: 30px 50px;
+}
+
+.form-submit .field {
+	margin: 24px 0;
+}
+
+.form-submit .field > * {
+	display: block;
+}
+
+.form-submit .field label {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 7px 0;
+}
+
+.form-submit .field input,
+.form-submit .field select,
+.form-submit .field textarea {
+	border: 1px solid #aaaaaa;
+	margin: 5px 0;
+	padding: 7px;
+	width: 100%;
+}
+
+.form-submit .field.mini input,
+.form-submit .field.mini select,
+.form-submit .field.mini textarea {
+	width: 40%;
+}
+
+.form-submit .field span {
+	color: #ff0000;
+	font-size: 13px;
+}
+
+.form-submit .field-inline > * {
+	display: inline-block;
+}
+
+.form-submit .field-inline input {
+	width: 50px;
+}
+
+.form-validation label.required:after {
+	color: #ff0000;
+	content: " *";
+	font-size: 18px;
+}
+
+.form-validation input.ng-invalid.ng-touched {
+	border-color: #ff0000;
+}
+
+.form-validation input.ng-invalid.ng-touched:focus {
+	outline: #ffff00;
+}
+
+.form-validation input.ng-valid {
+	border-color: none;
+}
+
 .justify {
     align-items: center;
     display: flex;

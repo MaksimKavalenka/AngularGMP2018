@@ -2,15 +2,15 @@
   <div class="body">
     <div class="header justify">
       <div>
-        <div>{{course.title | uppercase}}</div>
+        <div id="title">{{course.title | uppercase}}</div>
         <img [hidden]="!course.topRated" src="assets/images/star.png" alt="Star">
       </div>
       <div class="metadata">
-        <div>{{course.duration | duration}}</div>
-        <div>{{course.creationDate | date: "MM.dd.y"}}</div>
+        <div id="duration">{{course.duration | duration}}</div>
+        <div id="creationDate">{{course.creationDate | date: "MM.dd.y"}}</div>
       </div>
     </div>
-    <div class="description">{{course.description}}</div>
+    <div id="description" class="description">{{course.description}}</div>
   </div>
   <div class="actions">
     <div class="action edit">

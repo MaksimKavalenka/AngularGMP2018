@@ -1,0 +1,8 @@
+.inline {
+  align-items: center;
+  display: flex;
+}
+
+.inline .duration {
+  padding: 0 30px;
+}

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material';
@@ -63,6 +64,24 @@ describe('CourseComponent TestHost', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should update a course', () => {
+    const newCourse: Course = new Course('1', 'Video Course 1', 31, new Date('01.08.2018'), 'Test1');
+    component.course = newCourse;
+    fixture.detectChanges();
+
+    const titleElement = fixture.debugElement.query(By.css('#title')).nativeElement;
+    expect(titleElement.textContent).toBe(newCourse.title.toUpperCase());
+
+    const descriptionElement = fixture.debugElement.query(By.css('#description')).nativeElement;
+    expect(descriptionElement.textContent).toBe(newCourse.description);
+
+    const durationElement = fixture.debugElement.query(By.css('#duration')).nativeElement;
+    expect(durationElement.textContent).toBe(new DurationPipe().transform(newCourse.duration));
+
+    const creationDateElement = fixture.debugElement.query(By.css('#creationDate')).nativeElement;
+    expect(creationDateElement.textContent).toBe(new DatePipe('en-US').transform(newCourse.creationDate, 'MM.dd.y'));
   });
 
   it('should delete a course', () => {

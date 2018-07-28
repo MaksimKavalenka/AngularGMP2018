@@ -12,7 +12,6 @@ export class CoursesPageComponent implements OnInit {
 
   public courses: Course[];
   public searchQuery: string;
-  public isEmplyList: boolean;
 
   public constructor(
     @Inject('memoryCourseService') private courseService: ICourseService,

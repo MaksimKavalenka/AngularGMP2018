@@ -5,13 +5,13 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run build && npm run launch",
-    "build": "ng build",
+    "build": "ng build --prod",
     "launch": "node server.js",
-    "serve": "ng serve --open",
+    "serve": "ng serve --aot --open",
     "test": "ng test --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot -prod"
+    "postinstall": "ng build --prod"
   },
   "dependencies": {
     "@angular/animations": "^6.0.3",
