@@ -7,10 +7,15 @@
 
 button {
     border: none;
+    cursor: default;
     font-size: 24px;
     height: 100%;
     min-width: 150px;
     width: fit-content;
+}
+
+button.active {
+    cursor: pointer;
 }
 
 button:hover.active {
