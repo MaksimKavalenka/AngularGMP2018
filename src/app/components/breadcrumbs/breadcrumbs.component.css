@@ -9,15 +9,16 @@ button {
     border: none;
     font-size: 24px;
     height: 100%;
-    width: 150px;
+    min-width: 150px;
+    width: fit-content;
 }
 
-button:hover {
+button:hover.active {
     background: #ff2d34;
     color: #fff;
 }
 
-button:active {
+button:active.active {
     background: #d42b2f;
     color: #fff;
 }

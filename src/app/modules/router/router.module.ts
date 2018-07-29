@@ -6,11 +6,11 @@ import { NoContentComponent } from './components/no-content/no-content.component
 import { ROUTES } from './constants/routes';
 
 @NgModule({
+  declarations: [NoContentComponent],
+  exports: [RouterModule],
   imports: [
     CommonModule,
     RouterModule.forRoot(ROUTES),
   ],
-  exports: [RouterModule],
-  declarations: [NoContentComponent],
 })
 export class CustomRouterModule { }

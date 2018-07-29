@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ICourseService } from '../../services/course/course.service';
 import { Path } from '../../../router/constants/path';
 import { Course } from '../../entities/course';
+import { EventService } from '../../../../services/event.service';
 
 @Component({
   selector: 'app-save-course-page',
@@ -23,6 +24,7 @@ export class SaveCoursePageComponent implements OnInit {
   public constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private eventService: EventService,
     @Inject('memoryCourseService') private courseService: ICourseService,
   ) { }
 
@@ -30,6 +32,7 @@ export class SaveCoursePageComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         const course: Course = this.courseService.getCourse(params.id);
+        this.eventService.pushData({ title: course.title });
         this.id = params.id;
         this.title = course.title;
         this.description = course.description;
