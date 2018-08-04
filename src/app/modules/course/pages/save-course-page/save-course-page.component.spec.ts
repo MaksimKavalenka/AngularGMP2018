@@ -9,6 +9,7 @@ import { SaveCoursePageComponent } from './save-course-page.component';
 import { Course } from '../../entities/course';
 import { ICourseService } from '../../services/course/course.service';
 import { Path } from '../../../../modules/router/constants/path';
+import { EventService } from '../../../../services/event.service';
 
 const testCourse: Course = new Course('1', 'Video Course 1', 31, new Date('01.08.2018'), 'Test1');
 
@@ -40,7 +41,10 @@ describe('SaveCoursePageComponent', () => {
           { path: Path.COURSES, component: MockComponent },
         ]),
       ],
-      providers: [{ provide: 'memoryCourseService', useValue: spyCourseService }],
+      providers: [
+        EventService,
+        { provide: 'memoryCourseService', useValue: spyCourseService },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     })
       .compileComponents();

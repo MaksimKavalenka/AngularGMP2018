@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 
 import { CourseComponent } from './course.component';
@@ -10,9 +11,15 @@ import { ReleaseBorderDirective } from '../../directives/release-border/release-
 import { Course } from '../../entities/course';
 import { DurationPipe } from '../../pipes/duration/duration.pipe';
 import { DialogComponent } from '../../../material/components/dialog/dialog.component';
+import { Path } from '../../../router/constants/path';
 import { MaterialModule } from '../../../../modules/material/material.module';
 
 const testCourse: Course = new Course('0', 'Video Course 0', 30, new Date('08.08.2018'), 'Test');
+
+@Component({
+  template: '',
+})
+class MockComponent { }
 
 @Component({
   template:
@@ -48,9 +55,15 @@ describe('CourseComponent TestHost', () => {
         CourseComponent,
         ReleaseBorderDirective,
         DurationPipe,
+        MockComponent,
         TestHostComponent,
       ],
-      imports: [MaterialModule],
+      imports: [
+        MaterialModule,
+        RouterTestingModule.withRoutes([
+          { path: Path.COURSES, component: MockComponent },
+        ]),
+      ],
       providers: [{ provide: MatDialog, useValue: spyMatDialog }],
     })
       .compileComponents();

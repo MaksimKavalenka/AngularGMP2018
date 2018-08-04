@@ -10,7 +10,6 @@ export class EventService {
 
   public constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
   ) {
     this.router.events
       .subscribe((event) => {

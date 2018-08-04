@@ -12,11 +12,11 @@ export class BreadcrumbsComponent implements OnInit {
   public title: string;
 
   public constructor(
-    private routerService: EventService,
+    private eventService: EventService,
   ) { }
 
   public ngOnInit() {
-    this.routerService.data.subscribe((data) => {
+    this.eventService.data.subscribe((data) => {
       if (data) {
         this.title = data.title;
       } else {
