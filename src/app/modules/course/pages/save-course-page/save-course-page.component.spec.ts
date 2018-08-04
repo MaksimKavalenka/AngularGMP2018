@@ -57,7 +57,7 @@ describe('SaveCoursePageComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: spyActivatedRoute },
         { provide: EventService, useValue: spyEventService },
-        { provide: 'memoryCourseService', useValue: spyCourseService },
+        { provide: 'courseService', useValue: spyCourseService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })

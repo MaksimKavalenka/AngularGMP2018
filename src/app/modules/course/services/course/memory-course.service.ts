@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 import { ICourseService } from './course.service';
 import { Course } from '../../entities/course';
@@ -47,37 +48,41 @@ export class MemoryCourseService implements ICourseService {
     ),
   ];
 
-  public addCourse(title: string, duration: number, creationDate: Date, description: string, topRated?: boolean): Course {
+  public addCourse(title: string, duration: number, creationDate: Date, description: string, topRated?: boolean): Observable<Course> {
     const course: Course = new Course(GuidUtils.guid(), title, duration, creationDate, description, topRated);
     this.courses.push(course);
-    return course;
+    return of(course);
   }
 
-  public addCourses(courses: Course[]): void {
+  public addCourses(courses: Course[]): Observable<Course[]> {
     this.courses = this.courses.concat(courses);
+    return of(this.courses);
   }
 
-  public getCourse(id: string): Course {
-    return this.courses.find(course => course.id === id);
+  public getCourse(id: string): Observable<Course> {
+    const courseResult: Course = this.courses.find(course => course.id === id);
+    return of(courseResult);
   }
 
-  public getCourses(): Course[] {
-    return this.courses;
+  public getCourses(): Observable<Course[]> {
+    return of(this.courses);
   }
 
-  public updateCourse(id: string, course: Course): void {
+  public updateCourse(id: string, course: Course): Observable<Course> {
     course.id = id;
     this.deleteCourse(id);
     this.courses.push(course);
+    return of(course);
   }
 
-  public deleteCourse(id: string): Course[] {
+  public deleteCourse(id: string): Observable<Course> {
     this.courses = this.courses.filter(course => course.id !== id);
-    return this.courses;
+    return of();
   }
 
-  public deleteCourses(): void {
+  public deleteCourses(): Observable<Course> {
     this.courses = [];
+    return of();
   }
 
 }

@@ -14,18 +14,23 @@ export class CoursesPageComponent implements OnInit {
   public searchQuery: string;
 
   public constructor(
-    @Inject('memoryCourseService') private courseService: ICourseService,
+    @Inject('courseService') private courseService: ICourseService,
   ) {
     this.courses = [];
   }
 
   public ngOnInit() {
-    this.courses = this.courseService.getCourses();
+    this.courseService.getCourses()
+      .subscribe(courses => this.courses = courses);
   }
 
   public deleteCourse(id: string) {
-    this.courses = this.courseService.deleteCourse(id);
-    console.log(`Course ${id} has been deleted`);
+    this.courseService.deleteCourse(id)
+      .subscribe(() => {
+        console.log(`Course ${id} has been deleted`);
+        this.courseService.getCourses()
+          .subscribe(courses => this.courses = courses);
+      });
   }
 
   public search(searchQuery: string) {

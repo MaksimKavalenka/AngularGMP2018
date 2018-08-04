@@ -39,7 +39,7 @@ describe('CoursesPageComponent', () => {
         OrderByPipe,
         SearchPipe,
       ],
-      providers: [{ provide: 'memoryCourseService', useValue: spyCourseService }],
+      providers: [{ provide: 'courseService', useValue: spyCourseService }],
       schemas: [NO_ERRORS_SCHEMA],
     })
       .compileComponents();
