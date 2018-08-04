@@ -8,7 +8,7 @@ import { User } from '../../entities/user';
 const testUser: User = new User('1', 'firstName', 'lastName', 'email', 'password');
 const userId: string = null;
 
-describe('AuthorizationService', () => {
+describe('LocalStorageAuthService', () => {
   let localStorageAuthService: LocalStorageAuthService;
 
   let spyLocalStorageAuthService: Partial<LocalStorageAuthService>;

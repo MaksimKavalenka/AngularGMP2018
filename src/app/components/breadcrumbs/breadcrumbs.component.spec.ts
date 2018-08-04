@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import { Path } from '../../modules/router/constants/path';
+import { EventService } from '../../services/event.service';
 
 @Component({
   template: '',
@@ -25,6 +26,7 @@ describe('BreadcrumbsComponent', () => {
           { path: Path.COURSES, component: MockComponent },
         ]),
       ],
+      providers: [EventService],
     })
       .compileComponents();
   }));

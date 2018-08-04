@@ -1,5 +1,6 @@
 export enum Path {
-  ADD_COURSE = 'courses/add',
-  COURSES = 'courses',
   LOGIN = 'login',
+  COURSES = 'courses',
+  ADD_COURSE = 'courses/new',
+  EDIT_COURSE = 'courses/:id',
 }

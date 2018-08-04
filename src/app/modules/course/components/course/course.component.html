@@ -13,7 +13,7 @@
     <div id="description" class="description">{{course.description}}</div>
   </div>
   <div class="actions">
-    <div class="action edit">
+    <div class="action edit" [routerLink]="['/courses', course.id]">
       <img src="assets/images/edit.png" alt="Edit">
       <div>Edit</div>
     </div>

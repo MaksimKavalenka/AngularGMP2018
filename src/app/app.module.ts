@@ -9,8 +9,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { CourseModule } from './modules/course/course.module';
 import { CustomRouterModule } from './modules/router/router.module';
+import { EventService } from './services/event.service';
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     BreadcrumbsComponent,
@@ -24,6 +26,6 @@ import { CustomRouterModule } from './modules/router/router.module';
     CourseModule,
     CustomRouterModule,
   ],
-  bootstrap: [AppComponent],
+  providers: [EventService],
 })
 export class AppModule { }

@@ -1,1 +1,2 @@
-<button id="courses" [routerLink]="['/courses']">Courses</button>
+<button id="courses" class="active" [routerLink]="['/courses']">Courses</button>
+<button id="course" *ngIf="title">{{title}}</button>
