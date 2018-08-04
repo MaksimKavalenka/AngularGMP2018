@@ -30,4 +30,10 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toBe('AngularGMP2018');
   }));
+
+  it(`should check the authentication`, async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.isAuthenticated()).toBeTruthy();
+  }));
 });
