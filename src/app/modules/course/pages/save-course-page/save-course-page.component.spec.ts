@@ -89,7 +89,7 @@ describe('SaveCoursePageComponent', () => {
     expect(component.description).toBe(testCourse.description);
     expect(component.date).toBe(testCourse.creationDate.toString());
     expect(component.duration).toBe(testCourse.duration);
-    expect(component.topRated).toBe(testCourse.topRated);
+    expect(component.isTopRated).toBe(testCourse.isTopRated);
   }));
 
   it('should update a course', fakeAsync(() => {

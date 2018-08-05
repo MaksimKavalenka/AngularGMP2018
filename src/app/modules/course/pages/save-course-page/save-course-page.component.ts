@@ -19,7 +19,7 @@ export class SaveCoursePageComponent implements OnInit {
   public date: string; // TODO: Add a validation
   public duration: number;
   public authors: string;
-  public topRated: boolean;
+  public isTopRated: boolean;
 
   public constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,7 +40,7 @@ export class SaveCoursePageComponent implements OnInit {
             this.date = course.creationDate.toString();
             this.duration = course.duration;
             this.authors = 'Unknown';
-            this.topRated = course.topRated;
+            this.isTopRated = course.isTopRated;
           });
       }
     });
@@ -54,7 +54,7 @@ export class SaveCoursePageComponent implements OnInit {
         duration: this.duration,
         creationDate: new Date(this.date),
         description: this.description,
-        topRated: this.topRated,
+        isTopRated: this.isTopRated,
       });
 
       this.courseService.updateCourse(this.id, course)

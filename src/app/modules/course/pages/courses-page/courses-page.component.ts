@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Sort } from '@angular/material';
 
 import { Course } from '../../entities/course';
 import { ICourseService } from '../../services/course/course.service';
@@ -10,6 +11,12 @@ import { ICourseService } from '../../services/course/course.service';
 })
 export class CoursesPageComponent implements OnInit {
 
+  private static readonly PAGE_COURSES_COUNT: number = 2;
+  private static readonly PAGE_SORT: Sort = {
+    active: 'creationDate',
+    direction: 'desc',
+  };
+
   public courses: Course[];
   public searchQuery: string;
 
@@ -20,26 +27,30 @@ export class CoursesPageComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.courseService.getCourses()
-      .subscribe(courses => this.courses = courses);
+    this.getCourses();
+  }
+
+  public getCourses() {
+    this.courseService.getCourses(this.courses.length, CoursesPageComponent.PAGE_COURSES_COUNT, CoursesPageComponent.PAGE_SORT)
+      .subscribe(courses => this.courses = this.courses.concat(courses));
   }
 
   public deleteCourse(id: string) {
     this.courseService.deleteCourse(id)
       .subscribe(() => {
         console.log(`Course ${id} has been deleted`);
-        this.courseService.getCourses()
-          .subscribe(courses => this.courses = courses);
+        this.courses.filter(course => course.id !== id);
       });
   }
 
   public search(searchQuery: string) {
-    this.searchQuery = searchQuery;
     console.log(`Search by ${searchQuery}`);
+    this.searchQuery = searchQuery;
   }
 
   public loadMore() {
     console.log('Load more');
+    this.getCourses();
   }
 
 }

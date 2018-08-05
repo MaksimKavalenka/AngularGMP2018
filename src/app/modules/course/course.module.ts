@@ -15,7 +15,7 @@ import { SaveCoursePageComponent } from './pages/save-course-page/save-course-pa
 import { DurationPipe } from './pipes/duration/duration.pipe';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
-import { JsonServerCourseService } from './services/course/json-server-course.service';
+import { NodeCourseService } from './services/course/node-course.service';
 import { MaterialModule } from '../../modules/material/material.module';
 import { CustomRouterModule } from '../../modules/router/router.module';
 
@@ -42,7 +42,7 @@ import { CustomRouterModule } from '../../modules/router/router.module';
     CustomRouterModule,
   ],
   providers: [
-    { provide: 'courseService', useClass: JsonServerCourseService },
+    { provide: 'courseService', useClass: NodeCourseService },
   ],
 })
 export class CourseModule { }

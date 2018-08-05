@@ -4,7 +4,7 @@ export class Course {
   public duration: number;
   public creationDate: Date;
   public description: string;
-  public topRated: boolean;
+  public isTopRated: boolean;
 
   public constructor(course: any) {
     this.id = course.id;
@@ -12,6 +12,6 @@ export class Course {
     this.duration = course.duration;
     this.creationDate = new Date(course.creationDate);
     this.description = course.description;
-    this.topRated = !!course.topRated;
+    this.isTopRated = !!course.isTopRated;
   }
 }

@@ -21,6 +21,7 @@ describe('MemoryCourseService', () => {
       addCourses: spyOn(courseService, 'addCourses').and.callThrough(),
       getCourse: spyOn(courseService, 'getCourse').and.callThrough(),
       getCourses: spyOn(courseService, 'getCourses').and.callThrough(),
+      getAllCourses: spyOn(courseService, 'getAllCourses').and.callThrough(),
       updateCourse: spyOn(courseService, 'updateCourse').and.callThrough(),
       deleteCourse: spyOn(courseService, 'deleteCourse').and.callThrough(),
       deleteCourses: spyOn(courseService, 'deleteCourses').and.callThrough(),
@@ -43,8 +44,16 @@ describe('MemoryCourseService', () => {
   });
 
   it('should get courses', () => {
-    courseService.getCourses();
-    expect(spyMemoryCourseService.getCourses).toHaveBeenCalled();
+    const start = 0;
+    const limit = 5;
+
+    courseService.getCourses(start, limit);
+    expect(spyMemoryCourseService.getCourses).toHaveBeenCalledWith(start, limit);
+  });
+
+  it('should get all courses', () => {
+    courseService.getAllCourses();
+    expect(spyMemoryCourseService.getAllCourses).toHaveBeenCalled();
   });
 
   it('should update a course', () => {

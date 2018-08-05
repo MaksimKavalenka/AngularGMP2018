@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { Course } from '../../entities/course';
+import { ArrayUtils } from '../../../../utils/array-utils';
 
 @Pipe({
   name: 'orderBy',
@@ -8,17 +9,7 @@ import { Course } from '../../entities/course';
 export class OrderByPipe implements PipeTransform {
 
   public transform(courses: Course[], field: string, order: number): Course[] {
-    if (courses) {
-      return courses.sort((course1, course2) => {
-        if (course1[field] > course2[field]) {
-          return order;
-        }
-        if (course1[field] < course2[field]) {
-          return -order;
-        }
-        return 0;
-      });
-    }
+    return ArrayUtils.sort(courses, field, order);
   }
 
 }

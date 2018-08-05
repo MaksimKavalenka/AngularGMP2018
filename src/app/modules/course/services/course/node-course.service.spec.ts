@@ -1,20 +1,20 @@
 // import { HttpClient, HttpClientModule } from '@angular/common/http';
 // import { TestBed, inject } from '@angular/core/testing';
 
-// import { JsonServerCourseService } from './json-server-course.service';
+// import { NodeCourseService } from './node-course.service';
 
-// describe('JsonServerCourseService', () => {
+// describe('NodeCourseService', () => {
 //   beforeEach(() => {
 //     TestBed.configureTestingModule({
 //       imports: [HttpClientModule],
 //       providers: [
 //         HttpClient,
-//         JsonServerCourseService,
+//         NodeCourseService,
 //       ],
 //     });
 //   });
 
-//   it('should be created', inject([JsonServerCourseService], (service: JsonServerCourseService) => {
+//   it('should be created', inject([NodeCourseService], (service: NodeCourseService) => {
 //     expect(service).toBeTruthy();
 //   }));
 // });
