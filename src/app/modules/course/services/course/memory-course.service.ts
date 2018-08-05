@@ -81,10 +81,15 @@ export class MemoryCourseService implements ICourseService {
     return of(courseResult);
   }
 
-  public getCourses(start: number, limit: number, sort?: Sort): Observable<Course[]> {
-    const modCourses: Course[] = sort
-      ? ArrayUtils.sort(this.courses, sort.active, sort.direction === 'desc' ? -1 : 1)
+  public getCourses(start: number, limit: number, searchQuery?: string, sort?: Sort): Observable<Course[]> {
+    let modCourses: Course[] = searchQuery
+      ? this.courses.filter(course => course.title.concat(course.description).toUpperCase().indexOf(searchQuery.toUpperCase()) >= 0)
       : this.courses;
+
+    modCourses = sort
+      ? ArrayUtils.sort(modCourses, sort.active, sort.direction === 'desc' ? -1 : 1)
+      : this.courses;
+
     return of(modCourses.slice(start, start + limit));
   }
 

@@ -37,11 +37,16 @@ export class NodeCourseService implements ICourseService {
     return observable;
   }
 
-  public getCourses(start: number, limit: number, sort?: Sort): Observable<Course[]> {
+  public getCourses(start: number, limit: number, searchQuery?: string, sort?: Sort): Observable<Course[]> {
     const observable = new Observable<Course[]>(observer => _observer = observer);
     let _observer: Observer<Course[]>;
 
     let url = `${JsonServerURL.COURSES}?start=${start}&limit=${limit}`;
+
+    if (searchQuery) {
+      url += `&textFragment=${searchQuery}`;
+    }
+
     if (sort) {
       url += `&sort=${sort.active}&order=${sort.direction}`;
     }

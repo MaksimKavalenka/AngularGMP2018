@@ -31,7 +31,10 @@ export class CoursesPageComponent implements OnInit {
   }
 
   public getCourses() {
-    this.courseService.getCourses(this.courses.length, CoursesPageComponent.PAGE_COURSES_COUNT, CoursesPageComponent.PAGE_SORT)
+    this.courseService.getCourses(
+      this.courses.length, CoursesPageComponent.PAGE_COURSES_COUNT,
+      this.searchQuery, CoursesPageComponent.PAGE_SORT,
+    )
       .subscribe(courses => this.courses = this.courses.concat(courses));
   }
 
@@ -46,6 +49,8 @@ export class CoursesPageComponent implements OnInit {
   public search(searchQuery: string) {
     console.log(`Search by ${searchQuery}`);
     this.searchQuery = searchQuery;
+    this.courses = [];
+    this.getCourses();
   }
 
   public loadMore() {
