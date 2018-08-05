@@ -13,7 +13,13 @@ import { DialogComponent } from '../../../material/components/dialog/dialog.comp
 import { Path } from '../../../router/constants/path';
 import { MaterialModule } from '../../../../modules/material/material.module';
 
-const testCourse: Course = new Course('0', 'Video Course 0', 30, new Date('08.08.2018'), 'Test');
+const testCourse: Course = new Course({
+  id: '0',
+  title: 'Video Course 0',
+  duration: 30,
+  creationDate: new Date('08.08.2018'),
+  description: 'Test',
+});
 
 @Component({
   template: '',

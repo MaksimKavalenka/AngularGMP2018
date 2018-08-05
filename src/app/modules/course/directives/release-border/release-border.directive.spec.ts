@@ -6,9 +6,27 @@ import { ReleaseBorderDirective } from './release-border.directive';
 import { Course } from '../../entities/course';
 
 const testCourses: Course[] = [
-  new Course('1', 'Video Course 1', 31, new Date(Date.now() + 1000 * 60), 'Test1'),
-  new Course('2', 'Video Course 2', 32, new Date(), 'Test2'),
-  new Course('3', 'Video Course 3', 33, new Date(Date.now() - 1000 * 60 * 60 * 24 * 15), 'Test3'),
+  new Course({
+    id: '1',
+    title: 'Video Course 1',
+    duration: 31,
+    creationDate: new Date(Date.now() + 1000 * 60),
+    description: 'Test1',
+  }),
+  new Course({
+    id: '2',
+    title: 'Video Course 2',
+    duration: 32,
+    creationDate: new Date(),
+    description: 'Test2',
+  }),
+  new Course({
+    id: '3',
+    title: 'Video Course 3',
+    duration: 33,
+    creationDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 15),
+    description: 'Test3',
+  }),
 ];
 
 @Component({

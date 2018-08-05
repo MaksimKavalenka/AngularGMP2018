@@ -1,5 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 import { CoursesPageComponent } from './courses-page.component';
 import { Course } from '../../entities/course';
@@ -8,9 +9,27 @@ import { SearchPipe } from '../../pipes/search/search.pipe';
 import { ICourseService } from '../../services/course/course.service';
 
 const testCourses: Course[] = [
-  new Course('1', 'Video Course 1', 31, new Date('01.08.2018'), 'Test1'),
-  new Course('2', 'Video Course 2', 32, new Date('02.08.2018'), 'Test2'),
-  new Course('3', 'Video Course 3', 33, new Date('03.08.2018'), 'Test3'),
+  new Course({
+    id: '1',
+    title: 'Video Course 1',
+    duration: 31,
+    creationDate: new Date('01.08.2018'),
+    description: 'Test1',
+  }),
+  new Course({
+    id: '2',
+    title: 'Video Course 2',
+    duration: 32,
+    creationDate: new Date('02.08.2018'),
+    description: 'Test2',
+  }),
+  new Course({
+    id: '3',
+    title: 'Video Course 3',
+    duration: 33,
+    creationDate: new Date('03.08.2018'),
+    description: 'Test3',
+  }),
 ];
 
 const testCourseCategory: Object = {
@@ -28,9 +47,9 @@ describe('CoursesPageComponent', () => {
 
   beforeEach(async(() => {
     spyCourseService = {
-      deleteCourse: jasmine.createSpy('deleteCourse').and.returnValue([testCourseCategory['delete']]),
-      getCourse: jasmine.createSpy('getCourse').and.returnValue(testCourseCategory['get']),
-      getCourses: jasmine.createSpy('getCourses').and.returnValue(testCourses),
+      getCourse: jasmine.createSpy('getCourse').and.returnValue(of(testCourseCategory['get'])),
+      getCourses: jasmine.createSpy('getCourses').and.returnValue(of(testCourses)),
+      deleteCourse: jasmine.createSpy('deleteCourse').and.returnValue(of([testCourseCategory['delete']])),
     };
 
     TestBed.configureTestingModule({
@@ -61,7 +80,6 @@ describe('CoursesPageComponent', () => {
     component.deleteCourse(course.id);
 
     expect(spyCourseService.deleteCourse).toHaveBeenCalledWith(course.id);
-    expect(component.courses).toEqual([course]);
   });
 
   it('should apply a search query', () => {

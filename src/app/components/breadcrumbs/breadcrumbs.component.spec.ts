@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import { Path } from '../../modules/router/constants/path';
 import { EventService } from '../../services/event.service';
+
+const testTitle = 'Test title';
 
 @Component({
   template: '',
@@ -15,7 +18,13 @@ describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;
   let fixture: ComponentFixture<BreadcrumbsComponent>;
 
+  // let spyEventService: Partial<EventService>;
+
   beforeEach(async(() => {
+    // spyEventService = {
+    //   data: of({ title: testTitle }),
+    // };
+
     TestBed.configureTestingModule({
       declarations: [
         BreadcrumbsComponent,
@@ -26,7 +35,10 @@ describe('BreadcrumbsComponent', () => {
           { path: Path.COURSES, component: MockComponent },
         ]),
       ],
-      providers: [EventService],
+      providers: [
+        EventService,
+        // { provide: EventService, useValue: spyEventService },
+      ],
     })
       .compileComponents();
   }));
@@ -40,4 +52,8 @@ describe('BreadcrumbsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should set up a title', () => {
+  //   expect(component.title).toBe(testTitle);
+  // });
 });
