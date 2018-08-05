@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 import { ICourseService } from './course.service';
 import { Course } from '../../entities/course';
@@ -15,7 +15,7 @@ export class JsonServerCourseService implements ICourseService {
   ) { }
 
   public addCourse(title: string, duration: number, creationDate: Date, description: string, topRated?: boolean): Observable<Course> {
-    const course: Course = new Course(GuidUtils.guid(), title, duration, creationDate, description, topRated);
+    const course: Course = new Course({ title, duration, creationDate, description, topRated, id: GuidUtils.guid() });
     return this.http.post<Course>(JsonServerURL.COURSES, course);
   }
 
@@ -24,11 +24,29 @@ export class JsonServerCourseService implements ICourseService {
   }
 
   public getCourse(id: string): Observable<Course> {
-    return this.http.get<Course>(`${JsonServerURL.COURSES}/${id}`);
+    const observable = new Observable<Course>(observer => _observer = observer);
+    let _observer: Observer<Course>;
+
+    this.http.get<Course>(`${JsonServerURL.COURSES}/${id}`)
+      .subscribe((course) => {
+        const modCourse: Course = (new Course(course));
+        _observer.next(modCourse);
+      });
+
+    return observable;
   }
 
   public getCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>(JsonServerURL.COURSES);
+    const observable = new Observable<Course[]>(observer => _observer = observer);
+    let _observer: Observer<Course[]>;
+
+    this.http.get<Course[]>(JsonServerURL.COURSES)
+      .subscribe((courses) => {
+        const modCourses: Course[] = courses.map(course => new Course(course));
+        _observer.next(modCourses);
+      });
+
+    return observable;
   }
 
   public updateCourse(id: string, course: Course): Observable<Course> {

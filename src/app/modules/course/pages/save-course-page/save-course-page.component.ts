@@ -48,7 +48,15 @@ export class SaveCoursePageComponent implements OnInit {
 
   public saveCourse() {
     if (this.id) {
-      const course: Course = new Course(this.id, this.title, this.duration, new Date(this.date), this.description, this.topRated);
+      const course: Course = new Course({
+        id: this.id,
+        title: this.title,
+        duration: this.duration,
+        creationDate: new Date(this.date),
+        description: this.description,
+        topRated: this.topRated,
+      });
+
       this.courseService.updateCourse(this.id, course)
         .subscribe(() => this.router.navigate([`/${Path.COURSES}`]));
     } else {
