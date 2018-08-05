@@ -18,12 +18,12 @@ describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;
   let fixture: ComponentFixture<BreadcrumbsComponent>;
 
-  // let spyEventService: Partial<EventService>;
+  let spyEventService: Partial<EventService>;
 
   beforeEach(async(() => {
-    // spyEventService = {
-    //   data: of({ title: testTitle }),
-    // };
+    spyEventService = {
+      data: of({ title: testTitle }),
+    };
 
     TestBed.configureTestingModule({
       declarations: [
@@ -36,8 +36,7 @@ describe('BreadcrumbsComponent', () => {
         ]),
       ],
       providers: [
-        EventService,
-        // { provide: EventService, useValue: spyEventService },
+        { provide: EventService, useValue: spyEventService },
       ],
     })
       .compileComponents();
