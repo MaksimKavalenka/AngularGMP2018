@@ -10,6 +10,6 @@ export interface ICourseService {
   getCourses(start: number, limit: number, searchQuery?: string, sort?: Sort): Observable<Course[]>;
   getAllCourses(): Observable<Course[]>;
   updateCourse(id: string, course: Course): Observable<Course>;
-  deleteCourse(id: string): Observable<Course>;
-  deleteCourses(): Observable<Course>;
+  deleteCourse(id: string): Observable<void>;
+  deleteCourses(): Observable<void>;
 }

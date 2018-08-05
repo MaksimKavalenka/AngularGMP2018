@@ -13,12 +13,12 @@ export class HeaderComponent {
 
   public constructor(
     private router: Router,
-    @Inject('localStorageAuthService') private authService: IAuthService,
+    @Inject('authService') private authService: IAuthService,
   ) { }
 
   public logout(): void {
-    this.authService.logout();
-    this.router.navigate([`/${Path.LOGIN}`]);
+    this.authService.logout()
+      .subscribe(() => this.router.navigate([`/${Path.LOGIN}`]));
   }
 
   public isLoginPage(): boolean {

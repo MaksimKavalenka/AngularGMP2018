@@ -104,14 +104,14 @@ export class MemoryCourseService implements ICourseService {
     return of(course);
   }
 
-  public deleteCourse(id: string): Observable<Course> {
+  public deleteCourse(id: string): Observable<void> {
     this.courses = this.courses.filter(course => course.id !== id);
-    return of();
+    return of(null);
   }
 
-  public deleteCourses(): Observable<Course> {
+  public deleteCourses(): Observable<void> {
     this.courses = [];
-    return of();
+    return of(null);
   }
 
 }

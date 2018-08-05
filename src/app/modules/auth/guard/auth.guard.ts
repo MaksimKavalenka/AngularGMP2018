@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
   public constructor(
     private router: Router,
-    @Inject('localStorageAuthService') private authService: IAuthService,
+    @Inject('authService') private authService: IAuthService,
   ) { }
 
   public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

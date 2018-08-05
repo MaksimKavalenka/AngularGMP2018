@@ -11,7 +11,7 @@ export class AppComponent {
   public title = 'AngularGMP2018';
 
   public constructor(
-    @Inject('localStorageAuthService') private authService: IAuthService,
+    @Inject('authService') private authService: IAuthService,
   ) { }
 
   public isAuthenticated(): boolean {

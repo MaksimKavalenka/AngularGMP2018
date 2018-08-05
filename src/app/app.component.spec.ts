@@ -14,7 +14,7 @@ describe('AppComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      providers: [{ provide: 'localStorageAuthService', useValue: spyAuthService }],
+      providers: [{ provide: 'authService', useValue: spyAuthService }],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));

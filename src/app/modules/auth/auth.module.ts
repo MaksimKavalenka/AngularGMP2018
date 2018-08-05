@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -6,7 +7,8 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
-import { LocalStorageAuthService } from './services/auth/local-storage-auth.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { NodeAuthService } from './services/auth/node-auth.service';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -18,14 +20,15 @@ import { LocalStorageAuthService } from './services/auth/local-storage-auth.serv
   providers: [
     AuthGuard,
     CookieService,
-    { provide: 'localStorageAuthService', useClass: LocalStorageAuthService },
+    { provide: 'authService', useClass: NodeAuthService },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
 })
 export class AuthModule {
   public static forRoot(): ModuleWithProviders {
     return {
       ngModule: AuthModule,
-      providers: [LocalStorageAuthService],
+      providers: [NodeAuthService],
     };
   }
 }

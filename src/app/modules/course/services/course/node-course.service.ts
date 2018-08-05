@@ -25,21 +25,32 @@ export class NodeCourseService implements ICourseService {
   }
 
   public getCourse(id: string): Observable<Course> {
-    const observable = new Observable<Course>(observer => _observer = observer);
     let _observer: Observer<Course>;
+    const observable = new Observable<Course>((observer) => {
+      _observer = observer;
+      _getCourse();
+    });
 
-    this.http.get<Course>(`${JsonServerURL.COURSES}/${id}`)
-      .subscribe((course) => {
-        const modCourse: Course = (new Course(course));
-        _observer.next(modCourse);
-      });
+    const _getCourse = () => {
+      this.http.get<Course>(`${JsonServerURL.COURSES}/${id}`)
+        .subscribe(
+          (course) => {
+            const modCourse: Course = (new Course(course));
+            _observer.next(modCourse);
+          },
+          err => _observer.error(err),
+      );
+    };
 
     return observable;
   }
 
   public getCourses(start: number, limit: number, searchQuery?: string, sort?: Sort): Observable<Course[]> {
-    const observable = new Observable<Course[]>(observer => _observer = observer);
     let _observer: Observer<Course[]>;
+    const observable = new Observable<Course[]>((observer) => {
+      _observer = observer;
+      _getCourses();
+    });
 
     let url = `${JsonServerURL.COURSES}?start=${start}&limit=${limit}`;
 
@@ -51,24 +62,37 @@ export class NodeCourseService implements ICourseService {
       url += `&sort=${sort.active}&order=${sort.direction}`;
     }
 
-    this.http.get<Course[]>(url)
-      .subscribe((courses) => {
-        const modCourses: Course[] = courses.map(course => new Course(course));
-        _observer.next(modCourses);
-      });
+    const _getCourses = () => {
+      this.http.get<Course[]>(url)
+        .subscribe(
+          (courses) => {
+            const modCourses: Course[] = courses.map(course => new Course(course));
+            _observer.next(modCourses);
+          },
+          err => _observer.error(err),
+      );
+    };
 
     return observable;
   }
 
   public getAllCourses(): Observable<Course[]> {
-    const observable = new Observable<Course[]>(observer => _observer = observer);
     let _observer: Observer<Course[]>;
+    const observable = new Observable<Course[]>((observer) => {
+      _observer = observer;
+      _getAllCourses();
+    });
 
-    this.http.get<Course[]>(JsonServerURL.COURSES)
-      .subscribe((courses) => {
-        const modCourses: Course[] = courses.map(course => new Course(course));
-        _observer.next(modCourses);
-      });
+    const _getAllCourses = () => {
+      this.http.get<Course[]>(JsonServerURL.COURSES)
+        .subscribe(
+          (courses) => {
+            const modCourses: Course[] = courses.map(course => new Course(course));
+            _observer.next(modCourses);
+          },
+          err => _observer.error(err),
+      );
+    };
 
     return observable;
   }
@@ -77,12 +101,12 @@ export class NodeCourseService implements ICourseService {
     return this.http.put<Course>(`${JsonServerURL.COURSES}/${id}`, course);
   }
 
-  public deleteCourse(id: string): Observable<Course> {
-    return this.http.delete<Course>(`${JsonServerURL.COURSES}/${id}`);
+  public deleteCourse(id: string): Observable<void> {
+    return this.http.delete<void>(`${JsonServerURL.COURSES}/${id}`);
   }
 
-  public deleteCourses(): Observable<Course> {
-    return this.http.delete<Course>(JsonServerURL.COURSES);
+  public deleteCourses(): Observable<void> {
+    return this.http.delete<void>(JsonServerURL.COURSES);
   }
 
 }

@@ -8,7 +8,13 @@ import { User } from '../../entities/user';
 import { IAuthService } from '../../services/auth/auth.service';
 import { Path } from '../../../router/constants/path';
 
-const testUser: User = new User('1', 'firstName', 'lastName', 'email', 'password');
+const testUser: User = new User({
+  id: '1',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  login: 'login',
+  password: 'password',
+});
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -34,7 +40,7 @@ describe('LoginComponent', () => {
       ],
       providers: [
         { provide: Router, useValue: spyMockRouter },
-        { provide: 'localStorageAuthService', useValue: spyAuthService },
+        { provide: 'authService', useValue: spyAuthService },
       ],
     })
       .compileComponents();
@@ -51,12 +57,12 @@ describe('LoginComponent', () => {
   });
 
   it('should login a user', fakeAsync(() => {
-    const emailInput = fixture.debugElement.query(By.css('#email')).nativeElement;
+    const loginInput = fixture.debugElement.query(By.css('#login')).nativeElement;
     const passwordInput = fixture.debugElement.query(By.css('#password')).nativeElement;
     const loginForm = fixture.debugElement.query(By.css('.form-submit'));
 
-    emailInput.value = testUser.email;
-    emailInput.dispatchEvent(new Event('input'));
+    loginInput.value = testUser.login;
+    loginInput.dispatchEvent(new Event('input'));
 
     passwordInput.value = testUser.password;
     passwordInput.dispatchEvent(new Event('input'));
@@ -65,7 +71,7 @@ describe('LoginComponent', () => {
 
     loginForm.triggerEventHandler('submit', null);
 
-    expect(spyAuthService.login).toHaveBeenCalledWith(testUser.email, testUser.password);
+    expect(spyAuthService.login).toHaveBeenCalledWith(testUser.login, testUser.password);
     expect(spyMockRouter.navigate).toHaveBeenCalledWith([`/${Path.COURSES}`]);
   }));
 });

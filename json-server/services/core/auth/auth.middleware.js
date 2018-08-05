@@ -8,18 +8,17 @@ module.exports = (server) => {
 		let users = server.db.getState().users,
 			matchedUser = users.find((user) => {
 				console.log(user);
-				return user.login.toUpperCase() === req.body.login.toUpperCase();
+				return user.login.toUpperCase() === req.body.login.toUpperCase()
+					&& user.password.toUpperCase() === req.body.password.toUpperCase();
 			});
 
-		if(!matchedUser) {
-			res.status(401).send('Wrong username');
-		} else if(matchedUser.password === req.body.password) {
-			res.json({ token: matchedUser.fakeToken});
+		if (!matchedUser) {
+			res.status(401).send('Login or password is worng');
 		} else {
-			res.status(401).send("Wrong password");
+			res.json({ token: matchedUser.fakeToken });
 		}
 	});
-		
+
 	router.post('/auth/userinfo', (req, res, next) => {
 		let users = server.db.getState().users,
 			matchedUser = users.find((user) => {
@@ -27,7 +26,7 @@ module.exports = (server) => {
 				return user.fakeToken === req.header('Authorization');
 			});
 
-		if(!matchedUser) {
+		if (!matchedUser) {
 			res.status(401).send('Unauthorized');
 		} else {
 			res.json(matchedUser);

@@ -11,7 +11,7 @@ import { ICourseService } from '../../services/course/course.service';
 })
 export class CoursesPageComponent implements OnInit {
 
-  private static readonly PAGE_COURSES_COUNT: number = 2;
+  private static readonly PAGE_COURSES_COUNT: number = 5;
   private static readonly PAGE_SORT: Sort = {
     active: 'creationDate',
     direction: 'desc',
