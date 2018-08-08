@@ -11,17 +11,21 @@ import { Path } from '../../../router/constants/path';
 })
 export class LoginComponent {
 
-  public email: string;
+  public _login: string;
   public password: string;
+  public errorMessage: string;
 
   public constructor(
     private router: Router,
-    @Inject('localStorageAuthService') private authService: IAuthService,
+    @Inject('authService') private authService: IAuthService,
   ) { }
 
   public login(): void {
-    this.authService.login(this.email, this.password);
-    this.router.navigate([`/${Path.COURSES}`]);
+    this.authService.login(this._login, this.password)
+      .subscribe(
+        () => this.router.navigate([`/${Path.COURSES}`]),
+        err => this.errorMessage = err.error,
+    );
   }
 
 }

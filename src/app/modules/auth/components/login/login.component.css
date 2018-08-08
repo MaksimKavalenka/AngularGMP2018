@@ -1,5 +1,5 @@
 :host {
-  display: grid;
+	display: grid;
 	height: 70%;
 }
 
@@ -24,4 +24,9 @@ button.submit:disabled {
 	background: #fff;
 	color: #000;
 	cursor: not-allowed;
+}
+
+.error {
+	color: #f00;
+	margin: 15px 0;
 }

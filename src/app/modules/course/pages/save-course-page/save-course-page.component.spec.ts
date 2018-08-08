@@ -12,7 +12,13 @@ import { ICourseService } from '../../services/course/course.service';
 import { Path } from '../../../../modules/router/constants/path';
 import { EventService } from '../../../../services/event.service';
 
-const testCourse: Course = new Course('1', 'Video Course 1', 31, new Date('01.08.2018'), 'Test1');
+const testCourse: Course = new Course({
+  id: '1',
+  title: 'Video Course 1',
+  duration: 31,
+  creationDate: new Date('01.08.2018'),
+  description: 'Test1',
+});
 
 @Component({
   template: '',
@@ -37,9 +43,9 @@ describe('SaveCoursePageComponent', () => {
     };
 
     spyCourseService = {
-      addCourse: jasmine.createSpy('saveCourse').and.returnValue(testCourse),
-      getCourse: jasmine.createSpy('getCourse').and.returnValue(testCourse),
-      updateCourse: jasmine.createSpy('updateCourse'),
+      addCourse: jasmine.createSpy('saveCourse').and.returnValue(of(testCourse)),
+      getCourse: jasmine.createSpy('getCourse').and.returnValue(of(testCourse)),
+      updateCourse: jasmine.createSpy('updateCourse').and.returnValue(of(testCourse)),
     };
 
     TestBed.configureTestingModule({
@@ -57,7 +63,7 @@ describe('SaveCoursePageComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: spyActivatedRoute },
         { provide: EventService, useValue: spyEventService },
-        { provide: 'memoryCourseService', useValue: spyCourseService },
+        { provide: 'courseService', useValue: spyCourseService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })
@@ -83,7 +89,7 @@ describe('SaveCoursePageComponent', () => {
     expect(component.description).toBe(testCourse.description);
     expect(component.date).toBe(testCourse.creationDate.toString());
     expect(component.duration).toBe(testCourse.duration);
-    expect(component.topRated).toBe(testCourse.topRated);
+    expect(component.isTopRated).toBe(testCourse.isTopRated);
   }));
 
   it('should update a course', fakeAsync(() => {

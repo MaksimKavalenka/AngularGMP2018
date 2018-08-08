@@ -42,7 +42,7 @@ describe('HeaderComponent', () => {
       ],
       providers: [
         { provide: Router, useValue: spyMockRouter },
-        { provide: 'localStorageAuthService', useValue: spyAuthService },
+        { provide: 'authService', useValue: spyAuthService },
       ],
     })
       .compileComponents();

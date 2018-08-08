@@ -2,65 +2,72 @@ import { ICourseService } from './course.service';
 import { MemoryCourseService } from './memory-course.service';
 import { Course } from '../../entities/course';
 
+const testCourse: Course = new Course({
+  id: '1',
+  title: 'Video Course 1',
+  duration: 31,
+  creationDate: new Date('01.08.2018'),
+  description: 'Test1',
+});
+
 describe('MemoryCourseService', () => {
   const courseService: ICourseService = new MemoryCourseService();
-  const testCourses: Course[] = [];
+
+  let spyMemoryCourseService: Partial<MemoryCourseService>;
 
   beforeAll(() => {
-    for (let i = 0; i < 3; i += 1) {
-      testCourses.push(new Course(i.toString(), `Video Course ${i}`, 30 + i, new Date(`${i}.08.2018`), `Test${i}`));
-    }
-  });
-
-  beforeEach(() => {
-    courseService.deleteCourses();
-    courseService.addCourses(testCourses);
+    spyMemoryCourseService = {
+      addCourse: spyOn(courseService, 'addCourse').and.callThrough(),
+      addCourses: spyOn(courseService, 'addCourses').and.callThrough(),
+      getCourse: spyOn(courseService, 'getCourse').and.callThrough(),
+      getCourses: spyOn(courseService, 'getCourses').and.callThrough(),
+      getAllCourses: spyOn(courseService, 'getAllCourses').and.callThrough(),
+      updateCourse: spyOn(courseService, 'updateCourse').and.callThrough(),
+      deleteCourse: spyOn(courseService, 'deleteCourse').and.callThrough(),
+      deleteCourses: spyOn(courseService, 'deleteCourses').and.callThrough(),
+    };
   });
 
   it('should add a course', () => {
-    const course: Course = courseService.addCourse('Video Course 5', 35, new Date('5.08.2018'), 'Test5', true);
-    expect(courseService.getCourse(course.id)).toEqual(course);
-    expect(courseService.getCourses().length).toBe(testCourses.length + 1);
+    courseService.addCourse('Video Course 1', 31, new Date('01.08.2018'), 'Test1', true);
+    expect(spyMemoryCourseService.addCourse).toHaveBeenCalled();
   });
 
   it('should add courses', () => {
-    const testCoursesToAdd: Course[] = [];
-    for (let i = 3; i < 5; i += 1) {
-      testCoursesToAdd.push(new Course(i.toString(), `Video Course ${i}`, 30 + i, new Date(`${i}.08.2018`), `Test${i}`));
-    }
-
-    courseService.addCourses(testCoursesToAdd);
-    expect(courseService.getCourses().length).toBe(testCourses.length + testCoursesToAdd.length);
+    courseService.addCourses([testCourse]);
+    expect(spyMemoryCourseService.addCourses).toHaveBeenCalledWith([testCourse]);
   });
 
   it('should get a course', () => {
-    const course: Course = testCourses[0];
-    expect(courseService.getCourse(course.id)).toEqual(course);
+    courseService.getCourse(testCourse.id);
+    expect(spyMemoryCourseService.getCourse).toHaveBeenCalledWith(testCourse.id);
   });
 
   it('should get courses', () => {
-    expect(courseService.getCourses()).toEqual(testCourses);
+    const start = 0;
+    const limit = 5;
+
+    courseService.getCourses(start, limit);
+    expect(spyMemoryCourseService.getCourses).toHaveBeenCalledWith(start, limit);
+  });
+
+  it('should get all courses', () => {
+    courseService.getAllCourses();
+    expect(spyMemoryCourseService.getAllCourses).toHaveBeenCalled();
   });
 
   it('should update a course', () => {
-    const id: string = testCourses[0].id;
-    const updatedCourse: Course = new Course('6', 'Video Course 6', 35, new Date('6.08.2018'), 'Test6');
-
-    courseService.updateCourse(id, updatedCourse);
-    expect(courseService.getCourse(updatedCourse.id)).toEqual(updatedCourse);
-    expect(courseService.getCourses().length).toBe(testCourses.length);
+    courseService.updateCourse(testCourse.id, testCourse);
+    expect(spyMemoryCourseService.updateCourse).toHaveBeenCalledWith(testCourse.id, testCourse);
   });
 
   it('should delete a course', () => {
-    const course: Course = testCourses[0];
-
-    courseService.deleteCourse(course.id);
-    expect(courseService.getCourses().length).toBe(testCourses.length - 1);
-    expect(courseService.getCourse(course.id)).toBeUndefined();
+    courseService.deleteCourse(testCourse.id);
+    expect(spyMemoryCourseService.deleteCourse).toHaveBeenCalledWith(testCourse.id);
   });
 
   it('should delete courses', () => {
     courseService.deleteCourses();
-    expect(courseService.getCourses().length).toBe(0);
+    expect(spyMemoryCourseService.deleteCourse).toHaveBeenCalled();
   });
 });

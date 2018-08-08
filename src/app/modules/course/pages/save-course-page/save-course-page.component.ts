@@ -19,39 +19,50 @@ export class SaveCoursePageComponent implements OnInit {
   public date: string; // TODO: Add a validation
   public duration: number;
   public authors: string;
-  public topRated: boolean;
+  public isTopRated: boolean;
 
   public constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
-    @Inject('memoryCourseService') private courseService: ICourseService,
+    @Inject('courseService') private courseService: ICourseService,
   ) { }
 
   public ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
-        const course: Course = this.courseService.getCourse(params.id);
-        this.eventService.pushData({ title: course.title });
-        this.id = params.id;
-        this.title = course.title;
-        this.description = course.description;
-        this.date = course.creationDate.toString();
-        this.duration = course.duration;
-        this.authors = 'Unknown';
-        this.topRated = course.topRated;
+        this.courseService.getCourse(params.id)
+          .subscribe((course) => {
+            this.eventService.pushData({ title: course.title });
+            this.id = params.id;
+            this.title = course.title;
+            this.description = course.description;
+            this.date = course.creationDate.toString();
+            this.duration = course.duration;
+            this.authors = 'Unknown';
+            this.isTopRated = course.isTopRated;
+          });
       }
     });
   }
 
   public saveCourse() {
     if (this.id) {
-      const course: Course = new Course(this.id, this.title, this.duration, new Date(this.date), this.description, this.topRated);
-      this.courseService.updateCourse(this.id, course);
+      const course: Course = new Course({
+        id: this.id,
+        title: this.title,
+        duration: this.duration,
+        creationDate: new Date(this.date),
+        description: this.description,
+        isTopRated: this.isTopRated,
+      });
+
+      this.courseService.updateCourse(this.id, course)
+        .subscribe(() => this.router.navigate([`/${Path.COURSES}`]));
     } else {
-      this.courseService.addCourse(this.title, this.duration, new Date(this.date), this.description);
+      this.courseService.addCourse(this.title, this.duration, new Date(this.date), this.description)
+        .subscribe(() => this.router.navigate([`/${Path.COURSES}`]));
     }
-    this.router.navigate([`/${Path.COURSES}`]);
   }
 
   public isFormValid(): boolean {

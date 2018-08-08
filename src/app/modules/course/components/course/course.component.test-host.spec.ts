@@ -14,7 +14,13 @@ import { DialogComponent } from '../../../material/components/dialog/dialog.comp
 import { Path } from '../../../router/constants/path';
 import { MaterialModule } from '../../../../modules/material/material.module';
 
-const testCourse: Course = new Course('0', 'Video Course 0', 30, new Date('08.08.2018'), 'Test');
+const testCourse: Course = new Course({
+  id: '0',
+  title: 'Video Course 0',
+  duration: 30,
+  creationDate: new Date('08.08.2018'),
+  description: 'Test',
+});
 
 @Component({
   template: '',
@@ -80,7 +86,14 @@ describe('CourseComponent TestHost', () => {
   });
 
   it('should update a course', () => {
-    const newCourse: Course = new Course('1', 'Video Course 1', 31, new Date('01.08.2018'), 'Test1');
+    const newCourse: Course = new Course({
+      id: '1',
+      title: 'Video Course 1',
+      duration: 31,
+      creationDate: new Date('01.08.2018'),
+      description: 'Test1',
+    });
+
     component.course = newCourse;
     fixture.detectChanges();
 

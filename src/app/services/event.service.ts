@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Observable, Observer } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable()
 export class EventService {
 
-  private _selected: BehaviorSubject<any> = new BehaviorSubject(null);
-  public data = this._selected.asObservable();
+  private observer: Observer<any>;
+  public data = new Observable<any>(observer => this.observer = observer);
 
   public constructor(
     private router: Router,
@@ -20,7 +20,7 @@ export class EventService {
   }
 
   public pushData(data: any) {
-    this._selected.next(data);
+    this.observer.next(data);
   }
 
 }

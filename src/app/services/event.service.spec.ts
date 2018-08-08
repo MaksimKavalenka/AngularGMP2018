@@ -26,7 +26,7 @@ describe('EventService', () => {
     eventService = TestBed.get(EventService);
 
     spyEventService = {
-      pushData: spyOn(eventService, 'pushData').and.callThrough(),
+      pushData: spyOn(eventService, 'pushData'),
     };
   });
 

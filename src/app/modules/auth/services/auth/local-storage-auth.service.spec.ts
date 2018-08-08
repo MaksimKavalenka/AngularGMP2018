@@ -2,10 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { CookieService } from 'ngx-cookie-service';
 
+import { AuthService } from './auth.service';
 import { LocalStorageAuthService } from './local-storage-auth.service';
 import { User } from '../../entities/user';
 
-const testUser: User = new User('1', 'firstName', 'lastName', 'email', 'password');
+const testUser: User = new User({
+  id: '1',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  login: 'login',
+  password: 'password',
+});
 const userId: string = null;
 
 describe('LocalStorageAuthService', () => {
@@ -32,11 +39,11 @@ describe('LocalStorageAuthService', () => {
       providers: [
         { provide: CookieService, useValue: spyCookieService },
         { provide: LOCAL_STORAGE, useValue: spyWebStorageService },
-        { provide: 'localStorageAuthService', useClass: LocalStorageAuthService },
+        { provide: 'authService', useClass: LocalStorageAuthService },
       ],
     });
 
-    localStorageAuthService = TestBed.get('localStorageAuthService');
+    localStorageAuthService = TestBed.get('authService');
 
     spyLocalStorageAuthService = {
       login: spyOn(localStorageAuthService, 'login').and.callThrough(),
@@ -47,25 +54,20 @@ describe('LocalStorageAuthService', () => {
   });
 
   it('should login a user', (() => {
-    const email = 'email';
+    const login = 'login';
     const password = 'password';
-    const user: User = localStorageAuthService.login(email, password);
+    localStorageAuthService.login(login, password);
 
-    expect(user.email).toBe(email);
-    expect(user.password).toBe(password);
-
-    expect(spyLocalStorageAuthService.login).toHaveBeenCalledWith(email, password);
+    expect(spyLocalStorageAuthService.login).toHaveBeenCalledWith(login, password);
     expect(spyLocalStorageAuthService.isAuthenticated).toHaveBeenCalled();
-    expect(spyCookieService.get).toHaveBeenCalledWith(LocalStorageAuthService.USER_ID_KEY);
-    expect(spyWebStorageService.set).toHaveBeenCalledWith(user.id, user);
-    expect(spyCookieService.set).toHaveBeenCalledWith(LocalStorageAuthService.USER_ID_KEY, user.id);
+    expect(spyCookieService.get).toHaveBeenCalledWith(AuthService.TOKEN_KEY);
   }));
 
   it('should logout a user', (() => {
     localStorageAuthService.logout();
 
     expect(spyLocalStorageAuthService.logout).toHaveBeenCalled();
-    expect(spyCookieService.delete).toHaveBeenCalledWith(LocalStorageAuthService.USER_ID_KEY);
+    expect(spyCookieService.delete).toHaveBeenCalledWith(AuthService.TOKEN_KEY);
     expect(spyWebStorageService.remove).toHaveBeenCalledWith(userId);
   }));
 
@@ -75,16 +77,14 @@ describe('LocalStorageAuthService', () => {
     expect(isAuthenticated).toBeFalsy();
 
     expect(spyLocalStorageAuthService.isAuthenticated).toHaveBeenCalled();
-    expect(spyCookieService.get).toHaveBeenCalledWith(LocalStorageAuthService.USER_ID_KEY);
+    expect(spyCookieService.get).toHaveBeenCalledWith(AuthService.TOKEN_KEY);
   }));
 
   it('should get a user', (() => {
-    const user: User = localStorageAuthService.getUser();
-
-    expect(user).toEqual(testUser);
+    localStorageAuthService.getUser();
 
     expect(spyLocalStorageAuthService.getUser).toHaveBeenCalled();
-    expect(spyCookieService.get).toHaveBeenCalledWith(LocalStorageAuthService.USER_ID_KEY);
+    expect(spyCookieService.get).toHaveBeenCalledWith(AuthService.TOKEN_KEY);
     expect(spyWebStorageService.get).toHaveBeenCalledWith(userId);
   }));
 });

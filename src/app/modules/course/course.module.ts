@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -14,7 +15,7 @@ import { SaveCoursePageComponent } from './pages/save-course-page/save-course-pa
 import { DurationPipe } from './pipes/duration/duration.pipe';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
-import { MemoryCourseService } from './services/course/memory-course.service';
+import { NodeCourseService } from './services/course/node-course.service';
 import { MaterialModule } from '../../modules/material/material.module';
 import { CustomRouterModule } from '../../modules/router/router.module';
 
@@ -36,11 +37,12 @@ import { CustomRouterModule } from '../../modules/router/router.module';
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     MaterialModule,
     CustomRouterModule,
   ],
   providers: [
-    { provide: 'memoryCourseService', useClass: MemoryCourseService },
+    { provide: 'courseService', useClass: NodeCourseService },
   ],
 })
 export class CourseModule { }

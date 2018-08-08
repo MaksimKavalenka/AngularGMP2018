@@ -37,7 +37,7 @@ describe('AuthGuardGuard', () => {
       providers: [
         AuthGuard,
         { provide: Router, useValue: spyMockRouter },
-        { provide: 'localStorageAuthService', useValue: spyAuthService },
+        { provide: 'authService', useValue: spyAuthService },
       ],
     });
   }));

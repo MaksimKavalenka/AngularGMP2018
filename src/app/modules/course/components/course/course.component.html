@@ -1,9 +1,9 @@
-<div [appReleaseBorder]="course.creationDate" [ngClass]="{'top-rated': course.topRated}" class="course block">
+<div [appReleaseBorder]="course.creationDate" [ngClass]="{'top-rated': course.isTopRated}" class="course block">
   <div class="body">
     <div class="header justify">
       <div>
         <div id="title">{{course.title | uppercase}}</div>
-        <img [hidden]="!course.topRated" src="assets/images/star.png" alt="Star">
+        <img [hidden]="!course.isTopRated" src="assets/images/star.png" alt="Star">
       </div>
       <div class="metadata">
         <div id="duration">{{course.duration | duration}}</div>
