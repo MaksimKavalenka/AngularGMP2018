@@ -2,24 +2,24 @@ import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { LoaderComponent } from './loader.component';
+import { PaginationComponent } from './pagination.component';
 
 @Component({
   template:
-    `<app-loader (loadMoreEvent)="loadMore()"></app-loader>`,
+    `<app-pagination (loadMoreEvent)="loadMore()"></app-pagination>`,
 })
 class TestHostComponent {
   public loadMore() { }
 }
 
-describe('LoaderComponent HostTest', () => {
+describe('PaginationComponent HostTest', () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        LoaderComponent,
+        PaginationComponent,
         TestHostComponent,
       ],
     })
