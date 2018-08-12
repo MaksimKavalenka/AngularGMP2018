@@ -11,8 +11,8 @@ import { RxJsUtils } from '../../../../utils/rxjs-utils';
 @Injectable()
 export class LocalStorageAuthService extends AuthService {
 
-  public loadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  public loadingObservable: Observable<boolean>;
+  public loaderSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public loaderObservable: Observable<boolean>;
 
   public loginSubject: BehaviorSubject<void> = new BehaviorSubject(null);
   public loginObservable: Observable<void>;
@@ -22,7 +22,7 @@ export class LocalStorageAuthService extends AuthService {
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
   ) {
     super();
-    this.loadingObservable = this.loadingSubject.asObservable();
+    this.loaderObservable = this.loaderSubject.asObservable();
     this.loginObservable = this.loginSubject.asObservable();
   }
 
@@ -48,7 +48,7 @@ export class LocalStorageAuthService extends AuthService {
       return null;
     };
 
-    return RxJsUtils.createObservable<void, void>(of(null), handlerFunc, this.loadingSubject);
+    return RxJsUtils.createObservable<void, void>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public logout(): Observable<void> {
@@ -61,7 +61,7 @@ export class LocalStorageAuthService extends AuthService {
       return null;
     };
 
-    return RxJsUtils.createObservable<void, void>(of(null), handlerFunc, this.loadingSubject);
+    return RxJsUtils.createObservable<void, void>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public isAuthenticated(): boolean {
@@ -74,7 +74,7 @@ export class LocalStorageAuthService extends AuthService {
       return this.storage.get(token);
     };
 
-    return RxJsUtils.createObservable<void, User>(of(null), handlerFunc, this.loadingSubject);
+    return RxJsUtils.createObservable<void, User>(of(null), handlerFunc, this.loaderSubject);
   }
 
 }

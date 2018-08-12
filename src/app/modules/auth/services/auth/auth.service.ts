@@ -1,11 +1,9 @@
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { User } from '../../entities/user';
+import { ILoaderService } from '../../../../services/loader/loader.service';
 
-export interface IAuthService {
-  loadingSubject: BehaviorSubject<boolean>;
-  loadingObservable: Observable<boolean>;
-
+export interface IAuthService extends ILoaderService {
   loginSubject: BehaviorSubject<void>;
   loginObservable: Observable<void>;
 
@@ -16,11 +14,10 @@ export interface IAuthService {
 }
 
 export abstract class AuthService implements IAuthService {
-
   public static readonly TOKEN_KEY: string = 'token';
 
-  public abstract loadingSubject: BehaviorSubject<boolean>;
-  public abstract loadingObservable: Observable<boolean>;
+  public abstract loaderSubject: BehaviorSubject<boolean>;
+  public abstract loaderObservable: Observable<boolean>;
 
   public abstract loginSubject: BehaviorSubject<void>;
   public abstract loginObservable: Observable<void>;

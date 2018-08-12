@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import { ICourseService } from './course.service';
 import { Course } from '../../entities/course';
 import { GuidUtils } from '../../../../utils/guid-utils';
 import { ArrayUtils } from '../../../../utils/array-utils';
+import { RxJsUtils } from '../../../../utils/rxjs-utils';
 
 @Injectable()
 export class MemoryCourseService implements ICourseService {
@@ -65,53 +66,89 @@ export class MemoryCourseService implements ICourseService {
     }),
   ];
 
+  public loaderSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public loaderObservable: Observable<boolean>;
+
+  public constructor() {
+    this.loaderObservable = this.loaderSubject.asObservable();
+  }
+
   public addCourse(title: string, duration: number, creationDate: Date, description: string, isTopRated?: boolean): Observable<Course> {
-    const course: Course = new Course({ title, duration, creationDate, description, isTopRated, id: GuidUtils.guid() });
-    this.courses.push(course);
-    return of(course);
+    const handlerFunc = () => {
+      const course: Course = new Course({ title, duration, creationDate, description, isTopRated, id: GuidUtils.guid() });
+      this.courses.push(course);
+      return course;
+    };
+
+    return RxJsUtils.createObservable<void, Course>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public addCourses(courses: Course[]): Observable<Course[]> {
-    this.courses = this.courses.concat(courses);
-    return of(this.courses);
+    const handlerFunc = () => {
+      this.courses = this.courses.concat(courses);
+      return courses;
+    };
+
+    return RxJsUtils.createObservable<void, Course[]>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public getCourse(id: string): Observable<Course> {
-    const courseResult: Course = this.courses.find(course => course.id === id);
-    return of(courseResult);
+    const handlerFunc = () => {
+      const courseResult: Course = this.courses.find(course => course.id === id);
+      return courseResult;
+    };
+
+    return RxJsUtils.createObservable<void, Course>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public getCourses(start: number, limit: number, searchQuery?: string, sort?: Sort): Observable<Course[]> {
-    let modCourses: Course[] = searchQuery
-      ? this.courses.filter(course => course.title.concat(course.description).toUpperCase().indexOf(searchQuery.toUpperCase()) >= 0)
-      : this.courses;
+    const handlerFunc = () => {
+      let modCourses: Course[] = searchQuery
+        ? this.courses.filter(course => course.title.concat(course.description).toUpperCase().indexOf(searchQuery.toUpperCase()) >= 0)
+        : this.courses;
 
-    modCourses = sort
-      ? ArrayUtils.sort(modCourses, sort.active, sort.direction === 'desc' ? -1 : 1)
-      : this.courses;
+      modCourses = sort
+        ? ArrayUtils.sort(modCourses, sort.active, sort.direction === 'desc' ? -1 : 1)
+        : this.courses;
 
-    return of(modCourses.slice(start, start + limit));
+      return modCourses.slice(start, start + limit);
+    };
+
+    return RxJsUtils.createObservable<void, Course[]>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public getAllCourses(): Observable<Course[]> {
-    return of(this.courses);
+    const handlerFunc = () => this.courses;
+    return RxJsUtils.createObservable<void, Course[]>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public updateCourse(id: string, course: Course): Observable<Course> {
-    course.id = id;
-    this.deleteCourse(id);
-    this.courses.push(course);
-    return of(course);
+    const handlerFunc = () => {
+      course.id = id;
+      this.deleteCourse(id);
+      this.courses.push(course);
+      return course;
+    };
+
+    return RxJsUtils.createObservable<void, Course>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public deleteCourse(id: string): Observable<void> {
-    this.courses = this.courses.filter(course => course.id !== id);
-    return of(null);
+    const handlerFunc = () => {
+      this.courses = this.courses.filter(course => course.id !== id);
+      return null;
+    };
+
+    return RxJsUtils.createObservable<void, void>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public deleteCourses(): Observable<void> {
-    this.courses = [];
-    return of(null);
+    const handlerFunc = () => {
+      this.courses = [];
+      return null;
+    };
+
+    return RxJsUtils.createObservable<void, void>(of(null), handlerFunc, this.loaderSubject);
   }
 
 }

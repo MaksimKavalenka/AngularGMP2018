@@ -11,8 +11,8 @@ import { RxJsUtils } from '../../../../utils/rxjs-utils';
 @Injectable()
 export class NodeAuthService extends AuthService {
 
-  public loadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  public loadingObservable: Observable<boolean>;
+  public loaderSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public loaderObservable: Observable<boolean>;
 
   public loginSubject: BehaviorSubject<void> = new BehaviorSubject(null);
   public loginObservable: Observable<void>;
@@ -22,7 +22,7 @@ export class NodeAuthService extends AuthService {
     private http: HttpClient,
   ) {
     super();
-    this.loadingObservable = this.loadingSubject.asObservable();
+    this.loaderObservable = this.loaderSubject.asObservable();
     this.loginObservable = this.loginSubject.asObservable();
   }
 
@@ -35,7 +35,7 @@ export class NodeAuthService extends AuthService {
       return null;
     };
 
-    return RxJsUtils.createObservable<any, void>(observable, handlerFunc, this.loadingSubject);
+    return RxJsUtils.createObservable<any, void>(observable, handlerFunc, this.loaderSubject);
   }
 
   public logout(): Observable<void> {
@@ -45,7 +45,7 @@ export class NodeAuthService extends AuthService {
       return null;
     };
 
-    return RxJsUtils.createObservable<void, void>(of(null), handlerFunc, this.loadingSubject);
+    return RxJsUtils.createObservable<void, void>(of(null), handlerFunc, this.loaderSubject);
   }
 
   public isAuthenticated(): boolean {
@@ -55,7 +55,7 @@ export class NodeAuthService extends AuthService {
   public getUser(): Observable<User> {
     const observable = this.http.post<User>(`${JsonServerURL.AUTH}/userinfo`, {});
     const handlerFunc = response => new User(response);
-    return RxJsUtils.createObservable<User, User>(observable, handlerFunc, this.loadingSubject);
+    return RxJsUtils.createObservable<User, User>(observable, handlerFunc, this.loaderSubject);
   }
 
 }

@@ -2,8 +2,9 @@ import { Sort } from '@angular/material';
 import { Observable } from 'rxjs';
 
 import { Course } from '../../entities/course';
+import { ILoaderService } from '../../../../services/loader/loader.service';
 
-export interface ICourseService {
+export interface ICourseService extends ILoaderService {
   addCourse(title: string, duration: number, creationDate: Date, description: string, isTopRated?: boolean): Observable<Course>;
   addCourses(courses: Course[]): Observable<Course[]>;
   getCourse(id: string): Observable<Course>;
