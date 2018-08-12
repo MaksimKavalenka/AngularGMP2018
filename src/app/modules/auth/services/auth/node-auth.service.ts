@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, Observer, of } from 'rxjs';
+import { Observable, Observer, of, BehaviorSubject } from 'rxjs';
 
 import { AuthService } from './auth.service';
 import { User } from '../../entities/user';
@@ -10,11 +10,15 @@ import { JsonServerURL } from '../../../../common/constants';
 @Injectable()
 export class NodeAuthService extends AuthService {
 
+  private loginSubject: BehaviorSubject<void> = new BehaviorSubject(null);
+  public loginObservable: Observable<void>;
+
   public constructor(
     private cookieService: CookieService,
     private http: HttpClient,
   ) {
     super();
+    this.loginObservable = this.loginSubject.asObservable();
   }
 
   public login(login: string, password: string): Observable<void> {
@@ -25,13 +29,13 @@ export class NodeAuthService extends AuthService {
     });
 
     const _login = () => {
-      this.http.post<any>(`${JsonServerURL.AUTH}/login`, { login, password })
-        .subscribe(
-          (user) => {
-            this.cookieService.set(AuthService.TOKEN_KEY, user.token);
-            _observer.next(null);
-          },
-          err => _observer.error(err),
+      this.http.post<any>(`${JsonServerURL.AUTH}/login`, { login, password }).subscribe(
+        (user) => {
+          this.cookieService.set(AuthService.TOKEN_KEY, user.token);
+          _observer.next(null);
+          this.loginSubject.next(null);
+        },
+        err => _observer.error(err),
       );
     };
 
@@ -57,13 +61,12 @@ export class NodeAuthService extends AuthService {
     });
 
     const _getUser = () => {
-      this.http.post<User>(`${JsonServerURL.AUTH}/userinfo`, {})
-        .subscribe(
-          (user) => {
-            const _user = new User(user);
-            _observer.next(_user);
-          },
-          err => _observer.error(err),
+      this.http.post<User>(`${JsonServerURL.AUTH}/userinfo`, {}).subscribe(
+        (user) => {
+          const _user = new User(user);
+          _observer.next(_user);
+        },
+        err => _observer.error(err),
       );
     };
 

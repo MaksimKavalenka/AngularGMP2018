@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, Observer, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import { AuthService } from './auth.service';
 import { User } from '../../entities/user';
@@ -10,11 +10,15 @@ import { GuidUtils } from '../../../../utils/guid-utils';
 @Injectable()
 export class LocalStorageAuthService extends AuthService {
 
+  private loginSubject: BehaviorSubject<void> = new BehaviorSubject(null);
+  public loginObservable: Observable<void>;
+
   public constructor(
     private cookieService: CookieService,
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
   ) {
     super();
+    this.loginObservable = this.loginSubject.asObservable();
   }
 
   public login(login: string, password: string): Observable<void> {
@@ -34,6 +38,7 @@ export class LocalStorageAuthService extends AuthService {
       console.log(`You've been logged in: ${user.login}`);
     }
 
+    this.loginSubject.next(null);
     return of(null);
   }
 

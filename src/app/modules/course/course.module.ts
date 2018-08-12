@@ -16,6 +16,7 @@ import { DurationPipe } from './pipes/duration/duration.pipe';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
 import { NodeCourseService } from './services/course/node-course.service';
+import { CustomCommonModule } from '../../modules/common/common.module';
 import { MaterialModule } from '../../modules/material/material.module';
 import { CustomRouterModule } from '../../modules/router/router.module';
 
@@ -36,10 +37,11 @@ import { CustomRouterModule } from '../../modules/router/router.module';
   ],
   imports: [
     CommonModule,
+    CustomCommonModule,
+    CustomRouterModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
-    CustomRouterModule,
   ],
   providers: [
     { provide: 'courseService', useClass: NodeCourseService },

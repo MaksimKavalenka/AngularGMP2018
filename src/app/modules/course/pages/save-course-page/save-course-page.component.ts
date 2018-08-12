@@ -31,17 +31,16 @@ export class SaveCoursePageComponent implements OnInit {
   public ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
-        this.courseService.getCourse(params.id)
-          .subscribe((course) => {
-            this.eventService.pushData({ title: course.title });
-            this.id = params.id;
-            this.title = course.title;
-            this.description = course.description;
-            this.date = course.creationDate.toString();
-            this.duration = course.duration;
-            this.authors = 'Unknown';
-            this.isTopRated = course.isTopRated;
-          });
+        this.courseService.getCourse(params.id).subscribe((course) => {
+          this.eventService.pushData({ title: course.title });
+          this.id = params.id;
+          this.title = course.title;
+          this.description = course.description;
+          this.date = course.creationDate.toString();
+          this.duration = course.duration;
+          this.authors = 'Unknown';
+          this.isTopRated = course.isTopRated;
+        });
       }
     });
   }

@@ -32,13 +32,12 @@ export class NodeCourseService implements ICourseService {
     });
 
     const _getCourse = () => {
-      this.http.get<Course>(`${JsonServerURL.COURSES}/${id}`)
-        .subscribe(
-          (course) => {
-            const modCourse: Course = (new Course(course));
-            _observer.next(modCourse);
-          },
-          err => _observer.error(err),
+      this.http.get<Course>(`${JsonServerURL.COURSES}/${id}`).subscribe(
+        (course) => {
+          const modCourse: Course = (new Course(course));
+          _observer.next(modCourse);
+        },
+        err => _observer.error(err),
       );
     };
 
@@ -63,13 +62,12 @@ export class NodeCourseService implements ICourseService {
     }
 
     const _getCourses = () => {
-      this.http.get<Course[]>(url)
-        .subscribe(
-          (courses) => {
-            const modCourses: Course[] = courses.map(course => new Course(course));
-            _observer.next(modCourses);
-          },
-          err => _observer.error(err),
+      this.http.get<Course[]>(url).subscribe(
+        (courses) => {
+          const modCourses: Course[] = courses.map(course => new Course(course));
+          _observer.next(modCourses);
+        },
+        err => _observer.error(err),
       );
     };
 
@@ -84,13 +82,12 @@ export class NodeCourseService implements ICourseService {
     });
 
     const _getAllCourses = () => {
-      this.http.get<Course[]>(JsonServerURL.COURSES)
-        .subscribe(
-          (courses) => {
-            const modCourses: Course[] = courses.map(course => new Course(course));
-            _observer.next(modCourses);
-          },
-          err => _observer.error(err),
+      this.http.get<Course[]>(JsonServerURL.COURSES).subscribe(
+        (courses) => {
+          const modCourses: Course[] = courses.map(course => new Course(course));
+          _observer.next(modCourses);
+        },
+        err => _observer.error(err),
       );
     };
 

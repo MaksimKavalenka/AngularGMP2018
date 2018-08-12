@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { CourseModule } from './modules/course/course.module';
+import { CustomCommonModule } from './modules/common/common.module';
 import { CustomRouterModule } from './modules/router/router.module';
 import { EventService } from './services/event.service';
 
@@ -24,6 +25,7 @@ import { EventService } from './services/event.service';
     BrowserAnimationsModule,
     BrowserModule,
     CourseModule,
+    CustomCommonModule,
     CustomRouterModule,
   ],
   providers: [EventService],

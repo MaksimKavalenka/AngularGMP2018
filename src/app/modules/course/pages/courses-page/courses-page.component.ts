@@ -39,11 +39,10 @@ export class CoursesPageComponent implements OnInit {
   }
 
   public deleteCourse(id: string) {
-    this.courseService.deleteCourse(id)
-      .subscribe(() => {
-        console.log(`Course ${id} has been deleted`);
-        this.courses = this.courses.filter(course => course.id !== id);
-      });
+    this.courseService.deleteCourse(id).subscribe(() => {
+      console.log(`Course ${id} has been deleted`);
+      this.courses = this.courses.filter(course => course.id !== id);
+    });
   }
 
   public search(searchQuery: string) {

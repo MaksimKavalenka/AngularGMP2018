@@ -16,7 +16,7 @@ export class BreadcrumbsComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
-    this.eventService.data.subscribe((data) => {
+    this.eventService.eventObservable.subscribe((data) => {
       if (data) {
         this.title = data.title;
       } else {
