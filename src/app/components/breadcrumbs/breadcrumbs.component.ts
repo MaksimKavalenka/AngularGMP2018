@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EventService } from '../../services/event.service';
+import { EventService } from '../../modules/common/services/event/event.service';
 
 @Component({
   selector: 'app-breadcrumbs',

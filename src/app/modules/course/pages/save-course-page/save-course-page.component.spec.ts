@@ -10,7 +10,7 @@ import { SaveCoursePageComponent } from './save-course-page.component';
 import { Course } from '../../entities/course';
 import { ICourseService } from '../../services/course/course.service';
 import { Path } from '../../../../modules/router/constants/path';
-import { EventService } from '../../../../services/event.service';
+import { EventService } from '../../../../modules/common/services/event/event.service';
 
 const testCourse: Course = new Course({
   id: '1',

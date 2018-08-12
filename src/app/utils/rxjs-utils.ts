@@ -1,4 +1,4 @@
-import { Observable, Subject, Observer } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 export abstract class RxJsUtils {
 

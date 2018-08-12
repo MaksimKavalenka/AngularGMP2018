@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ICourseService } from '../../services/course/course.service';
 import { Path } from '../../../router/constants/path';
 import { Course } from '../../entities/course';
-import { EventService } from '../../../../services/event.service';
+import { EventService } from '../../../../modules/common/services/event/event.service';
 
 @Component({
   selector: 'app-save-course-page',

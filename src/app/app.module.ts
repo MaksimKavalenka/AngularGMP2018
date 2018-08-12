@@ -10,7 +10,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { CourseModule } from './modules/course/course.module';
 import { CustomCommonModule } from './modules/common/common.module';
 import { CustomRouterModule } from './modules/router/router.module';
-import { EventService } from './services/event.service';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -28,6 +27,5 @@ import { EventService } from './services/event.service';
     CustomCommonModule,
     CustomRouterModule,
   ],
-  providers: [EventService],
 })
 export class AppModule { }
