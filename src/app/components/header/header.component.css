@@ -1,3 +1,7 @@
+[hidden] {
+    display: none !important;
+}
+
 :host {
     border-bottom: 2px solid #000;
     display: block;

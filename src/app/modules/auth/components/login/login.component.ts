@@ -1,30 +1,37 @@
-import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
-import { IAuthService } from '../../services/auth/auth.service';
-import { Path } from '../../../router/constants/path';
+import { Login } from '../../actions/actions';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
 
+  private authStore: Subscription;
   public _login: string;
   public password: string;
   public errorMessage: string;
 
   public constructor(
-    private router: Router,
-    @Inject('authService') private authService: IAuthService,
+    private store: Store<any>,
   ) { }
 
-  public login(): void {
-    this.authService.login(this._login, this.password).subscribe(
-      () => this.router.navigate([`/${Path.COURSES}`]),
-      err => this.errorMessage = err.error,
+  public ngOnInit() {
+    this.authStore = this.store.select('auth').subscribe(
+      auth => this.errorMessage = auth.err ? auth.err.error : auth.err,
     );
+  }
+
+  public ngOnDestroy() {
+    this.authStore.unsubscribe();
+  }
+
+  public login(): void {
+    this.store.dispatch(new Login(this._login, this.password));
   }
 
 }

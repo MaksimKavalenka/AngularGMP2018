@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
+import { Logout, GetUser } from '../../modules/auth/actions/actions';
 import { User } from '../../modules/auth/entities/user';
-import { IAuthService } from '../../modules/auth/services/auth/auth.service';
 import { Path } from '../../modules/router/constants/path';
 
 @Component({
@@ -12,33 +14,36 @@ import { Path } from '../../modules/router/constants/path';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  private authStore: Subscription;
   public user: User;
+  public isAuthenticated: boolean;
 
   public constructor(
     private router: Router,
-    @Inject('authService') private authService: IAuthService,
+    private store: Store<any>,
   ) { }
 
   public ngOnInit() {
-    this.authService.loginObservable.subscribe(() => {
-      this.authService.getUser().subscribe(user => this.user = user);
-    });
+    this.authStore = this.store.select('auth').subscribe(
+      (auth) => {
+        this.user = auth.user;
+        this.isAuthenticated = auth.isAuthenticated;
+      },
+    );
+
+    this.store.dispatch(new GetUser());
   }
 
   public ngOnDestroy() {
-    this.authService.loginSubject.unsubscribe();
+    this.authStore.unsubscribe();
   }
 
   public logout(): void {
-    this.authService.logout().subscribe(() => this.router.navigate([`/${Path.LOGIN}`]));
+    this.store.dispatch(new Logout());
   }
 
   public isLoginPage(): boolean {
     return this.router.url === `/${Path.LOGIN}`;
-  }
-
-  public isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
   }
 
 }

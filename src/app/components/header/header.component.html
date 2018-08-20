@@ -3,9 +3,9 @@
     <img src="assets/images/logo.png">
     <div>Logo</div>
   </div>
-  <div class="block" *ngIf="!isLoginPage()">
-    <div id="user" *ngIf="isAuthenticated()">Hi {{user | json}}</div>
-    <button id="login" *ngIf="!isAuthenticated()" [routerLink]="['/login']">Log in</button>
-    <button id="logout" *ngIf="isAuthenticated()" (click)="logout()">Log out</button>
+  <div class="block" [hidden]="isLoginPage()">
+    <div id="user" [hidden]="!isAuthenticated">Hi {{user | json}}</div>
+    <button id="login" [hidden]="isAuthenticated" [routerLink]="['/login']">Log in</button>
+    <button id="logout" [hidden]="!isAuthenticated" (click)="logout()">Log out</button>
   </div>
 </div>
