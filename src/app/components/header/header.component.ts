@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { Logout, GetUser } from '../../modules/auth/actions/actions';
+import { Logout, GetUser } from '../../modules/auth/actions/auth.actions';
 import { User } from '../../modules/auth/entities/user';
 import { Path } from '../../modules/router/constants/path';
 

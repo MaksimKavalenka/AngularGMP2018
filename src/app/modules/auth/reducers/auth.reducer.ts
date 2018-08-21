@@ -1,6 +1,6 @@
 import { ActionReducer } from '@ngrx/store';
 
-import { AuthActions, AuthActionTypes, GetUserSuccess, LoginFailure } from '../actions/actions';
+import { AuthActions, AuthActionTypes, GetUserSuccess, LoginFailure } from '../actions/auth.actions';
 
 const defaultState: any = {
   user: null,
@@ -15,7 +15,7 @@ export function authReducer(state: any = defaultState, action: AuthActions): Act
         err: (<LoginFailure>action).err,
       };
 
-    case AuthActionTypes.LOGOUT:
+    case AuthActionTypes.LOGOUT_SUCCESS:
       return defaultState;
 
     case AuthActionTypes.GET_USER_SUCCESS:

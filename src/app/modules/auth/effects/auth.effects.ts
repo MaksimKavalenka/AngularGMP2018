@@ -4,7 +4,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
 
-import { AuthActionTypes, Login, LoginSuccess, LoginFailure, GetUserSuccess } from '../actions/actions';
+import { AuthActionTypes, Login, LoginSuccess, LoginFailure, GetUserSuccess, LogoutSuccess } from '../actions/auth.actions';
 import { IAuthService } from '../services/auth/auth.service';
 import { Path } from '../../router/constants/path';
 
@@ -44,7 +44,8 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     switchMap(() => {
       return this.authService.logout().pipe(
-        map(() => this.router.navigate([`/${Path.LOGIN}`])),
+        map(() => new LogoutSuccess()),
+        tap(() => this.router.navigate([`/${Path.LOGIN}`])),
       );
     }),
   );

@@ -1,5 +1,5 @@
 <app-loader></app-loader>
 <app-header></app-header>
-<app-breadcrumbs *ngIf="isAuthenticated()"></app-breadcrumbs>
+<app-breadcrumbs [hidden]="!isAuthenticated()"></app-breadcrumbs>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

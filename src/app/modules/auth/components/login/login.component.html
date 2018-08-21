@@ -16,7 +16,7 @@
       <div>
         <button type="submit" class="submit" [disabled]="!_login || !password">Login</button>
       </div>
-      <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+      <div class="error" [hidden]="!errorMessage">{{errorMessage}}</div>
     </div>
   </fieldset>
 </form>
