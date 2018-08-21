@@ -7,6 +7,8 @@ const defaultState: any = {
 };
 
 export function courseReducer(state: any = defaultState, action: CourseActions): ActionReducer<any> {
+  delete state.course;
+
   switch (action.type) {
     case CourseActionTypes.ADD_COURSE_SUCCESS:
     case CourseActionTypes.UPDATE_COURSE_SUCCESS:

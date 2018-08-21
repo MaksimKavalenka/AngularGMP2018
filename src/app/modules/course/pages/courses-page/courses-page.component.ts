@@ -34,7 +34,7 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
       course => this.courses = course.courses,
     );
 
-    this.getCourses();
+    this.getCourses(true);
   }
 
   public ngOnDestroy() {
