@@ -4,6 +4,7 @@
     <div>Logo</div>
   </div>
   <div class="block" *ngIf="!isLoginPage()">
+    <div id="user" *ngIf="isAuthenticated()">Hi {{user | json}}</div>
     <button id="login" *ngIf="!isAuthenticated()" [routerLink]="['/login']">Log in</button>
     <button id="logout" *ngIf="isAuthenticated()" (click)="logout()">Log out</button>
   </div>

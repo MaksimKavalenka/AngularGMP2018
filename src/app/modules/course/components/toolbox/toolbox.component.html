@@ -1,7 +1,6 @@
 <div class="justify">
     <div class="block">
-        <input type="text" placeholder="Text to search" [(ngModel)]="searchQuery">
-        <button class="search" (click)="search()">Search</button>
+        <input type="text" placeholder="Text to search" [(ngModel)]="searchQuery" [appDebounce]="2000" (debounceClick)="search()">
     </div>
     <div class="block">
         <div id="add-course" class="action add" [routerLink]="['/courses/new']">

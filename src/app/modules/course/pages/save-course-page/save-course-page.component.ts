@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ICourseService } from '../../services/course/course.service';
 import { Path } from '../../../router/constants/path';
 import { Course } from '../../entities/course';
-import { EventService } from '../../../../services/event.service';
+import { EventService } from '../../../../modules/common/services/event/event.service';
 
 @Component({
   selector: 'app-save-course-page',
@@ -31,17 +31,16 @@ export class SaveCoursePageComponent implements OnInit {
   public ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
-        this.courseService.getCourse(params.id)
-          .subscribe((course) => {
-            this.eventService.pushData({ title: course.title });
-            this.id = params.id;
-            this.title = course.title;
-            this.description = course.description;
-            this.date = course.creationDate.toString();
-            this.duration = course.duration;
-            this.authors = 'Unknown';
-            this.isTopRated = course.isTopRated;
-          });
+        this.courseService.getCourse(params.id).subscribe((course) => {
+          this.eventService.pushData({ title: course.title });
+          this.id = params.id;
+          this.title = course.title;
+          this.description = course.description;
+          this.date = course.creationDate.toString();
+          this.duration = course.duration;
+          this.authors = 'Unknown';
+          this.isTopRated = course.isTopRated;
+        });
       }
     });
   }

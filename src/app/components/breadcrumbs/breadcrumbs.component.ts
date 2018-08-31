@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EventService } from '../../services/event.service';
+import { EventService } from '../../modules/common/services/event/event.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -16,7 +16,7 @@ export class BreadcrumbsComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
-    this.eventService.data.subscribe((data) => {
+    this.eventService.eventObservable.subscribe((data) => {
       if (data) {
         this.title = data.title;
       } else {

@@ -7,7 +7,7 @@ import { AuthorsComponent } from './components/authors/authors.component';
 import { CourseComponent } from './components/course/course.component';
 import { DateComponent } from './components/date/date.component';
 import { DurationComponent } from './components/duration/duration.component';
-import { LoaderComponent } from './components/loader/loader.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 import { ToolboxComponent } from './components/toolbox/toolbox.component';
 import { ReleaseBorderDirective } from './directives/release-border/release-border.directive';
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
@@ -16,6 +16,7 @@ import { DurationPipe } from './pipes/duration/duration.pipe';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
 import { NodeCourseService } from './services/course/node-course.service';
+import { CustomCommonModule } from '../../modules/common/common.module';
 import { MaterialModule } from '../../modules/material/material.module';
 import { CustomRouterModule } from '../../modules/router/router.module';
 
@@ -25,7 +26,7 @@ import { CustomRouterModule } from '../../modules/router/router.module';
     CourseComponent,
     DateComponent,
     DurationComponent,
-    LoaderComponent,
+    PaginationComponent,
     ToolboxComponent,
     ReleaseBorderDirective,
     CoursesPageComponent,
@@ -36,10 +37,11 @@ import { CustomRouterModule } from '../../modules/router/router.module';
   ],
   imports: [
     CommonModule,
+    CustomCommonModule,
+    CustomRouterModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
-    CustomRouterModule,
   ],
   providers: [
     { provide: 'courseService', useClass: NodeCourseService },

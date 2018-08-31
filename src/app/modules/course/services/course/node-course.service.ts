@@ -1,112 +1,81 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, BehaviorSubject } from 'rxjs';
 
 import { ICourseService } from './course.service';
 import { Course } from '../../entities/course';
 import { JsonServerURL } from '../../../../common/constants';
 import { GuidUtils } from '../../../../utils/guid-utils';
+import { RxJsUtils } from '../../../../utils/rxjs-utils';
 
 @Injectable()
 export class NodeCourseService implements ICourseService {
 
+  public loaderSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public loaderObservable: Observable<boolean>;
+
   public constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+    this.loaderObservable = this.loaderSubject.asObservable();
+  }
 
   public addCourse(title: string, duration: number, creationDate: Date, description: string, isTopRated?: boolean): Observable<Course> {
     const course: Course = new Course({ title, duration, creationDate, description, isTopRated, id: GuidUtils.guid() });
-    return this.http.post<Course>(JsonServerURL.COURSES, course);
+    const observable = this.http.post<Course>(JsonServerURL.COURSES, course);
+    const handlerFunc = response => response;
+    return RxJsUtils.createObservable<Course, Course>(observable, handlerFunc, this.loaderSubject);
   }
 
   public addCourses(courses: Course[]): Observable<Course[]> {
-    return this.http.post<Course[]>(JsonServerURL.COURSES, courses);
+    const observable = this.http.post<Course[]>(JsonServerURL.COURSES, courses);
+    const handlerFunc = response => response;
+    return RxJsUtils.createObservable<Course[], Course[]>(observable, handlerFunc, this.loaderSubject);
   }
 
   public getCourse(id: string): Observable<Course> {
-    let _observer: Observer<Course>;
-    const observable = new Observable<Course>((observer) => {
-      _observer = observer;
-      _getCourse();
-    });
-
-    const _getCourse = () => {
-      this.http.get<Course>(`${JsonServerURL.COURSES}/${id}`)
-        .subscribe(
-          (course) => {
-            const modCourse: Course = (new Course(course));
-            _observer.next(modCourse);
-          },
-          err => _observer.error(err),
-      );
-    };
-
-    return observable;
+    const observable = this.http.get<Course>(`${JsonServerURL.COURSES}/${id}`);
+    const handlerFunc = response => new Course(response);
+    return RxJsUtils.createObservable<Course, Course>(observable, handlerFunc, this.loaderSubject);
   }
 
   public getCourses(start: number, limit: number, searchQuery?: string, sort?: Sort): Observable<Course[]> {
-    let _observer: Observer<Course[]>;
-    const observable = new Observable<Course[]>((observer) => {
-      _observer = observer;
-      _getCourses();
-    });
-
     let url = `${JsonServerURL.COURSES}?start=${start}&limit=${limit}`;
-
     if (searchQuery) {
       url += `&textFragment=${searchQuery}`;
     }
-
     if (sort) {
       url += `&sort=${sort.active}&order=${sort.direction}`;
     }
 
-    const _getCourses = () => {
-      this.http.get<Course[]>(url)
-        .subscribe(
-          (courses) => {
-            const modCourses: Course[] = courses.map(course => new Course(course));
-            _observer.next(modCourses);
-          },
-          err => _observer.error(err),
-      );
-    };
-
-    return observable;
+    const observable = this.http.get<Course[]>(url);
+    const handlerFunc = response => response.map(course => new Course(course));
+    return RxJsUtils.createObservable<Course[], Course[]>(observable, handlerFunc, this.loaderSubject);
   }
 
   public getAllCourses(): Observable<Course[]> {
-    let _observer: Observer<Course[]>;
-    const observable = new Observable<Course[]>((observer) => {
-      _observer = observer;
-      _getAllCourses();
-    });
-
-    const _getAllCourses = () => {
-      this.http.get<Course[]>(JsonServerURL.COURSES)
-        .subscribe(
-          (courses) => {
-            const modCourses: Course[] = courses.map(course => new Course(course));
-            _observer.next(modCourses);
-          },
-          err => _observer.error(err),
-      );
-    };
-
-    return observable;
+    const observable = this.http.get<Course[]>(JsonServerURL.COURSES);
+    const handlerFunc = response => response.map(course => new Course(course));
+    return RxJsUtils.createObservable<Course[], Course[]>(observable, handlerFunc, this.loaderSubject);
   }
 
   public updateCourse(id: string, course: Course): Observable<Course> {
-    return this.http.put<Course>(`${JsonServerURL.COURSES}/${id}`, course);
+    const observable = this.http.put<Course>(`${JsonServerURL.COURSES}/${id}`, course);
+    const handlerFunc = response => response;
+    return RxJsUtils.createObservable<Course, Course>(observable, handlerFunc, this.loaderSubject);
   }
 
   public deleteCourse(id: string): Observable<void> {
-    return this.http.delete<void>(`${JsonServerURL.COURSES}/${id}`);
+    const observable = this.http.delete<void>(`${JsonServerURL.COURSES}/${id}`);
+    const handlerFunc = () => null;
+    return RxJsUtils.createObservable<void, void>(observable, handlerFunc, this.loaderSubject);
   }
 
   public deleteCourses(): Observable<void> {
-    return this.http.delete<void>(JsonServerURL.COURSES);
+    const observable = this.http.delete<void>(JsonServerURL.COURSES);
+    const handlerFunc = () => null;
+    return RxJsUtils.createObservable<void, void>(observable, handlerFunc, this.loaderSubject);
   }
 
 }

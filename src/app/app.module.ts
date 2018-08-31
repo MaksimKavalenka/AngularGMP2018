@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LoaderComponent } from './components/loader/loader/loader.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { CourseModule } from './modules/course/course.module';
+import { CustomCommonModule } from './modules/common/common.module';
 import { CustomRouterModule } from './modules/router/router.module';
-import { EventService } from './services/event.service';
+import { LoaderService } from './services/loader/loader.service';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -18,14 +20,16 @@ import { EventService } from './services/event.service';
     BreadcrumbsComponent,
     FooterComponent,
     HeaderComponent,
+    LoaderComponent,
   ],
   imports: [
     AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
     CourseModule,
+    CustomCommonModule,
     CustomRouterModule,
   ],
-  providers: [EventService],
+  providers: [LoaderService],
 })
 export class AppModule { }

@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import { Path } from '../../modules/router/constants/path';
-import { EventService } from '../../services/event.service';
+import { EventService } from '../../modules/common/services/event/event.service';
 
 const testTitle = 'Test title';
 
@@ -22,7 +22,7 @@ describe('BreadcrumbsComponent', () => {
 
   beforeEach(async(() => {
     spyEventService = {
-      data: of({ title: testTitle }),
+      eventObservable: of({ title: testTitle }),
     };
 
     TestBed.configureTestingModule({

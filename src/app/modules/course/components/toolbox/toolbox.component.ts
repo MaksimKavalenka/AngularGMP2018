@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-toolbox',
@@ -7,13 +8,19 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class ToolboxComponent {
 
-  public searchQuery: string;
+  private static readonly SEARCH_CHARS_MIN_BOUND: number = 3;
+
+  private searchSubject: BehaviorSubject<string> = new BehaviorSubject(null);
+
+  public searchQuery = '';
 
   @Output()
   public searchEvent: EventEmitter<string> = new EventEmitter();
 
   public search() {
-    this.searchEvent.emit(this.searchQuery);
+    if ((this.searchQuery.length === 0) || (this.searchQuery.length >= ToolboxComponent.SEARCH_CHARS_MIN_BOUND)) {
+      this.searchEvent.emit(this.searchQuery);
+    }
   }
 
 }

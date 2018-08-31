@@ -21,10 +21,9 @@ export class LoginComponent {
   ) { }
 
   public login(): void {
-    this.authService.login(this._login, this.password)
-      .subscribe(
-        () => this.router.navigate([`/${Path.COURSES}`]),
-        err => this.errorMessage = err.error,
+    this.authService.login(this._login, this.password).subscribe(
+      () => this.router.navigate([`/${Path.COURSES}`]),
+      err => this.errorMessage = err.error,
     );
   }
 
