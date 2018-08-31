@@ -3,7 +3,7 @@
     <label class="required" for="duration">Duration</label>
     <div class="inline">
       <input type="number" min="0" id="duration" name="duration" [(ngModel)]="duration" required/>
-      <div class="duration" *ngIf="duration">{{duration | duration}}</div>
+      <div class="duration" [hidden]="!duration">{{duration | duration}}</div>
     </div>
   </div>
 </div>

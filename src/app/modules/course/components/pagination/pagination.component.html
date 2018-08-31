@@ -1,2 +1,2 @@
-<div *ngIf="!isEmptyList" class="load-more" (click)="loadMore()">Load more</div>
-<div *ngIf="isEmptyList" class="load-more">No data. Feel free to add new course</div>
+<div [hidden]="isEmptyList" class="load-more" (click)="loadMore()">Load more</div>
+<div [hidden]="!isEmptyList" class="load-more">No data. Feel free to add new course</div>
