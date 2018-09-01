@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -15,13 +16,25 @@ import { EventService } from '../../../../modules/common/services/event/event.se
 export class SaveCoursePageComponent implements OnInit, OnDestroy {
 
   private courseStore: Subscription;
+
   public id: string;
-  public title: string;
-  public description: string;
   public date: string; // TODO: Add a validation
   public duration: number;
   public authors: string;
   public isTopRated: boolean;
+
+  public durationErrors: any;
+
+  public courseFormGroup: FormGroup = new FormGroup({
+    title: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(50),
+    ]),
+    description: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(500),
+    ]),
+  });
 
   public constructor(
     private activatedRoute: ActivatedRoute,
@@ -34,9 +47,11 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
       (course) => {
         if (course.course) {
           this.eventService.pushData({ title: course.course.title });
+          this.courseFormGroup.setValue({
+            title: course.course.title,
+            description: course.course.description,
+          });
           this.id = course.course.id;
-          this.title = course.course.title;
-          this.description = course.course.description;
           this.date = course.course.creationDate.toString();
           this.duration = course.course.duration;
           this.authors = 'Unknown';
@@ -60,21 +75,23 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
     if (this.id) {
       const course: Course = new Course({
         id: this.id,
-        title: this.title,
+        title: this.courseFormGroup.get('title').value,
         duration: this.duration,
         creationDate: new Date(this.date),
-        description: this.description,
+        description: this.courseFormGroup.get('description').value,
         isTopRated: this.isTopRated,
       });
 
       this.store.dispatch(new UpdateCourse(this.id, course));
     } else {
-      this.store.dispatch(new AddCourse(this.title, this.duration, new Date(this.date), this.description));
+      this.store.dispatch(new AddCourse(
+        this.courseFormGroup.get('title').value, this.duration, new Date(this.date), this.courseFormGroup.get('description').value,
+      ));
     }
   }
 
   public isFormValid(): boolean {
-    return !!this.title && !!this.description && !!this.date && this.duration && !!this.authors;
+    return true;
   }
 
 }

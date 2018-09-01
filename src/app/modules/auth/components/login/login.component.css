@@ -25,8 +25,3 @@ button.submit:disabled {
 	color: #000;
 	cursor: not-allowed;
 }
-
-.error {
-	color: #f00;
-	margin: 15px 0;
-}

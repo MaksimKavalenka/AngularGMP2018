@@ -1,14 +1,20 @@
-<div class="form-submit form-validation">
+<div class="form-submit form-validation" [formGroup]="courseFormGroup">
   <div class="field">
-    <label class="required" for="title">Title</label>
-    <input type="text" id="title" name="title" [(ngModel)]="title" required/>
+    <label for="title">Title: </label>
+    <app-control-message [control]="courseFormGroup.controls.title" class="error-msg"></app-control-message>
+    <input type="text" id="title" name="title" formControlName="title" />
   </div>
   <div class="field">
-    <label class="required" for="description">Description</label>
-    <textarea id="description" name="description" [(ngModel)]="description" required></textarea>
+    <label for="description">Description: </label>
+    <app-control-message [control]="courseFormGroup.controls.description" class="error-msg"></app-control-message>
+    <textarea id="description" name="description" formControlName="description"></textarea>
   </div>
   <app-date [(date)]="date"></app-date>
-  <app-duration [(duration)]="duration"></app-duration>
+  <div class="field mini">
+    <label for="duration">Duration: </label>
+    <app-control-message [control]="duration" class="error-msg"></app-control-message>
+    <app-duration id="duration" name="duration" required appIsNumber></app-duration>
+  </div>
   <app-authors [(authors)]="authors"></app-authors>
   <div>
     <button class="submit" [disabled]="!isFormValid()" (click)="saveCourse()">Save</button>

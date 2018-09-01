@@ -1,10 +1,10 @@
-import { CommonModule } from './common.module';
+import { CustomCommonModule } from './common.module';
 
 describe('CommonModule', () => {
-  let commonModule: CommonModule;
+  let commonModule: CustomCommonModule;
 
   beforeEach(() => {
-    commonModule = new CommonModule();
+    commonModule = new CustomCommonModule();
   });
 
   it('should create an instance', () => {

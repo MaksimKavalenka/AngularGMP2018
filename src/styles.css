@@ -86,6 +86,13 @@ img {
     margin: 0 15px;
 }
 
+.error-msg {
+    color: #f00;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px;
+}
+
 .form-submit {
 	margin: auto;
     text-align: center;
@@ -116,6 +123,11 @@ img {
 }
 
 .form-submit .field > * {
+	display: inline-block;
+}
+
+.form-submit .field > input,
+.form-submit .field > app-duration {
 	display: block;
 }
 
@@ -134,9 +146,14 @@ img {
 	width: 100%;
 }
 
+.form-submit .field app-duration {
+	width: 100%;
+}
+
 .form-submit .field.mini input,
 .form-submit .field.mini select,
-.form-submit .field.mini textarea {
+.form-submit .field.mini textarea,
+.form-submit .field.mini app-duration-input {
 	width: 40%;
 }
 
@@ -145,29 +162,25 @@ img {
 	font-size: 13px;
 }
 
-.form-submit .field-inline > * {
-	display: inline-block;
-}
-
-.form-submit .field-inline input {
-	width: 50px;
-}
-
 .form-validation label.required:after {
 	color: #ff0000;
 	content: " *";
 	font-size: 18px;
 }
 
-.form-validation input.ng-invalid.ng-touched {
+.form-validation input.ng-invalid.ng-touched,
+.form-validation textarea.ng-invalid.ng-touched,
+.form-validation app-duration-input.ng-invalid.ng-touched input {
 	border-color: #ff0000;
 }
 
-.form-validation input.ng-invalid.ng-touched:focus {
+.form-validation input.ng-invalid.ng-touched:focus,
+.form-validation app-duration-input.ng-invalid.ng-touched:focus input {
 	outline: #ffff00;
 }
 
-.form-validation input.ng-valid {
+.form-validation input.ng-valid,
+.form-validation app-duration-input.ng-valid input {
 	border-color: none;
 }
 
