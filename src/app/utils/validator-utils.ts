@@ -11,6 +11,13 @@ export abstract class ValidatorUtils {
     };
   }
 
+  public static minAuthorsValidator(minAuthors: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      return control.value && control.value.length >= minAuthors
+        ? null : { minAuthors: { requiredLength: minAuthors } };
+    };
+  }
+
   public static numberValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       return ValidationUtils.isNumber(control.value) ? null : { notNumber: { value: control.value } };

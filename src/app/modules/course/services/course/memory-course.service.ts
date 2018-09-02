@@ -3,6 +3,7 @@ import { Sort } from '@angular/material';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import { ICourseService } from './course.service';
+import { Author } from '../../entities/author';
 import { Course } from '../../entities/course';
 import { GuidUtils } from '../../../../utils/guid-utils';
 import { ArrayUtils } from '../../../../utils/array-utils';
@@ -73,9 +74,11 @@ export class MemoryCourseService implements ICourseService {
     this.loaderObservable = this.loaderSubject.asObservable();
   }
 
-  public addCourse(title: string, duration: number, creationDate: Date, description: string, isTopRated?: boolean): Observable<Course> {
+  public addCourse(
+    title: string, duration: number, creationDate: Date, description: string, authors: Author[], isTopRated?: boolean,
+  ): Observable<Course> {
     const handlerFunc = () => {
-      const course: Course = new Course({ title, duration, creationDate, description, isTopRated, id: GuidUtils.guid() });
+      const course: Course = new Course({ title, duration, creationDate, description, authors, isTopRated, id: GuidUtils.guid() });
       this.courses.push(course);
       return course;
     };

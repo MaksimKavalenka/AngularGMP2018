@@ -5,11 +5,12 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 
 import { AuthService } from './auth.service';
 import { User } from '../../entities/user';
-import { JsonServerURL } from '../../../../common/constants';
 import { RxJsUtils } from '../../../../utils/rxjs-utils';
 
 @Injectable()
 export class NodeAuthService extends AuthService {
+
+  private static readonly AUTH_URL = 'http://localhost:3004/auth';
 
   public loaderSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public loaderObservable: Observable<boolean>;
@@ -27,7 +28,7 @@ export class NodeAuthService extends AuthService {
   }
 
   public login(login: string, password: string): Observable<void> {
-    const observable = this.http.post<any>(`${JsonServerURL.AUTH}/login`, { login, password });
+    const observable = this.http.post<any>(`${NodeAuthService.AUTH_URL}/login`, { login, password });
 
     const handlerFunc = (response) => {
       this.cookieService.set(AuthService.TOKEN_KEY, response.token);
@@ -53,7 +54,7 @@ export class NodeAuthService extends AuthService {
   }
 
   public getUser(): Observable<User> {
-    const observable = this.http.post<User>(`${JsonServerURL.AUTH}/userinfo`, {});
+    const observable = this.http.post<User>(`${NodeAuthService.AUTH_URL}/userinfo`, {});
     const handlerFunc = response => new User(response);
     return RxJsUtils.createObservable<User, User>(observable, handlerFunc, this.loaderSubject);
   }

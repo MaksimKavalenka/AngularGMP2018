@@ -19,7 +19,11 @@
     <app-control-message [control]="duration" class="error-msg"></app-control-message>
     <app-duration id="duration" name="duration" [(ngModel)]="course.duration" #duration="ngModel" required appNumber></app-duration>
   </div>
-  <app-authors [(authors)]="course.authors"></app-authors>
+  <div class="field">
+    <label for="authors">Authors: </label>
+    <app-control-message [control]="authors" class="error-msg"></app-control-message>
+    <app-authors id="authors" name="authors" [(ngModel)]="course.authors" #authors="ngModel" appMinAuthors="1"></app-authors>
+  </div>
   <div>
     <button class="submit" [disabled]="!courseForm.valid" (click)="saveCourse()">Save</button>
     <button class="cancel" [routerLink]="['/courses']">Cancel</button>

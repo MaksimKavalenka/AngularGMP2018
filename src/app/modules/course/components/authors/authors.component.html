@@ -1,6 +1,4 @@
-<div class="form-submit form-validation">
-  <div class="field">
-    <label class="required" for="authors">Authors</label>
-    <input type="text" id="authors" name="authors" [(ngModel)]="authors" required/>
-  </div>
+<div class="inline">
+  <ng-select bindLabel="name" [items]="authors | async" [multiple]="true" [(ngModel)]="value" [closeOnSelect]="true"
+    [hideSelected]="true" [appMinAuthors]="appMinAuthors" placeholder="Select authors"></ng-select>
 </div>

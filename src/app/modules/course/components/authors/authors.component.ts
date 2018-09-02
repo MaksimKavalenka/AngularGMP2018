@@ -1,25 +1,36 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, forwardRef, Inject, OnInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Observable } from 'rxjs';
+
+import { Author } from '../../entities/author';
+import { IAuthorService } from '../../services/author/author.service';
+import { DefaultControlValueAccessor } from '../../../common/entities/controlValueAccessor';
 
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.css'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => AuthorsComponent),
+    multi: true,
+  }],
 })
-export class AuthorsComponent {
+export class AuthorsComponent extends DefaultControlValueAccessor implements OnInit {
 
-  private authorsValue: string; // TODO: Must be an array essentially
-
-  @Output()
-  public authorsChange: EventEmitter<string> = new EventEmitter();
+  public authors: Observable<Author[]>;
 
   @Input()
-  public get authors(): string {
-    return this.authorsValue;
+  public appMinAuthors: number;
+
+  public constructor(
+    @Inject('authorService') private authorService: IAuthorService,
+  ) {
+    super();
   }
 
-  public set authors(authors: string) {
-    this.authorsValue = authors;
-    this.authorsChange.emit(this.authorsValue);
+  public ngOnInit(): void {
+    this.authors = this.authorService.getAllAuthors();
   }
 
 }

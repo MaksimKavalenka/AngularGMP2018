@@ -33,7 +33,7 @@ export class CourseEffects {
     ofType(CourseActionTypes.ADD_COURSE),
     switchMap((action: AddCourse) => {
       return this.courseService.addCourse(
-        action.title, action.duration, action.creationDate, action.description, action.isTopRated,
+        action.title, action.duration, action.creationDate, action.description, action.authors, action.isTopRated,
       ).pipe(
         map(() => new AddCourseSuccess()),
         tap(() => this.router.navigate([`/${Path.COURSES}`])),

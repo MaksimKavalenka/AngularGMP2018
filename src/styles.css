@@ -1,4 +1,5 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css'; 
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 html {
     height: 100%;
@@ -127,6 +128,7 @@ img {
 }
 
 .form-submit .field > input,
+.form-submit .field > app-authors,
 .form-submit .field > app-date,
 .form-submit .field > app-duration {
 	display: block;
@@ -140,7 +142,8 @@ img {
 
 .form-submit .field input,
 .form-submit .field select,
-.form-submit .field textarea {
+.form-submit .field textarea,
+.form-submit .field .ng-select-container {
 	border: 1px solid #aaaaaa;
 	margin: 5px 0;
 	padding: 7px;
@@ -165,11 +168,12 @@ img {
 }
 
 .form-validation input.ng-invalid.ng-touched,
-.form-validation textarea.ng-invalid.ng-touched {
+.form-validation textarea.ng-invalid.ng-touched,
+.form-validation ng-select.ng-invalid.ng-touched .ng-select-container {
 	border-color: #ff0000;
 }
 
-.form-validation input.ng-invalid.ng-touched:focus {
+.form-validation input.ng-invalid.ng-touched:focus, {
 	outline: #ffff00;
 }
 

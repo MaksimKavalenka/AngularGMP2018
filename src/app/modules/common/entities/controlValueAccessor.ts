@@ -6,24 +6,24 @@ export class DefaultControlValueAccessor implements ControlValueAccessor {
   public onChange: Function;
   public onTouched: Function;
 
-  public _value: number;
+  public _value: any | any[];
 
-  public get value(): number {
+  public get value(): any | any[] {
     return this._value;
   }
 
-  public set value(duration: number) {
-    this._value = duration;
+  public set value(value: any | any[]) {
+    this._value = value;
     if (this.onChange) {
-      this.onChange(duration);
+      this.onChange(value);
     }
   }
 
-  public writeValue(duration: number): void {
-    this.value = duration;
+  public writeValue(value: any | any[]): void {
+    this.value = value;
   }
 
-  public registerOnChange(fn: (duration: number) => void): void {
+  public registerOnChange(fn: (value: any | any[]) => void): void {
     this.onChange = fn;
   }
 

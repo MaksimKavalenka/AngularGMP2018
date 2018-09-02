@@ -27,6 +27,7 @@ export class ControlMessageComponent {
       required: 'Required',
       minlength: `Minimum length is ${validatorValue.requiredLength}`,
       maxlength: `Maximum length is ${validatorValue.requiredLength}`,
+      minAuthors: `At least ${validatorValue.requiredLength} author(s) should be selected`,
       notNumber: `The value is not a number: ${validatorValue.value}`,
       regexp: `The value does not fit into regexp: ${validatorValue.regexp}`,
     };

@@ -34,7 +34,7 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
           this.course.description = course.course.description;
           this.course.date = course.course.creationDate.toString();
           this.course.duration = course.course.duration;
-          this.course.authors = 'Unknown';
+          this.course.authors = course.course.authors;
           this.course.isTopRated = course.course.isTopRated;
         }
       },
@@ -59,13 +59,14 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
         description: this.course.description,
         duration: this.course.duration,
         creationDate: new Date(this.course.date),
+        authors: this.course.authors,
         isTopRated: this.course.isTopRated,
       });
 
       this.store.dispatch(new UpdateCourse(this.course.id, course));
     } else {
       this.store.dispatch(new AddCourse(
-        this.course.title, this.course.duration, new Date(this.course.date), this.course.description,
+        this.course.title, this.course.duration, new Date(this.course.date), this.course.description, this.course.authors,
       ));
     }
   }
