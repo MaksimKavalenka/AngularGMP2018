@@ -1,23 +1,27 @@
-<div class="form-submit form-validation" [formGroup]="courseFormGroup">
+<form class="form-submit form-validation" #courseForm="ngForm">
   <div class="field">
     <label for="title">Title: </label>
-    <app-control-message [control]="courseFormGroup.controls.title" class="error-msg"></app-control-message>
-    <input type="text" id="title" name="title" formControlName="title" />
+    <app-control-message [control]="title" class="error-msg"></app-control-message>
+    <input type="text" id="title" name="title" [(ngModel)]="course.title" #title="ngModel" required maxlength="50" />
   </div>
   <div class="field">
     <label for="description">Description: </label>
-    <app-control-message [control]="courseFormGroup.controls.description" class="error-msg"></app-control-message>
-    <textarea id="description" name="description" formControlName="description"></textarea>
+    <app-control-message [control]="description" class="error-msg"></app-control-message>
+    <textarea id="description" name="description" [(ngModel)]="course.description" #description="ngModel" required maxlength="500"></textarea>
   </div>
-  <app-date [(date)]="date"></app-date>
+  <div class="field mini">
+    <label for="date">Date: </label>
+    <app-control-message [control]="date" class="error-msg"></app-control-message>
+    <app-date id="date" name="date" [(ngModel)]="course.date" #date="ngModel" required appDateRegexp="dd/MM/yyyy"></app-date>
+  </div>
   <div class="field mini">
     <label for="duration">Duration: </label>
     <app-control-message [control]="duration" class="error-msg"></app-control-message>
-    <app-duration id="duration" name="duration" required appIsNumber></app-duration>
+    <app-duration id="duration" name="duration" [(ngModel)]="course.duration" #duration="ngModel" required appNumber></app-duration>
   </div>
-  <app-authors [(authors)]="authors"></app-authors>
+  <app-authors [(authors)]="course.authors"></app-authors>
   <div>
-    <button class="submit" [disabled]="!isFormValid()" (click)="saveCourse()">Save</button>
+    <button class="submit" [disabled]="!courseForm.valid" (click)="saveCourse()">Save</button>
     <button class="cancel" [routerLink]="['/courses']">Cancel</button>
   </div>
-</div>
+</form>

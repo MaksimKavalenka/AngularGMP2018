@@ -127,6 +127,7 @@ img {
 }
 
 .form-submit .field > input,
+.form-submit .field > app-date,
 .form-submit .field > app-duration {
 	display: block;
 }
@@ -146,14 +147,9 @@ img {
 	width: 100%;
 }
 
-.form-submit .field app-duration {
-	width: 100%;
-}
-
 .form-submit .field.mini input,
 .form-submit .field.mini select,
-.form-submit .field.mini textarea,
-.form-submit .field.mini app-duration-input {
+.form-submit .field.mini textarea {
 	width: 40%;
 }
 
@@ -169,18 +165,15 @@ img {
 }
 
 .form-validation input.ng-invalid.ng-touched,
-.form-validation textarea.ng-invalid.ng-touched,
-.form-validation app-duration-input.ng-invalid.ng-touched input {
+.form-validation textarea.ng-invalid.ng-touched {
 	border-color: #ff0000;
 }
 
-.form-validation input.ng-invalid.ng-touched:focus,
-.form-validation app-duration-input.ng-invalid.ng-touched:focus input {
+.form-validation input.ng-invalid.ng-touched:focus {
 	outline: #ffff00;
 }
 
-.form-validation input.ng-valid,
-.form-validation app-duration-input.ng-valid input {
+.form-validation input.ng-valid {
 	border-color: none;
 }
 

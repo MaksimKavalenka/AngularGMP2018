@@ -9,10 +9,10 @@ import { AuthorsComponent } from './components/authors/authors.component';
 import { CourseComponent } from './components/course/course.component';
 import { DateComponent } from './components/date/date.component';
 import { DurationComponent } from './components/duration/duration.component';
-import { DurationInputComponent } from './components/duration-input/duration-input.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ToolboxComponent } from './components/toolbox/toolbox.component';
-import { IsNumberDirective } from './directives/is-number/is-number.directive';
+import { DateRegexpDirective } from './directives/date-regexp/date-regexp.directive';
+import { NumberDirective } from './directives/number/number.directive';
 import { ReleaseBorderDirective } from './directives/release-border/release-border.directive';
 import { CourseEffects } from './effects/course.effects';
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
@@ -32,10 +32,10 @@ import { CustomRouterModule } from '../router/router.module';
     CourseComponent,
     DateComponent,
     DurationComponent,
-    DurationInputComponent,
     PaginationComponent,
     ToolboxComponent,
-    IsNumberDirective,
+    DateRegexpDirective,
+    NumberDirective,
     ReleaseBorderDirective,
     CoursesPageComponent,
     SaveCoursePageComponent,

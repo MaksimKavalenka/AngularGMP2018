@@ -1,25 +1,24 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { DefaultControlValueAccessor } from '../../../common/entities/controlValueAccessor';
 
 @Component({
   selector: 'app-date',
   templateUrl: './date.component.html',
   styleUrls: ['./date.component.css'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => DateComponent),
+    multi: true,
+  }],
 })
-export class DateComponent {
-
-  private dateValue: string; // TODO: Shouldn't it be of a Date type?
-
-  @Output()
-  public dateChange: EventEmitter<string> = new EventEmitter();
+export class DateComponent extends DefaultControlValueAccessor {
 
   @Input()
-  public get date(): string {
-    return this.dateValue;
-  }
+  public required = false;
 
-  public set date(date: string) {
-    this.dateValue = date;
-    this.dateChange.emit(this.dateValue);
-  }
+  @Input()
+  public appDateRegexp = null;
 
 }

@@ -1,5 +1,7 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { DefaultControlValueAccessor } from '../../../common/entities/controlValueAccessor';
 
 @Component({
   selector: 'app-duration',
@@ -11,34 +13,12 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
     multi: true,
   }],
 })
-export class DurationComponent implements ControlValueAccessor {
+export class DurationComponent extends DefaultControlValueAccessor {
 
-  private _duration: number;
+  @Input()
+  public required = false;
 
-  public get duration(): number {
-    return this._duration;
-  }
-
-  public set duration(duration: number) {
-    this._duration = duration;
-  }
-
-  public onChange(event: any): void {
-    this.duration = event.target.value;
-  }
-
-  public onTouched(): void { }
-
-  public writeValue(duration: number): void {
-    this.duration = duration;
-  }
-
-  public registerOnChange(fn: (duration: number) => void): void {
-    this.onChange = fn;
-  }
-
-  public registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
+  @Input()
+  public appNumber = false;
 
 }

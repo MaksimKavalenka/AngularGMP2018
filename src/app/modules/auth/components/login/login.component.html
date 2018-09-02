@@ -6,17 +6,17 @@
     </div>
     <div class="body">
       <div class="field">
-        <label for="login">Login</label>
+        <label for="login">Login: </label>
         <app-control-message [control]="user.controls.login" class="error-msg"></app-control-message>
         <input type="text" id="login" name="login" formControlName="login" placeholder="Please enter login"/>
       </div>
       <div class="field">
-        <label for="password">Password</label>
+        <label for="password">Password: </label>
         <app-control-message [control]="user.controls.password" class="error-msg"></app-control-message>
         <input type="password" id="password" name="password" formControlName="password" placeholder="Please enter password"/>
       </div>
       <div>
-        <button type="submit" class="submit" [disabled]="!loginForm.form.valid">Login</button>
+        <button type="submit" class="submit" [disabled]="!loginForm.valid">Login</button>
       </div>
       <div class="error-msg" [hidden]="!errorMessage">{{errorMessage}}</div>
     </div>

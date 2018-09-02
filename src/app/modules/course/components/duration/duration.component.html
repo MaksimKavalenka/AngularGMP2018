@@ -1,4 +1,5 @@
 <div class="inline">
-  <input type="text" id="duration" name="duration" [(ngModel)]="duration" (change)="onChange($event)" (keyup)="onChange($event)" required appIsNumber />
-  <div class="duration" [hidden]="!duration">{{duration | duration}}</div>
+  <input type="text" id="duration" name="duration" [(ngModel)]="value" (change)="change($event)" (keyup)="change($event)"
+    [required]="required" [appNumber]="appNumber" />
+  <div class="duration" [hidden]="!value">{{value | duration}}</div>
 </div>

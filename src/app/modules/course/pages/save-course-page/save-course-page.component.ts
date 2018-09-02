@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -17,24 +16,7 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
 
   private courseStore: Subscription;
 
-  public id: string;
-  public date: string; // TODO: Add a validation
-  public duration: number;
-  public authors: string;
-  public isTopRated: boolean;
-
-  public durationErrors: any;
-
-  public courseFormGroup: FormGroup = new FormGroup({
-    title: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(50),
-    ]),
-    description: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(500),
-    ]),
-  });
+  public course: any = {};
 
   public constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,15 +29,13 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
       (course) => {
         if (course.course) {
           this.eventService.pushData({ title: course.course.title });
-          this.courseFormGroup.setValue({
-            title: course.course.title,
-            description: course.course.description,
-          });
-          this.id = course.course.id;
-          this.date = course.course.creationDate.toString();
-          this.duration = course.course.duration;
-          this.authors = 'Unknown';
-          this.isTopRated = course.course.isTopRated;
+          this.course.id = course.course.id;
+          this.course.title = course.course.title;
+          this.course.description = course.course.description;
+          this.course.date = course.course.creationDate.toString();
+          this.course.duration = course.course.duration;
+          this.course.authors = 'Unknown';
+          this.course.isTopRated = course.course.isTopRated;
         }
       },
     );
@@ -72,26 +52,22 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
   }
 
   public saveCourse() {
-    if (this.id) {
+    if (this.course.id) {
       const course: Course = new Course({
-        id: this.id,
-        title: this.courseFormGroup.get('title').value,
-        duration: this.duration,
-        creationDate: new Date(this.date),
-        description: this.courseFormGroup.get('description').value,
-        isTopRated: this.isTopRated,
+        id: this.course.id,
+        title: this.course.title,
+        description: this.course.description,
+        duration: this.course.duration,
+        creationDate: new Date(this.course.date),
+        isTopRated: this.course.isTopRated,
       });
 
-      this.store.dispatch(new UpdateCourse(this.id, course));
+      this.store.dispatch(new UpdateCourse(this.course.id, course));
     } else {
       this.store.dispatch(new AddCourse(
-        this.courseFormGroup.get('title').value, this.duration, new Date(this.date), this.courseFormGroup.get('description').value,
+        this.course.title, this.course.duration, new Date(this.course.date), this.course.description,
       ));
     }
-  }
-
-  public isFormValid(): boolean {
-    return true;
   }
 
 }
