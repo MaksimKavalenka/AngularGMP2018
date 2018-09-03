@@ -16,7 +16,7 @@ export class DateRegexpDirective implements Validator {
   public appDateRegexp: string;
 
   validate = (control: AbstractControl): { [key: string]: any } | null => {
-    return this.appDateRegexp && moment(control.value, this.appDateRegexp.toUpperCase(), true).isValid()
+    return this.appDateRegexp && moment(control.value, this.appDateRegexp, true).isValid()
       ? null : { regexp: { regexp: this.appDateRegexp, value: control.value } };
   }
 

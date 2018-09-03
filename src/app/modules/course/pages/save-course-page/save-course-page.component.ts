@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
 
 import { AddCourse, UpdateCourse, GetCourse } from '../../actions/course.actions';
 import { Course } from '../../entities/course';
@@ -16,6 +17,7 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
 
   private courseStore: Subscription;
 
+  public dateFormat = 'DD/MM/YYYY';
   public course: any = {};
 
   public constructor(
@@ -32,7 +34,7 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
           this.course.id = course.course.id;
           this.course.title = course.course.title;
           this.course.description = course.course.description;
-          this.course.date = course.course.creationDate.toString();
+          this.course.date = moment(course.course.creationDate).format(this.dateFormat);
           this.course.duration = course.course.duration;
           this.course.authors = course.course.authors;
           this.course.isTopRated = course.course.isTopRated;

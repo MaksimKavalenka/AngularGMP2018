@@ -12,7 +12,7 @@
   <div class="field mini">
     <label for="date">Date: </label>
     <app-control-message [control]="date" class="error-msg"></app-control-message>
-    <app-date id="date" name="date" [(ngModel)]="course.date" #date="ngModel" required appDateRegexp="dd/MM/yyyy"></app-date>
+    <app-date id="date" name="date" [(ngModel)]="course.date" #date="ngModel" required [appDateRegexp]="dateFormat"></app-date>
   </div>
   <div class="field mini">
     <label for="duration">Duration: </label>

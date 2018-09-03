@@ -31,8 +31,9 @@ export class DefaultControlValueAccessor implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  @HostListener('click')
-  public click(): void {
+  @HostListener('focusout')
+  @HostListener('keydown')
+  public touched(): void {
     if (this.onTouched) {
       this.onTouched();
     }
