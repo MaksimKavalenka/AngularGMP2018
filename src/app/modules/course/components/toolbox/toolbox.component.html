@@ -1,11 +1,14 @@
-<div class="justify">
-    <div class="block">
-        <input type="text" placeholder="Text to search" [(ngModel)]="searchQuery" [appDebounce]="2000" (debounceClick)="search()">
-    </div>
-    <div class="block">
-        <div id="add-course" class="action add" [routerLink]="['/courses/new']">
-            <img src="assets/images/add.png" alt="Add course">
-            <div>Add course</div>
+<form class="form-validation" [formGroup]="search">
+    <div class="justify">
+        <div class="block">
+            <input type="text" placeholder="Text to search" [appDebounce]="2000" (debounceClick)="searchSubmit()" formControlName="searchQuery">
+            <app-control-message [control]="search.controls.searchQuery" class="error-msg"></app-control-message>
+        </div>
+        <div class="block">
+            <div id="add-course" class="action add" [routerLink]="['/courses/new']">
+                <img src="assets/images/add.png" alt="Add course">
+                <div>Add course</div>
+            </div>
         </div>
     </div>
-</div>
+</form>

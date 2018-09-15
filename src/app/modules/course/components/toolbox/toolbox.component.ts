@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-toolbox',
@@ -10,16 +10,17 @@ export class ToolboxComponent {
 
   private static readonly SEARCH_CHARS_MIN_BOUND: number = 3;
 
-  private searchSubject: BehaviorSubject<string> = new BehaviorSubject(null);
-
-  public searchQuery = '';
-
   @Output()
   public searchEvent: EventEmitter<string> = new EventEmitter();
 
-  public search() {
-    if ((this.searchQuery.length === 0) || (this.searchQuery.length >= ToolboxComponent.SEARCH_CHARS_MIN_BOUND)) {
-      this.searchEvent.emit(this.searchQuery);
+  public search: FormGroup = new FormGroup({
+    searchQuery: new FormControl(null, [Validators.minLength(ToolboxComponent.SEARCH_CHARS_MIN_BOUND)]),
+  });
+
+  public searchSubmit() {
+    if ((this.search.get('searchQuery').value.length === 0)
+      || (this.search.get('searchQuery').value.length >= ToolboxComponent.SEARCH_CHARS_MIN_BOUND)) {
+      this.searchEvent.emit(this.search.get('searchQuery').value);
     }
   }
 

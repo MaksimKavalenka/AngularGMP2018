@@ -1,6 +1,7 @@
 import { Sort } from '@angular/material';
 import { Action } from '@ngrx/store';
 
+import { Author } from '../entities/author';
 import { Course } from '../entities/course';
 
 export enum CourseActionTypes {
@@ -24,6 +25,7 @@ export class AddCourse implements Action {
     public duration: number,
     public creationDate: Date,
     public description: string,
+    public authors: Author[],
     public isTopRated?: boolean,
   ) { }
 }

@@ -1,25 +1,24 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { DefaultControlValueAccessor } from '../../../common/entities/controlValueAccessor';
 
 @Component({
   selector: 'app-duration',
   templateUrl: './duration.component.html',
   styleUrls: ['./duration.component.css'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => DurationComponent),
+    multi: true,
+  }],
 })
-export class DurationComponent {
-
-  private durationValue: number;
-
-  @Output()
-  public durationChange: EventEmitter<number> = new EventEmitter();
+export class DurationComponent extends DefaultControlValueAccessor {
 
   @Input()
-  public get duration(): number {
-    return this.durationValue;
-  }
+  public required = false;
 
-  public set duration(duration: number) {
-    this.durationValue = duration;
-    this.durationChange.emit(this.durationValue);
-  }
+  @Input()
+  public appNumber = false;
 
 }

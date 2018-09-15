@@ -1,4 +1,4 @@
-<form class="form-submit form-validation" (ngSubmit)="login()">
+<form #loginForm="ngForm" class="form-submit form-validation" (ngSubmit)="login()" [formGroup]="user">
   <fieldset>
     <div class="header">
       <div>Login</div>
@@ -6,17 +6,19 @@
     </div>
     <div class="body">
       <div class="field">
-        <label class="required" for="login">Login</label>
-        <input type="text" id="login" name="login" placeholder="Please enter login" [(ngModel)]="_login" required/>
+        <label for="login">Login: </label>
+        <app-control-message [control]="user.controls.login" class="error-msg"></app-control-message>
+        <input type="text" id="login" name="login" formControlName="login" placeholder="Please enter login"/>
       </div>
       <div class="field">
-        <label class="required" for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Please enter password" [(ngModel)]="password" required/>
+        <label for="password">Password: </label>
+        <app-control-message [control]="user.controls.password" class="error-msg"></app-control-message>
+        <input type="password" id="password" name="password" formControlName="password" placeholder="Please enter password"/>
       </div>
       <div>
-        <button type="submit" class="submit" [disabled]="!_login || !password">Login</button>
+        <button type="submit" class="submit" [disabled]="!loginForm.valid">Login</button>
       </div>
-      <div class="error" [hidden]="!errorMessage">{{errorMessage}}</div>
+      <div class="error-msg" [hidden]="!errorMessage">{{errorMessage}}</div>
     </div>
   </fieldset>
 </form>

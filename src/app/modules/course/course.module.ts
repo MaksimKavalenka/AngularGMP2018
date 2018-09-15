@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -11,6 +12,9 @@ import { DateComponent } from './components/date/date.component';
 import { DurationComponent } from './components/duration/duration.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ToolboxComponent } from './components/toolbox/toolbox.component';
+import { DateRegexpDirective } from './directives/date-regexp/date-regexp.directive';
+import { MinAuthorsDirective } from './directives/min-authors/min-authors.directive';
+import { NumberDirective } from './directives/number/number.directive';
 import { ReleaseBorderDirective } from './directives/release-border/release-border.directive';
 import { CourseEffects } from './effects/course.effects';
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
@@ -19,10 +23,11 @@ import { DurationPipe } from './pipes/duration/duration.pipe';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
 import { courseReducer } from './reducers/course.reducer';
+import { NodeAuthorService } from './services/author/node-author.service';
 import { NodeCourseService } from './services/course/node-course.service';
-import { CustomCommonModule } from '../../modules/common/common.module';
-import { MaterialModule } from '../../modules/material/material.module';
-import { CustomRouterModule } from '../../modules/router/router.module';
+import { CustomCommonModule } from '../common/common.module';
+import { MaterialModule } from '../material/material.module';
+import { CustomRouterModule } from '../router/router.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,9 @@ import { CustomRouterModule } from '../../modules/router/router.module';
     DurationComponent,
     PaginationComponent,
     ToolboxComponent,
+    DateRegexpDirective,
+    MinAuthorsDirective,
+    NumberDirective,
     ReleaseBorderDirective,
     CoursesPageComponent,
     SaveCoursePageComponent,
@@ -46,10 +54,13 @@ import { CustomRouterModule } from '../../modules/router/router.module';
     FormsModule,
     HttpClientModule,
     MaterialModule,
+    NgSelectModule,
+    ReactiveFormsModule,
     EffectsModule.forRoot([CourseEffects]),
     StoreModule.forRoot({ course: courseReducer }),
   ],
   providers: [
+    { provide: 'authorService', useClass: NodeAuthorService },
     { provide: 'courseService', useClass: NodeCourseService },
   ],
 })

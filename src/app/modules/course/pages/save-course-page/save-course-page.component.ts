@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
 
 import { AddCourse, UpdateCourse, GetCourse } from '../../actions/course.actions';
 import { Course } from '../../entities/course';
@@ -15,13 +16,9 @@ import { EventService } from '../../../../modules/common/services/event/event.se
 export class SaveCoursePageComponent implements OnInit, OnDestroy {
 
   private courseStore: Subscription;
-  public id: string;
-  public title: string;
-  public description: string;
-  public date: string; // TODO: Add a validation
-  public duration: number;
-  public authors: string;
-  public isTopRated: boolean;
+
+  public dateFormat = 'DD/MM/YYYY';
+  public course: any = {};
 
   public constructor(
     private activatedRoute: ActivatedRoute,
@@ -34,13 +31,13 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
       (course) => {
         if (course.course) {
           this.eventService.pushData({ title: course.course.title });
-          this.id = course.course.id;
-          this.title = course.course.title;
-          this.description = course.course.description;
-          this.date = course.course.creationDate.toString();
-          this.duration = course.course.duration;
-          this.authors = 'Unknown';
-          this.isTopRated = course.course.isTopRated;
+          this.course.id = course.course.id;
+          this.course.title = course.course.title;
+          this.course.description = course.course.description;
+          this.course.date = moment(course.course.creationDate).format(this.dateFormat);
+          this.course.duration = course.course.duration;
+          this.course.authors = course.course.authors;
+          this.course.isTopRated = course.course.isTopRated;
         }
       },
     );
@@ -57,24 +54,23 @@ export class SaveCoursePageComponent implements OnInit, OnDestroy {
   }
 
   public saveCourse() {
-    if (this.id) {
+    if (this.course.id) {
       const course: Course = new Course({
-        id: this.id,
-        title: this.title,
-        duration: this.duration,
-        creationDate: new Date(this.date),
-        description: this.description,
-        isTopRated: this.isTopRated,
+        id: this.course.id,
+        title: this.course.title,
+        description: this.course.description,
+        duration: this.course.duration,
+        creationDate: new Date(this.course.date),
+        authors: this.course.authors,
+        isTopRated: this.course.isTopRated,
       });
 
-      this.store.dispatch(new UpdateCourse(this.id, course));
+      this.store.dispatch(new UpdateCourse(this.course.id, course));
     } else {
-      this.store.dispatch(new AddCourse(this.title, this.duration, new Date(this.date), this.description));
+      this.store.dispatch(new AddCourse(
+        this.course.title, this.course.duration, new Date(this.course.date), this.course.description, this.course.authors,
+      ));
     }
-  }
-
-  public isFormValid(): boolean {
-    return !!this.title && !!this.description && !!this.date && this.duration && !!this.authors;
   }
 
 }

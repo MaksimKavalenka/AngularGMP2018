@@ -1,6 +1,4 @@
-<div class="form-submit form-validation">
-  <div class="field mini">
-    <label class="required" for="date">Date</label>
-    <input type="text" id="date" name="date" [(ngModel)]="date" required/>
-  </div>
+<div class="inline">
+  <input type="text" id="date" name="date" [(ngModel)]="value" (change)="change($event)" (keyup)="change($event)" [required]="required"
+    [appDateRegexp]="appDateRegexp" />
 </div>

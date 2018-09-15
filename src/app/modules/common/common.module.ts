@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ControlMessageComponent } from './components/control-message/control-message.component';
 import { DebounceDirective } from './directives/debounce/debounce.directive';
 import { EventService } from './services/event/event.service';
 
 @NgModule({
-  declarations: [DebounceDirective],
-  exports: [DebounceDirective],
+  declarations: [
+    ControlMessageComponent,
+    DebounceDirective,
+  ],
+  exports: [
+    ControlMessageComponent,
+    DebounceDirective,
+  ],
   imports: [CommonModule],
   providers: [EventService],
 })
