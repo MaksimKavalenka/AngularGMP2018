@@ -16,7 +16,7 @@
         <input type="password" id="password" name="password" formControlName="password" placeholder="Please enter password"/>
       </div>
       <div>
-        <button type="submit" class="submit" [disabled]="!loginForm.valid">Login</button>
+        <button type="submit" class="submit" [disabled]="!loginForm.valid" i18n="@@login">Login</button>
       </div>
       <div class="error-msg" [hidden]="!errorMessage">{{errorMessage}}</div>
     </div>

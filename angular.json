@@ -28,6 +28,20 @@
             "scripts": []
           },
           "configurations": {
+            "en": {
+              "aot": true,
+              "i18nFile": "src/locale/messages.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "es",
+              "i18nMissingTranslation": "error"
+            },
+            "es": {
+              "aot": true,
+              "i18nFile": "src/locale/messages.es.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "es",
+              "i18nMissingTranslation": "error"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -55,6 +69,12 @@
           "configurations": {
             "production": {
               "browserTarget": "AngularGMP2018:build:production"
+            },
+            "en": {
+              "browserTarget": "AngularGMP2018:build:en"
+            },
+            "es": {
+              "browserTarget": "AngularGMP2018:build:es"
             }
           }
         },
